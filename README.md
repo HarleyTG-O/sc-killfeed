@@ -15,8 +15,4 @@ A lightweight, Python-based kill tracker for *Star Citizen* that monitors the ga
 - 🖥️ Includes a simple tray icon and optional transparent overlay
 
 ## 📥 Installation
-
-1. **Install Python dependencies:**
-
-```bash
-pip install pystray pillow pygame requests
+https://github.com/HarleyTG-O/sc-killfeed/releases/tag/Global
