@@ -1,6 +1,6 @@
 # Star Citizen Kill Tracker
 
-A lightweight, Python-based kill tracker for *Star Citizen* that monitors the game log file and sends PvP, suicide, or environmental death notifications directly to a configured Discord webhook. It includes:
+A lightweight, kill tracker for *Star Citizen* that monitors the game log file and sends PvP, suicide, or environmental death notifications directly to a configured Discord webhook. It includes:
 
 - A tray icon with Start/Stop tracking options
 - An optional in-game overlay (transparent overlay window)
