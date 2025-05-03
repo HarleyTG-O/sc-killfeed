@@ -1,238 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Citizen Kill Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Star Citizen Kill Tracker</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" type="image/png">
+  <!-- Favicon -->
+  <link rel="icon" href="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" type="image/png">
 
-    <style>
-        /* Resetting margins and padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0d0d0d; /* RSI dark background */
-            color: #e1e1e1; /* Light grey text */
-            line-height: 1.6;
-            padding: 0;
-            position: relative;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #0d0d0d;
+      color: #e1e1e1;
+      line-height: 1.6;
+    }
 
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
 
-        /* Header Section */
-        header {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #333;
-            margin-bottom: 40px;
-        }
+    header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #333;
+      margin-bottom: 40px;
+    }
 
-        header img {
-            width: 100px;
-            margin-right: 20px;
-        }
+    header img {
+      width: 100px;
+      margin-right: 20px;
+    }
 
-        header h1 {
-            font-size: 2.8em;
-            color: #fff;
-            font-weight: 600;
-        }
+    header h1 {
+      font-size: 2.8em;
+      color: #fff;
+      font-weight: 600;
+    }
 
-        /* Main Content Area */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
 
-        .section {
-            background-color: #1a1a1a;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+    .section {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 
-        .section h2 {
-            font-size: 2.2em;
-            color: #e1e1e1;
-            margin-bottom: 15px;
-        }
+    .section h2 {
+      font-size: 2.2em;
+      color: #e1e1e1;
+      margin-bottom: 15px;
+    }
 
-        .section p {
-            font-size: 1.2em;
-            color: #ccc;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
+    .section p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
 
-        /* Button Styles */
-        .button {
-            background-color: #ed1c24; /* RSI Red */
-            color: #fff;
-            font-size: 1.3em;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            text-align: center;
-            display: inline-block;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 15px;
-        }
+    .section ul {
+      padding-left: 20px;
+    }
 
-        .button:hover {
-            background-color: #b0151b;
-            transform: scale(1.05);
-        }
+    .section li {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
 
-        /* Footer Section */
-        footer {
-            text-align: center;
-            margin-top: 60px;
-            padding: 20px;
-            background-color: #121212;
-            color: #777;
-            font-size: 1.1em;
-        }
+    .button {
+      background-color: #ed1c24;
+      color: #fff;
+      font-size: 1.3em;
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 15px;
+    }
 
-        footer a {
-            color: #ed1c24;
-            text-decoration: none;
-        }
+    .button:hover {
+      background-color: #b0151b;
+      transform: scale(1.05);
+    }
 
-        /* Overlay Styles */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      background-color: #121212;
+      color: #777;
+      font-size: 1.1em;
+    }
 
-        .overlay-content {
-            background: #1a1a1a;
-            color: #e1e1e1;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+    footer a {
+      color: #ed1c24;
+      text-decoration: none;
+    }
 
-        .overlay-content h3 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-        .overlay-content p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
+    .overlay-content {
+      background: #1a1a1a;
+      color: #e1e1e1;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 
-        .overlay .button {
-            margin-top: 10px;
-        }
-    </style>
+    .overlay-content h3 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .overlay-content p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .overlay .button {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container">
+    <header>
+      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo" />
+      <h1>Star Citizen Kill Tracker</h1>
+    </header>
 
-    <div class="container">
-        <!-- Header Section -->
-        <header>
-            <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo">
-            <h1>Star Citizen Kill Tracker</h1>
-        </header>
+    <div class="main-content">
+      <!-- Section 1: Intro -->
+      <div class="section">
+        <h2>Welcome to the Star Citizen Kill Tracker</h2>
+        <p>Track player deaths in Star Citizen and receive real-time notifications in your Discord server about PvP, Suicide, and Environmental deaths. Get complete details of every death event, right at your fingertips.</p>
+        <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">Download Latest Release</a>
+        <a href="https://discord.gg/jxfHnGQqj7" class="button">Join Our Discord</a>
+      </div>
 
-        <!-- Main Content Section -->
-        <div class="main-content">
-            <!-- Section 1: Introduction with Download Link -->
-            <div class="section">
-                <h2>Welcome to the Star Citizen Kill Tracker</h2>
-                <p>Track player deaths in Star Citizen and receive real-time notifications in your Discord server about PvP,
-                    Suicide, and Environmental deaths. Get complete details of every death event, right at your fingertips.</p>
-                
-                <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">Download Latest Release</a>
-                <a href="https://discord.gg/jxfHnGQqj7" class="button">Join Our Discord</a>
-            </div>
+      <!-- Section 2: Features -->
+      <div class="section">
+        <h2>Features</h2>
+        <ul>
+          <li>Real-time Death Tracking</li>
+          <li>Detailed Discord Notifications</li>
+          <li>Automatic Classification of Kill Types (PvP, Suicide, Environmental)</li>
+          <li>Simple, user-friendly interface</li>
+        </ul>
+        <h3 style="margin-top: 20px;">Coming Soon</h3>
+        <ul>
+          <li>KeyAuth-Protected User Login</li>
+        </ul>
+      </div>
 
-            <!-- Section 2: Features -->
-            <div class="section">
-                <h2>Features</h2>
-                <ul>
-                    <li>Real-time Death Tracking</li>
-                    <li>Detailed Discord Notifications</li>
-                    <li>Automatic Classification of Kill Types (PvP, Suicide, Environmental)</li>
-                    <li>Simple, user-friendly interface</li>
-                </ul>
-            </div>
+      <!-- Section 3: Changelog -->
+      <div class="section" id="changelog">
+        <h2>Changelog</h2>
+        <p>Latest release updates directly from GitHub:</p>
+        <div id="changelog-content" style="white-space: pre-wrap; font-family: monospace; color: #ccc;"></div>
+      </div>
+
+      <!-- Section 4: Screenshots -->
+      <div class="section" id="screenshots">
+        <h2>Screenshots</h2>
+        <p>Explore the look and feel of the tracker:</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+          <img src="https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/screenshot1.png" alt="Screenshot 1" style="max-width: 100%; height: auto; border-radius: 8px; max-height: 400px;">
+          <img src="https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/screenshot2.png" alt="Screenshot 2" style="max-width: 100%; height: auto; border-radius: 8px; max-height: 400px;">
         </div>
+      </div>
 
-        <!-- Footer Section -->
-        <footer>
-            <p>&copy; 2025 Star Citizen Kill Tracker | Developed with ❤️ by the community</p>
-        </footer>
+      <!-- Section 5: Terms & Privacy -->
+      <div class="section" id="terms">
+        <h2>Terms & Privacy</h2>
+        <p>Read our policy and terms before using the Kill Tracker:</p>
+        <ul>
+          <li><a href="https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/tos-sckt.txt" target="_blank">Terms of Service</a></li>
+          <li><a href="https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.txt" target="_blank">Privacy Policy</a></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Custom Overlay for Download Latest Release -->
-    <div class="overlay" id="exitOverlay">
-        <div class="overlay-content">
-            <h3>Are you sure?</h3>
-            <p>Would you like to download the latest release?</p>
-            <button class="button" id="continueButton">Continue</button>
-            <button class="button" id="cancelButton">Cancel</button>
-        </div>
+    <footer>
+      <p>&copy; 2025 Star Citizen Kill Tracker | Developed with ❤️ by the community</p>
+    </footer>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="exitOverlay">
+    <div class="overlay-content">
+      <h3>Are you sure?</h3>
+      <p>Would you like to download the latest release?</p>
+      <button class="button" id="continueButton">Continue</button>
+      <button class="button" id="cancelButton">Cancel</button>
     </div>
+  </div>
 
-    <!-- JavaScript for dynamic overlay -->
-    <script>
-        // Select the buttons and overlay
-        const exitOverlay = document.getElementById("exitOverlay");
-        const downloadButton = document.getElementById("downloadButton");
-        const continueButton = document.getElementById("continueButton");
-        const cancelButton = document.getElementById("cancelButton");
+  <!-- Scripts -->
+  <script>
+    const exitOverlay = document.getElementById("exitOverlay");
+    const downloadButton = document.getElementById("downloadButton");
+    const continueButton = document.getElementById("continueButton");
+    const cancelButton = document.getElementById("cancelButton");
 
-        // Function to show the overlay
-        function showOverlay() {
-            exitOverlay.style.display = "flex";
-        }
+    function showOverlay() {
+      exitOverlay.style.display = "flex";
+    }
 
-        // Event listener for the download button
-        downloadButton.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent the default action (immediate redirect)
-            showOverlay(); // Show the overlay
-        });
+    downloadButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      showOverlay();
+    });
 
-        // Event listener for the continue button (redirect to the download link)
-        continueButton.addEventListener("click", function () {
-            window.location.href = downloadButton.href; // Redirect to the download link
-        });
+    continueButton.addEventListener("click", function () {
+      window.location.href = downloadButton.href;
+    });
 
-        // Event listener for the cancel button (close the overlay)
-        cancelButton.addEventListener("click", function () {
-            exitOverlay.style.display = "none"; // Close the overlay
-        });
-    </script>
+    cancelButton.addEventListener("click", function () {
+      exitOverlay.style.display = "none";
+    });
 
+    // Fetch changelog
+    fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest')
+      .then(response => response.json())
+      .then(data => {
+        const changelog = data.body || 'No changelog available.';
+        document.getElementById('changelog-content').textContent = changelog;
+      })
+      .catch(error => {
+        document.getElementById('changelog-content').textContent = 'Failed to load changelog.';
+        console.error('Changelog fetch error:', error);
+      });
+  </script>
 </body>
-
 </html>
