@@ -1,0 +1,49 @@
+# 🚀 Beta Tester Agreement  
+**Effective Date:** April 30, 2025  
+**Applies To:** Users participating in early testing of *Star Citizen Kill Tracker*
+
+Thank you for participating in the beta testing phase of the **Star Citizen Kill Tracker** ("the Tool"). By using a beta version, you acknowledge and agree to the following:
+
+---
+
+## 1. 🧪 Pre-Release Disclaimer
+
+- This version is **in development** and may contain bugs, incomplete features, or unstable behavior.
+- Features and functionality are **subject to change** without notice during the testing phase.
+
+---
+
+## 2. 🔐 Data & Privacy
+
+- The Tool follows the same data handling policies outlined in the [Privacy Policy](#).
+- No personal data is collected, and nothing is stored locally or remotely.
+- All beta testers are expected to **report any bugs or suspicious behavior**.
+
+---
+
+## 3. 🛠️ Feedback & Reporting
+
+- Please report bugs, crashes, or suggestions in the official [Support Discord](https://discord.gg/jxfHnGQqj7) or GitHub (if available).
+- When reporting issues, include:
+  - A brief description of the bug
+  - Steps to reproduce (if possible)
+  - Any relevant log output or screenshots
+
+---
+
+## 4. 🚫 Confidentiality
+
+- While not under NDA, beta features should not be redistributed, reverse-engineered, or leaked publicly without prior approval.
+- Screenshots, videos, and discussions about unreleased features should stay within official testing channels.
+
+---
+
+## 5. 📦 Leaving the Beta
+
+- You can stop testing at any time. Simply remove the Tool from your system and discontinue use.
+- Continued use of the beta after updates implies agreement to any revised terms.
+
+---
+
+> **We appreciate your help in shaping the future of the Star Citizen Kill Tracker. Your feedback makes this better for everyone.**
+
