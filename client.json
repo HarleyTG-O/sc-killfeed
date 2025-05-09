@@ -1,4 +1,4 @@
 {
-  "disable_client": false,
+  "disable_client": true,
   "version": "v0.1.3.4.9"
 }
