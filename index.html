@@ -266,54 +266,72 @@
   </div>
 
   
-  <script>
-    function showLegalOverlay(type) {
-      const overlay = document.getElementById("legalOverlay");
-      const title = document.getElementById("legalOverlayTitle");
-      const text = document.getElementById("legalOverlayText");
-      let url = "";
+<!-- ✅ FIXED VERSION: Legal Overlay Now Works -->
+<script>
+  function showLegalOverlay(type) {
+    const overlay = document.getElementById("legalOverlay");
+    const title = document.getElementById("legalOverlayTitle");
+    const text = document.getElementById("legalOverlayText");
+    let url = "";
 
-      if (type === "tos") {
-        title.textContent = "Terms of Service";
-        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/tos-sckt.txt";
-      } else if (type === "privacy") {
-        title.textContent = "Privacy Policy";
-        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.txt";
-      }
-    
-    const exitOverlay = document.getElementById("exitOverlay");
-    const downloadButton = document.getElementById("downloadButton");
-    const continueButton = document.getElementById("continueButton");
-    const cancelButton = document.getElementById("cancelButton");
-
-    function showOverlay() {
-      exitOverlay.style.display = "flex";
+    if (type === "tos") {
+      title.textContent = "Terms of Service";
+      url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/tos-sckt.txt";
+    } else if (type === "privacy") {
+      title.textContent = "Privacy Policy";
+      url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.txt";
     }
 
-    downloadButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      showOverlay();
-    });
-
-    continueButton.addEventListener("click", function () {
-      window.location.href = downloadButton.href;
-    });
-
-    cancelButton.addEventListener("click", function () {
-      exitOverlay.style.display = "none";
-    });
-
-    // Fetch changelog from GitHub API
-    fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest')
-      .then(response => response.json())
+    fetch(url)
+      .then(res => res.ok ? res.text() : Promise.reject("Failed to load"))
       .then(data => {
-        const changelog = data.body || 'No changelog available.';
-        document.getElementById('changelog-content').textContent = changelog;
+        text.textContent = data;
+        overlay.style.display = "flex";
       })
-      .catch(error => {
-        document.getElementById('changelog-content').textContent = 'Failed to load changelog.';
-        console.error('Changelog fetch error:', error);
+      .catch(() => {
+        text.textContent = "Unable to load document.";
+        overlay.style.display = "flex";
       });
-  </script>
+  }
+
+  function hideLegalOverlay() {
+    document.getElementById("legalOverlay").style.display = "none";
+  }
+
+  const exitOverlay = document.getElementById("exitOverlay");
+  const downloadButton = document.getElementById("downloadButton");
+  const continueButton = document.getElementById("continueButton");
+  const cancelButton = document.getElementById("cancelButton");
+
+  function showOverlay() {
+    exitOverlay.style.display = "flex";
+  }
+
+  downloadButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    showOverlay();
+  });
+
+  continueButton.addEventListener("click", function () {
+    window.location.href = downloadButton.href;
+  });
+
+  cancelButton.addEventListener("click", function () {
+    exitOverlay.style.display = "none";
+  });
+
+  // Fetch changelog from GitHub API
+  fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest')
+    .then(response => response.json())
+    .then(data => {
+      const changelog = data.body || 'No changelog available.';
+      document.getElementById('changelog-content').textContent = changelog;
+    })
+    .catch(error => {
+      document.getElementById('changelog-content').textContent = 'Failed to load changelog.';
+      console.error('Changelog fetch error:', error);
+    });
+</script>
+
 </body>
 </html>
