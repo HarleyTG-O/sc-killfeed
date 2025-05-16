@@ -1,103 +1,62 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Star Citizen Kill Tracker</title>
-
-  <!-- Favicon -->
   <link rel="icon" href="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" type="image/png" />
-
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background-color: #1a252f;
       color: #ddd;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.5;
-      min-height: 100vh;
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
-      padding: 40px 20px;
     }
-
     .container {
       width: 100%;
       max-width: 900px;
       background-color: #16202b;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.7);
       padding: 30px 40px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7);
     }
-
     header {
       display: flex;
       align-items: center;
       gap: 20px;
       margin-bottom: 30px;
     }
-
     header img {
       width: 72px;
-      height: 72px;
       border-radius: 12px;
       box-shadow: 0 0 8px #ed1c24aa;
     }
-
     header h1 {
       font-size: 2.4rem;
-      font-weight: 700;
       color: #ed1c24;
-      user-select: none;
     }
-
     .section {
       background-color: #1f2a38;
       padding: 25px 30px;
       border-radius: 10px;
       margin-bottom: 30px;
-      box-shadow: inset 0 0 8px #0008;
     }
-
     .section h2 {
       font-size: 1.9rem;
       color: #ed1c24;
       margin-bottom: 15px;
       border-bottom: 1px solid #ed1c2433;
       padding-bottom: 8px;
-      user-select: none;
     }
-
-    .section h3 {
-      margin-top: 20px;
-      color: #f4a2a2;
-      font-weight: 600;
-    }
-
-    .section p, .section ul {
-      font-size: 1.1rem;
-      color: #ccc;
-      margin-bottom: 15px;
-    }
-
-    .section ul {
-      list-style: inside disc;
-      padding-left: 10px;
-    }
-
-    .section li {
-      margin-bottom: 8px;
-    }
-
-    a.button {
+    .section ul { list-style: disc inside; margin-bottom: 15px; }
+    .section li { margin-bottom: 8px; }
+    a.button, button.button {
       display: inline-block;
       background-color: #ed1c24;
       color: #fff;
@@ -106,41 +65,22 @@
       padding: 12px 30px;
       border-radius: 8px;
       box-shadow: 0 3px 0 #b0141a;
-      transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
-      user-select: none;
       margin-right: 15px;
       margin-top: 10px;
+      transition: 0.3s ease;
+      border: none;
       cursor: pointer;
     }
-
-    a.button:hover {
+    a.button:hover, button.button:hover {
       background-color: #b0141a;
-      box-shadow: 0 1px 0 #8e1013;
       transform: translateY(2px);
     }
-
     footer {
       margin-top: 40px;
-      padding: 20px;
       color: #777;
-      font-size: 0.95rem;
-      user-select: none;
       text-align: center;
-      width: 100%;
       max-width: 900px;
     }
-
-    footer a {
-      color: #ed1c24;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Overlay */
     .overlay {
       position: fixed;
       inset: 0;
@@ -149,90 +89,57 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      user-select: none;
     }
-
     .overlay-content {
       background: #16202b;
       color: #ddd;
       padding: 30px 40px;
       border-radius: 12px;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      text-align: left;
       box-shadow: 0 0 12px #000c;
-      text-align: center;
-      max-width: 400px;
     }
-
     .overlay-content h3 {
       font-size: 1.8rem;
       margin-bottom: 20px;
       color: #ed1c24;
-      font-weight: 700;
     }
-
-    .overlay-content p {
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-      line-height: 1.4;
-    }
-
-    .overlay .button {
-      width: 130px;
-      margin: 0 10px;
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .container {
-        padding: 20px;
-      }
-      header h1 {
-        font-size: 1.8rem;
-      }
-      .section h2 {
-        font-size: 1.6rem;
-      }
-      a.button {
-        padding: 10px 20px;
-        font-size: 1rem;
-      }
-      .overlay-content {
-        padding: 25px 20px;
-      }
+    .overlay-content pre {
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="container" role="main" aria-label="Star Citizen Kill Tracker Information">
+  <div class="container">
     <header>
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Star Citizen Kill Tracker Logo" />
+      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo">
       <h1>Star Citizen Kill Tracker</h1>
     </header>
 
-    <section class="section" aria-labelledby="welcome-title">
-      <h2 id="welcome-title">Welcome to the Star Citizen Kill Tracker</h2>
-      <p>Track player deaths in Star Citizen and receive real-time notifications in your Discord server about PvP, Suicide, and Environmental deaths. Get complete details of every death event, right at your fingertips.</p>
+    <section class="section">
+      <h2>Welcome</h2>
+      <p>Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths.</p>
       <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">Download Latest Release</a>
-      <a href="https://discord.gg/jxfHnGQqj7" class="button" target="_blank" rel="noopener noreferrer">Join Our Discord</a>
+      <a href="https://discord.gg/jxfHnGQqj7" class="button" target="_blank">Join Our Discord</a>
     </section>
 
-    <section class="section" aria-labelledby="features-title">
-      <h2 id="features-title">Features</h2>
+    <section class="section">
+      <h2>Features</h2>
       <ul>
         <li>Real-time Death Tracking</li>
-        <li>Detailed Discord Notifications</li>
-        <li>Automatic Classification of Kill Types (PvP, Suicide, Environmental)</li>
-        <li>Simple, user-friendly interface</li>
-      </ul>
-      <h3>Coming Soon</h3>
-      <ul>
-        <li>Protected User Login</li>
+        <li>Discord Notifications</li>
+        <li>Kill Type Classification</li>
+        <li>User-friendly Interface</li>
       </ul>
     </section>
 
-    <section class="section" aria-labelledby="changelog-title" id="changelog">
-      <h2 id="changelog-title">Changelog</h2>
-      <p>Latest release updates directly from GitHub:</p>
-      <pre id="changelog-content" style="white-space: pre-wrap; font-family: Consolas, monospace; color: #ccc; max-height: 200px; overflow-y: auto; padding: 10px; background: #0f1a23; border-radius: 8px;"></pre>
+    <section class="section">
+      <h2>Changelog</h2>
+      <pre id="changelog-content">Loading latest release notes...</pre>
     </section>
 
     <section class="section">
@@ -243,20 +150,11 @@
     </section>
   </div>
 
-  <footer role="contentinfo">
-    <p>&copy; 2025 Star Citizen Kill Tracker | Developed with ❤️ by the community</p>
+  <footer>
+    <p>&copy; 2025 Star Citizen Kill Tracker | Built by the community</p>
   </footer>
 
-  <!-- Overlay -->
-  <div class="overlay" id="exitOverlay" role="dialog" aria-modal="true" aria-labelledby="exitOverlayTitle" aria-describedby="exitOverlayDesc">
-    <div class="overlay-content">
-      <h3 id="exitOverlayTitle">Are you sure?</h3>
-      <p id="exitOverlayDesc">Would you like to download the latest release?</p>
-      <button class="button" id="continueButton" aria-label="Continue to download latest release">Continue</button>
-      <button class="button" id="cancelButton" aria-label="Cancel download">Cancel</button>
-    </div>
-  </div>
- <!-- Overlay for Terms/Privacy -->
+  <!-- Overlay for Terms/Privacy -->
   <div class="overlay" id="legalOverlay">
     <div class="overlay-content">
       <h3 id="legalOverlayTitle">Loading...</h3>
@@ -265,73 +163,77 @@
     </div>
   </div>
 
-  
-<!-- ✅ FIXED VERSION: Legal Overlay Now Works -->
-<script>
-  function showLegalOverlay(type) {
-    const overlay = document.getElementById("legalOverlay");
-    const title = document.getElementById("legalOverlayTitle");
-    const text = document.getElementById("legalOverlayText");
-    let url = "";
+  <!-- Overlay for Download Confirmation -->
+  <div class="overlay" id="exitOverlay">
+    <div class="overlay-content">
+      <h3>Are you sure?</h3>
+      <p>Would you like to download the latest release?</p>
+      <button class="button" id="continueButton">Continue</button>
+      <button class="button" id="cancelButton">Cancel</button>
+    </div>
+  </div>
 
-    if (type === "tos") {
-      title.textContent = "Terms of Service";
-      url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/tos-sckt.txt";
-    } else if (type === "privacy") {
-      title.textContent = "Privacy Policy";
-      url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.txt";
+  <script>
+    function showLegalOverlay(type) {
+      const overlay = document.getElementById("legalOverlay");
+      const title = document.getElementById("legalOverlayTitle");
+      const text = document.getElementById("legalOverlayText");
+      let url = "";
+
+      if (type === "tos") {
+        title.textContent = "Terms of Service";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/tos-sckt.txt";
+      } else if (type === "privacy") {
+        title.textContent = "Privacy Policy";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.txt";
+      }
+
+      fetch(url)
+        .then(res => res.ok ? res.text() : Promise.reject("Failed to load"))
+        .then(data => {
+          text.textContent = data;
+          overlay.style.display = "flex";
+        })
+        .catch(() => {
+          text.textContent = "Unable to load document.";
+          overlay.style.display = "flex";
+        });
     }
 
-    fetch(url)
-      .then(res => res.ok ? res.text() : Promise.reject("Failed to load"))
+    function hideLegalOverlay() {
+      document.getElementById("legalOverlay").style.display = "none";
+    }
+
+    const exitOverlay = document.getElementById("exitOverlay");
+    const downloadButton = document.getElementById("downloadButton");
+    const continueButton = document.getElementById("continueButton");
+    const cancelButton = document.getElementById("cancelButton");
+
+    function showOverlay() {
+      exitOverlay.style.display = "flex";
+    }
+
+    downloadButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      showOverlay();
+    });
+
+    continueButton.addEventListener("click", function () {
+      window.location.href = downloadButton.href;
+    });
+
+    cancelButton.addEventListener("click", function () {
+      exitOverlay.style.display = "none";
+    });
+
+    fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest')
+      .then(res => res.json())
       .then(data => {
-        text.textContent = data;
-        overlay.style.display = "flex";
+        document.getElementById('changelog-content').textContent = data.body || "No changelog available.";
       })
       .catch(() => {
-        text.textContent = "Unable to load document.";
-        overlay.style.display = "flex";
+        document.getElementById('changelog-content').textContent = "Failed to load changelog.";
       });
-  }
-
-  function hideLegalOverlay() {
-    document.getElementById("legalOverlay").style.display = "none";
-  }
-
-  const exitOverlay = document.getElementById("exitOverlay");
-  const downloadButton = document.getElementById("downloadButton");
-  const continueButton = document.getElementById("continueButton");
-  const cancelButton = document.getElementById("cancelButton");
-
-  function showOverlay() {
-    exitOverlay.style.display = "flex";
-  }
-
-  downloadButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    showOverlay();
-  });
-
-  continueButton.addEventListener("click", function () {
-    window.location.href = downloadButton.href;
-  });
-
-  cancelButton.addEventListener("click", function () {
-    exitOverlay.style.display = "none";
-  });
-
-  // Fetch changelog from GitHub API
-  fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest')
-    .then(response => response.json())
-    .then(data => {
-      const changelog = data.body || 'No changelog available.';
-      document.getElementById('changelog-content').textContent = changelog;
-    })
-    .catch(error => {
-      document.getElementById('changelog-content').textContent = 'Failed to load changelog.';
-      console.error('Changelog fetch error:', error);
-    });
-</script>
-
+  </script>
 </body>
 </html>
