@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,20 +55,25 @@
     }
     .section ul { list-style: disc inside; margin-bottom: 15px; }
     .section li { margin-bottom: 8px; }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
     a.button, button.button {
       display: inline-block;
       background-color: #ed1c24;
       color: #fff;
       font-weight: 600;
       text-decoration: none;
-      padding: 12px 30px;
+      padding: 12px 20px;
       border-radius: 8px;
       box-shadow: 0 3px 0 #b0141a;
-      margin-right: 15px;
-      margin-top: 10px;
       transition: 0.3s ease;
       border: none;
       cursor: pointer;
+      white-space: nowrap;
     }
     a.button:hover, button.button:hover {
       background-color: #b0141a;
@@ -111,6 +115,20 @@
       font-family: Consolas, monospace;
       font-size: 1rem;
     }
+
+    /* Media Gallery Styling */
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .media-gallery video,
+    .media-gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #000c;
+    }
   </style>
 </head>
 <body>
@@ -123,8 +141,13 @@
     <section class="section">
       <h2>Welcome</h2>
       <p>Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths.</p>
-      <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">Download Latest Release</a>
-      <a href="https://discord.gg/jxfHnGQqj7" class="button" target="_blank">Join Our Discord</a>
+      <div class="button-group">
+        <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">Download Latest</a>
+        <a href="https://discord.gg/jxfHnGQqj7" class="button" target="_blank">Join Discord</a>
+        <button class="button" onclick="showLegalOverlay('tos')">Terms of Service</button>
+        <button class="button" onclick="showLegalOverlay('privacy')">Privacy Policy</button>
+        <button class="button" onclick="showLegalOverlay('eula')">View EULA</button>
+      </div>
     </section>
 
     <section class="section">
@@ -137,25 +160,23 @@
       </ul>
     </section>
 
-    <section class="section" aria-labelledby="changelog-title" id="changelog">
-      <h2 id="changelog-title">Changelog</h2>
-      <p>Latest release updates directly from GitHub:</p>
-      <pre id="changelog-content" style="white-space: pre-wrap; font-family: Consolas, monospace; color: #ccc; max-height: 200px; overflow-y: auto; padding: 10px; background: #0f1a23; border-radius: 8px;"></pre>
+    <section class="section">
+    <h2>Media Gallery</h2>
+    <div class="media-gallery">
+        <video controls src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/Startup-SCKT.mp4?raw=true"></video>
+        <video controls src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/sckilltrac-mainmenu.mp4?raw=true"></video>
+        <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/welcome-sckilltrac.png?raw=true" alt="Welcome Screenshot" />
+        <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/discordrpc.png?raw=true" alt="Discord RPC" />
+    </div>
     </section>
 
-    <section class="section">
-      <h2>Terms & Privacy</h2>
-      <p>Click below to view our Terms of Service and Privacy Policy:</p>
-      <button class="button" onclick="showLegalOverlay('tos')">View Terms of Service</button>
-      <button class="button" onclick="showLegalOverlay('privacy')">View Privacy Policy</button>
-    </section>
   </div>
 
   <footer>
     <p>&copy; 2025 Star Citizen Kill Tracker | Built by the community</p>
   </footer>
 
-  <!-- Overlay for Terms/Privacy -->
+  <!-- Overlay for Terms/Privacy/EULA -->
   <div class="overlay" id="legalOverlay">
     <div class="overlay-content">
       <h3 id="legalOverlayTitle">Loading...</h3>
@@ -187,6 +208,9 @@
       } else if (type === "privacy") {
         title.textContent = "Privacy Policy";
         url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.txt";
+      } else if (type === "eula") {
+        title.textContent = "End User License Agreement (EULA)";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/EULA.md";
       }
 
       fetch(url)
@@ -226,15 +250,6 @@
     cancelButton.addEventListener("click", function () {
       exitOverlay.style.display = "none";
     });
-
-    fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('changelog-content').textContent = data.body || "No changelog available.";
-      })
-      .catch(() => {
-        document.getElementById('changelog-content').textContent = "Failed to load changelog.";
-      });
   </script>
 </body>
 </html>
