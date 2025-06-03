@@ -39,6 +39,15 @@
     header h1 {
       font-size: 2.4rem;
       color: #ed1c24;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header h1 #version {
+      font-weight: normal;
+      font-size: 1.2rem;
+      color: #bbb;
+      margin-left: 10px;
     }
     .section {
       background-color: #1f2a38;
@@ -129,14 +138,35 @@
       border-radius: 10px;
       box-shadow: 0 0 8px #000c;
     }
+
+    /* Status Section Styling */
+    #statusList {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: #eee;
+      background-color: #222c3a;
+      border-radius: 8px;
+      padding: 15px 20px;
+      white-space: pre-line;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo">
-      <h1>Star Citizen Kill Tracker</h1>
+      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo" />
+      <h1>
+        Star Citizen Kill Tracker
+      </h1>
     </header>
+
+    <!-- New Status Section -->
+    <section class="section">
+      <h2>Status</h2>
+      <div id="statusList">
+        Loading status...
+      </div>
+    </section>
 
     <section class="section">
       <h2>Welcome</h2>
@@ -161,15 +191,14 @@
     </section>
 
     <section class="section">
-    <h2>Media Gallery</h2>
-    <div class="media-gallery">
+      <h2>Media Gallery</h2>
+      <div class="media-gallery">
         <video controls src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/Startup-SCKT.mp4?raw=true"></video>
         <video controls src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/sckilltrac-mainmenu.mp4?raw=true"></video>
         <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/welcome-sckilltrac.png?raw=true" alt="Welcome Screenshot" />
         <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/discordrpc.png?raw=true" alt="Discord RPC" />
-    </div>
+      </div>
     </section>
-
   </div>
 
   <footer>
@@ -229,6 +258,7 @@
       document.getElementById("legalOverlay").style.display = "none";
     }
 
+    // Download overlay logic
     const exitOverlay = document.getElementById("exitOverlay");
     const downloadButton = document.getElementById("downloadButton");
     const continueButton = document.getElementById("continueButton");
@@ -238,18 +268,61 @@
       exitOverlay.style.display = "flex";
     }
 
-    downloadButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      showOverlay();
-    });
+    // Only override default if the button exists
+    if (downloadButton) {
+      downloadButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        showOverlay();
+      });
+    }
 
-    continueButton.addEventListener("click", function () {
-      window.location.href = downloadButton.href;
-    });
+    if (continueButton) {
+      continueButton.addEventListener("click", function () {
+        window.location.href = downloadButton.href;
+      });
+    }
 
-    cancelButton.addEventListener("click", function () {
-      exitOverlay.style.display = "none";
-    });
+    if (cancelButton) {
+      cancelButton.addEventListener("click", function () {
+        exitOverlay.style.display = "none";
+      });
+    }
+
+    // Fetch and display version in header and status info
+    fetch('https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/client.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(data => {
+        // Version in header
+        const versionSpan = document.getElementById('version');
+        if (versionSpan) {
+          if (data.version) {
+            versionSpan.textContent = data.version;
+          } else {
+            versionSpan.textContent = '(version info unavailable)';
+          }
+        }
+
+        // Status area
+        const statusDiv = document.getElementById('statusList');
+        if (statusDiv) {
+          const disableClient = data.disable_client === true ? 'Yes' : 'No';
+          const mandatoryUpdate = data.mandatory_update === true ? 'Yes' : 'No';
+          const version = data.version || 'Unknown';
+
+          statusDiv.textContent = 
+            `Disable Client:     ${disableClient}\n` +
+            `Current Version:    ${version}`;
+        }
+      })
+      .catch(() => {
+        const versionSpan = document.getElementById('version');
+        if (versionSpan) versionSpan.textContent = '(failed to load version)';
+        const statusDiv = document.getElementById('statusList');
+        if (statusDiv) statusDiv.textContent = 'Failed to load status information.';
+      });
   </script>
 </body>
 </html>
