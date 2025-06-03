@@ -58,6 +58,9 @@ By using the Tool, you agree to:
 
 For questions, feedback, or concerns regarding this policy:
 
+
+— SC Kill Tracker Team
+
 - Open an issue on the project’s official GitHub repository *(if applicable)*  
 - Or contact the developer directly through the support Discord: [https://discord.gg/jxfHnGQqj7](https://discord.gg/jxfHnGQqj7)
 
