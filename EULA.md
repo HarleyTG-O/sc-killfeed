@@ -54,3 +54,5 @@ BY INSTALLING OR USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERST
 ---
 
 © 2025 SC Kill Tracker Team. All rights reserved.
+
+— SC Kill Tracker Team
