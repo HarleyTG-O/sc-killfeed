@@ -48,4 +48,7 @@ Violation of any clause may result in license revocation and legal action.
 ## Contact  
 For licensing or support, please contact:  
 📧 sckilltracker@gmail.com  
-💬 [Discord Support Server](https://discord.gg/YOUR_INVITE)
+💬 [Discord Support Server](https://discord.gg/jxfHnGQqj7))
+
+
+- SC Kill Tracker Team
