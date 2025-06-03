@@ -50,3 +50,6 @@ This tool is publicly available for use under the [**Star Citizen Kill Tracker D
 
 - These Terms of Service may be modified at any time without notice.  
 - Continued use of the Tool after changes constitutes **acceptance of the updated terms**.
+
+
+— SC Kill Tracker Team
