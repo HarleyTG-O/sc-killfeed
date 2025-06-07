@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Profile - SC Kill Tracker</title>
+  <link rel="icon" href="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Animated background with particles */
+    body {
+      background: linear-gradient(135deg, #0a0f1c 0%, #1a252f 50%, #0f1419 100%);
+      color: #e0e6ed;
+      font-family: "Exo 2", "Segoe UI", sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 20px 30px, #ed1c24, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(237, 28, 36, 0.5), transparent),
+        radial-gradient(1px 1px at 90px 40px, #ed1c24, transparent);
+      background-repeat: repeat;
+      background-size: 150px 80px;
+      animation: particleFloat 15s ease-in-out infinite;
+      opacity: 0.08;
+      z-index: -1;
+    }
+
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-50px) translateX(50px); }
+    }
+
+    /* Main container */
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.95), rgba(15, 20, 25, 0.95));
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow:
+        0 0 30px rgba(237, 28, 36, 0.3),
+        0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(237, 28, 36, 0.4);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow:
+        0 0 40px rgba(237, 28, 36, 0.5),
+        0 25px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Header with back button */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(237, 28, 36, 0.3);
+    }
+
+    .back-button {
+      background: linear-gradient(145deg, rgba(237, 28, 36, 0.8), rgba(176, 20, 26, 0.8));
+      color: white;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      border: 2px solid rgba(237, 28, 36, 0.5);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .back-button:hover {
+      background: linear-gradient(145deg, rgba(255, 40, 50, 0.9), rgba(237, 28, 36, 0.9));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(237, 28, 36, 0.4);
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ed1c24;
+      text-shadow: 0 0 15px rgba(237, 28, 36, 0.8);
+      letter-spacing: 2px;
+    }
+
+    /* Profile section */
+    .profile-section {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
+
+    .profile-avatar {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 30px rgba(237, 28, 36, 0.6),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      animation: avatarGlow 3s ease-in-out infinite alternate;
+      overflow: hidden;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    @keyframes avatarGlow {
+      0% { box-shadow: 0 0 30px rgba(237, 28, 36, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1); }
+      100% { box-shadow: 0 0 40px rgba(237, 28, 36, 0.9), inset 0 0 30px rgba(255, 255, 255, 0.2); }
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .profile-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ed1c24;
+      text-shadow: 0 0 15px rgba(237, 28, 36, 0.8);
+      margin-bottom: 10px;
+    }
+
+    .profile-subtitle {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.2rem;
+      color: #8fa8b8;
+      margin-bottom: 20px;
+    }
+
+    /* Info cards */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .info-card {
+      background: linear-gradient(145deg, rgba(31, 42, 56, 0.9), rgba(20, 28, 38, 0.9));
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(237, 28, 36, 0.2);
+      border-color: rgba(237, 28, 36, 0.5);
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ed1c24, transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .info-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 8px rgba(237, 28, 36, 0.5);
+    }
+
+    .card-value {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #e0e6ed;
+      word-break: break-all;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 12px 15px;
+      border-radius: 8px;
+      border-left: 4px solid #ed1c24;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Statistics Section */
+    .stats-section {
+      margin-bottom: 40px;
+    }
+
+    .stats-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: linear-gradient(145deg, rgba(31, 42, 56, 0.9), rgba(20, 28, 38, 0.9));
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat-card.pvp::before {
+      background: linear-gradient(90deg, transparent, #ed1c24, transparent);
+    }
+
+    .stat-card.pve::before {
+      background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    }
+
+    .stat-card.deaths::before {
+      background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
+    }
+
+    .stat-card.suicide::before {
+      background: linear-gradient(90deg, transparent, #ff9500, transparent);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 28, 36, 0.2);
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(237, 28, 36, 0.1);
+      border: 2px solid rgba(237, 28, 36, 0.3);
+    }
+
+    .stat-card.pve .stat-icon {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: rgba(0, 255, 136, 0.3);
+    }
+
+    .stat-card.deaths .stat-icon {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: rgba(255, 107, 107, 0.3);
+    }
+
+    .stat-card.suicide .stat-icon {
+      background: rgba(255, 149, 0, 0.1);
+      border-color: rgba(255, 149, 0, 0.3);
+    }
+
+    .stat-info {
+      flex: 1;
+    }
+
+    .stat-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #8fa8b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ed1c24;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-card.pve .stat-value {
+      color: #00ff88;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+
+    .stat-card.deaths .stat-value {
+      color: #ff6b6b;
+      text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    }
+
+    .stat-card.suicide .stat-value {
+      color: #ff9500;
+      text-shadow: 0 0 10px rgba(255, 149, 0, 0.5);
+    }
+
+    .stat-detail {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.8rem;
+      color: #8fa8b8;
+      opacity: 0.8;
+    }
+
+    /* Activity Section */
+    .activity-section {
+      margin-bottom: 40px;
+    }
+
+    .activity-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .activity-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .activity-feed::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .activity-feed::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+    }
+
+    .activity-feed::-webkit-scrollbar-thumb {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      border-radius: 3px;
+    }
+
+    .activity-item {
+      background: linear-gradient(145deg, rgba(31, 42, 56, 0.9), rgba(20, 28, 38, 0.9));
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(237, 28, 36, 0.2);
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .activity-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .activity-item.pvp::before {
+      background: #ed1c24;
+    }
+
+    .activity-item.pve::before {
+      background: #00ff88;
+    }
+
+    .activity-item.suicide::before {
+      background: #ff9500;
+    }
+
+    .activity-item.pvp-death::before {
+      background: #ff6b6b;
+    }
+
+    .activity-item:hover {
+      transform: translateX(5px);
+      border-color: rgba(237, 28, 36, 0.4);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.1);
+    }
+
+    .activity-icon {
+      font-size: 1.8rem;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(237, 28, 36, 0.1);
+      border: 2px solid rgba(237, 28, 36, 0.3);
+      flex-shrink: 0;
+    }
+
+    .activity-item.pve .activity-icon {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: rgba(0, 255, 136, 0.3);
+    }
+
+    .activity-item.suicide .activity-icon {
+      background: rgba(255, 149, 0, 0.1);
+      border-color: rgba(255, 149, 0, 0.3);
+    }
+
+    .activity-item.pvp-death .activity-icon {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: rgba(255, 107, 107, 0.3);
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .activity-type {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .activity-item.pve .activity-type {
+      color: #00ff88;
+    }
+
+    .activity-item.suicide .activity-type {
+      color: #ff9500;
+    }
+
+    .activity-item.pvp-death .activity-type {
+      color: #ff6b6b;
+    }
+
+    .activity-time {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #8fa8b8;
+      opacity: 0.8;
+    }
+
+    .activity-details {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .activity-zone,
+    .activity-victim,
+    .activity-killer,
+    .activity-method {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #b8c5d1;
+    }
+
+    .activity-zone {
+      font-family: 'Courier New', monospace;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 0.8rem;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .action-button {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      border: 2px solid rgba(237, 28, 36, 0.5);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .action-button:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(237, 28, 36, 0.6);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .action-button:hover::before {
+      left: 100%;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        padding: 25px;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .profile-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 25px;
+      }
+
+      .profile-avatar {
+        margin: 0 auto;
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+      }
+
+      .profile-title {
+        font-size: 2rem;
+      }
+
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .action-button {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+      }
+
+      .activity-feed {
+        max-height: 300px;
+      }
+
+      .activity-item {
+        padding: 15px;
+      }
+
+      .activity-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .activity-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+      }
+
+      .mock-notice {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .control-card {
+        padding: 15px;
+      }
+
+      .control-header {
+        margin-bottom: 15px;
+      }
+
+      .control-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+      }
+
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .data-card {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .data-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.8rem;
+        margin: 0 auto;
+      }
+
+      .data-button {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+
+    /* Mock Notice */
+    .mock-notice {
+      background: linear-gradient(145deg, rgba(255, 149, 0, 0.15), rgba(255, 149, 0, 0.05));
+      border: 2px solid rgba(255, 149, 0, 0.4);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: mockPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes mockPulse {
+      0%, 100% { border-color: rgba(255, 149, 0, 0.4); }
+      50% { border-color: rgba(255, 149, 0, 0.7); }
+    }
+
+    .mock-icon {
+      font-size: 2rem;
+      color: #ff9500;
+      flex-shrink: 0;
+    }
+
+    .mock-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ff9500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .mock-text {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #d0d6dd;
+      line-height: 1.5;
+    }
+
+    /* Controls Section */
+    .controls-section {
+      margin-bottom: 40px;
+    }
+
+    .controls-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .control-card {
+      background: linear-gradient(145deg, rgba(31, 42, 56, 0.9), rgba(20, 28, 38, 0.9));
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .control-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 28, 36, 0.2);
+      border-color: rgba(237, 28, 36, 0.5);
+    }
+
+    .control-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(237, 28, 36, 0.2);
+    }
+
+    .control-icon {
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(237, 28, 36, 0.1);
+      border: 2px solid rgba(237, 28, 36, 0.3);
+    }
+
+    .control-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .control-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .setting-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #8fa8b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .setting-input,
+    .setting-select {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      transition: all 0.3s ease;
+    }
+
+    .setting-input:focus,
+    .setting-select:focus {
+      outline: none;
+      border-color: rgba(237, 28, 36, 0.6);
+      box-shadow: 0 0 10px rgba(237, 28, 36, 0.2);
+    }
+
+    .setting-input[readonly] {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-label {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      border-radius: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-label:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 2px;
+      bottom: 2px;
+      background: #8fa8b8;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    input:checked + .toggle-label {
+      background: rgba(237, 28, 36, 0.3);
+      border-color: rgba(237, 28, 36, 0.6);
+    }
+
+    input:checked + .toggle-label:before {
+      transform: translateX(26px);
+      background: #ed1c24;
+      box-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+    }
+
+    input:disabled + .toggle-label {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Data Management Section */
+    .data-section {
+      margin-bottom: 40px;
+    }
+
+    .data-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .data-card {
+      background: linear-gradient(145deg, rgba(31, 42, 56, 0.9), rgba(20, 28, 38, 0.9));
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .data-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 28, 36, 0.2);
+      border-color: rgba(237, 28, 36, 0.5);
+    }
+
+    .data-icon {
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(237, 28, 36, 0.1);
+      border: 2px solid rgba(237, 28, 36, 0.3);
+      flex-shrink: 0;
+    }
+
+    .data-info {
+      flex: 1;
+    }
+
+    .data-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ed1c24;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .data-desc {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      color: #8fa8b8;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .data-button {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .data-button:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.4);
+    }
+
+    .data-button.danger {
+      background: linear-gradient(145deg, #ff6b6b, #e55555);
+    }
+
+    .data-button.danger:hover {
+      background: linear-gradient(145deg, #ff8080, #ff6b6b);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="back-button">← Back to Home</a>
+      <h1>User Profile</h1>
+      <div></div> <!-- Spacer for flexbox -->
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-avatar">
+        <img src="https://avatars.githubusercontent.com/u/78422734?s=400&u=a55ec5365cf78e9fd0f1240e74c1c02fd0a2ef1f&v=4" alt="HarleyTG Avatar">
+      </div>
+      <div class="profile-info">
+        <h2 class="profile-title">HarleyTG</h2>
+        <p class="profile-subtitle">Star Citizen Kill Tracker Account</p>
+      </div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="card-label">Username</div>
+        <div class="card-value">HarleyTG</div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-label">SCKillTrac ID</div>
+        <div class="card-value">HarleyTG@SCKillTrac</div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-label">UUID</div>
+        <div class="card-value">HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54</div>
+      </div>
+    </div>
+
+    <!-- Kill Statistics Section -->
+    <section class="stats-section">
+      <h2>Combat Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-card pvp">
+          <div class="stat-icon">⚔️</div>
+          <div class="stat-info">
+            <div class="stat-label">PvP Kills</div>
+            <div class="stat-value">2</div>
+            <div class="stat-detail">Global Tracking</div>
+          </div>
+        </div>
+
+        <div class="stat-card pve">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-info">
+            <div class="stat-label">PvE Kills</div>
+            <div class="stat-value">3</div>
+            <div class="stat-detail">Separate Tracking</div>
+          </div>
+        </div>
+
+        <div class="stat-card deaths">
+          <div class="stat-icon">💀</div>
+          <div class="stat-info">
+            <div class="stat-label">Deaths</div>
+            <div class="stat-value">2</div>
+            <div class="stat-detail">PvP Deaths</div>
+          </div>
+        </div>
+
+        <div class="stat-card suicide">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-info">
+            <div class="stat-label">Suicides</div>
+            <div class="stat-value">1</div>
+            <div class="stat-detail">Self-Inflicted</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Activity Section -->
+    <section class="activity-section">
+      <h2>Recent Activity</h2>
+      <div class="activity-feed">
+        <div class="activity-item suicide">
+          <div class="activity-icon">🔥</div>
+          <div class="activity-content">
+            <div class="activity-header">
+              <span class="activity-type">Suicide Event</span>
+              <span class="activity-time">Yesterday at 6:52 PM</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-zone">Zone: rs_entry_cru-leo1</div>
+              <div class="activity-method">Method: Self-inflicted</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-item pve">
+          <div class="activity-icon">🎯</div>
+          <div class="activity-content">
+            <div class="activity-header">
+              <span class="activity-type">PvE Kill</span>
+              <span class="activity-time">Jun 6, 6:51 AM</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-zone">Zone: ObjectContainer-ugf_lta_a_0002</div>
+              <div class="activity-victim">Victim: NineTails Techie</div>
+              <div class="activity-method">Weapon: Takedown</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-item pvp">
+          <div class="activity-icon">⚔️</div>
+          <div class="activity-content">
+            <div class="activity-header">
+              <span class="activity-type">PvP Kill</span>
+              <span class="activity-time">Jun 6, 6:18 AM</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-zone">Zone: ANVL_Asgard</div>
+              <div class="activity-victim">Victim: HarleyTG (Self)</div>
+              <div class="activity-method">Damage: Crash</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-item pvp-death">
+          <div class="activity-icon">💀</div>
+          <div class="activity-content">
+            <div class="activity-header">
+              <span class="activity-type">PvP Death</span>
+              <span class="activity-time">Jun 6, 3:46 AM</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-zone">Zone: Hangar_SmallTop_RestStop</div>
+              <div class="activity-killer">Killer: Dampiel</div>
+              <div class="activity-method">Weapon: Energy Rifle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mock Service Notice -->
+    <div class="mock-notice">
+      <div class="mock-icon">⚠️</div>
+      <div class="mock-content">
+        <div class="mock-title">MOCK SERVICE DEMONSTRATION</div>
+        <div class="mock-text">This is a demonstration profile. All data, controls, and features are simulated for showcase purposes only. No actual tracking or data storage occurs.</div>
+      </div>
+    </div>
+
+    <!-- Settings & Controls Section -->
+    <section class="controls-section">
+      <h2>Account Controls</h2>
+      <div class="controls-grid">
+        <div class="control-card">
+          <div class="control-header">
+            <div class="control-icon">🔧</div>
+            <div class="control-title">Profile Settings</div>
+          </div>
+          <div class="control-content">
+            <div class="setting-item">
+              <label class="setting-label">Display Name</label>
+              <input type="text" class="setting-input" value="HarleyTG" readonly>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Organization</label>
+              <input type="text" class="setting-input" value="Eclipse Legion" readonly>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Status</label>
+              <select class="setting-select" disabled>
+                <option>Active</option>
+                <option>Away</option>
+                <option>Offline</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <div class="control-header">
+            <div class="control-icon">📊</div>
+            <div class="control-title">Tracking Settings</div>
+          </div>
+          <div class="control-content">
+            <div class="setting-item">
+              <label class="setting-label">PvP Tracking</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="pvpToggle" checked disabled>
+                <label for="pvpToggle" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">PvE Tracking</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="pveToggle" checked disabled>
+                <label for="pveToggle" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Auto-Report</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="autoToggle" checked disabled>
+                <label for="autoToggle" class="toggle-label"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <div class="control-header">
+            <div class="control-icon">🔔</div>
+            <div class="control-title">Notifications</div>
+          </div>
+          <div class="control-content">
+            <div class="setting-item">
+              <label class="setting-label">Kill Notifications</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="killNotif" checked disabled>
+                <label for="killNotif" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Death Notifications</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="deathNotif" disabled>
+                <label for="deathNotif" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Discord Webhook</label>
+              <input type="text" class="setting-input" placeholder="https://discord.com/api/webhooks/..." readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <div class="control-header">
+            <div class="control-icon">🛡️</div>
+            <div class="control-title">Privacy & Security</div>
+          </div>
+          <div class="control-content">
+            <div class="setting-item">
+              <label class="setting-label">Profile Visibility</label>
+              <select class="setting-select" disabled>
+                <option>Public</option>
+                <option>Friends Only</option>
+                <option>Private</option>
+              </select>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Data Sharing</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="dataSharing" disabled>
+                <label for="dataSharing" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">API Access</label>
+              <input type="text" class="setting-input" value="sk_demo_1234567890abcdef" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Management Section -->
+    <section class="data-section">
+      <h2>Data Management</h2>
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-icon">📈</div>
+          <div class="data-info">
+            <div class="data-title">Export Data</div>
+            <div class="data-desc">Download your kill tracking data in JSON format</div>
+            <button class="data-button" onclick="mockExport()">📥 Export JSON</button>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-icon">🔄</div>
+          <div class="data-info">
+            <div class="data-title">Sync Status</div>
+            <div class="data-desc">Last synchronized: 2 minutes ago</div>
+            <button class="data-button" onclick="mockSync()">🔄 Force Sync</button>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-icon">🗑️</div>
+          <div class="data-info">
+            <div class="data-title">Clear Data</div>
+            <div class="data-desc">Remove all tracking data (irreversible)</div>
+            <button class="data-button danger" onclick="mockClear()">🗑️ Clear All</button>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-icon">📊</div>
+          <div class="data-info">
+            <div class="data-title">Generate Report</div>
+            <div class="data-desc">Create detailed activity report</div>
+            <button class="data-button" onclick="mockReport()">📊 Generate</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="action-buttons">
+      <button class="action-button" onclick="mockEdit()">🔧 Edit Profile</button>
+      <button class="action-button" onclick="mockStats()">📊 View Statistics</button>
+      <button class="action-button" onclick="mockSettings()">⚙️ Advanced Settings</button>
+      <button class="action-button" onclick="mockLogout()">🚪 Logout</button>
+    </div>
+  </div>
+
+  <script>
+    // Mock function implementations
+    function mockEdit() {
+      alert('🔧 Edit Profile\n\nThis would open a profile editing interface where you could:\n• Update display name\n• Change organization\n• Upload new avatar\n• Modify bio and preferences\n\n⚠️ This is a mock demonstration.');
+    }
+
+    function mockStats() {
+      alert('📊 View Statistics\n\nThis would show detailed statistics including:\n• Kill/Death ratios\n• Weapon usage analytics\n• Zone activity heatmaps\n• Performance trends over time\n• Leaderboard rankings\n\n⚠️ This is a mock demonstration.');
+    }
+
+    function mockSettings() {
+      alert('⚙️ Advanced Settings\n\nThis would open advanced configuration options:\n• API key management\n• Webhook configurations\n• Data retention policies\n• Export/import settings\n• Integration preferences\n\n⚠️ This is a mock demonstration.');
+    }
+
+    function mockLogout() {
+      if (confirm('🚪 Logout\n\nAre you sure you want to logout?\n\n⚠️ This is a mock demonstration.')) {
+        alert('Logging out...');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
+      }
+    }
+
+    function mockExport() {
+      alert('📥 Export Data\n\nThis would generate and download a JSON file containing:\n• All kill/death records\n• Combat statistics\n• Activity timeline\n• User preferences\n\nFile: harleytg_killtracker_data.json\n\n⚠️ This is a mock demonstration.');
+    }
+
+    function mockSync() {
+      const button = event.target;
+      const originalText = button.textContent;
+
+      button.textContent = '🔄 Syncing...';
+      button.disabled = true;
+
+      setTimeout(() => {
+        button.textContent = '✅ Synced';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 1500);
+      }, 2000);
+    }
+
+    function mockClear() {
+      if (confirm('🗑️ Clear All Data\n\nThis would permanently delete:\n• All kill/death records\n• Combat statistics\n• Activity history\n\nThis action cannot be undone!\n\n⚠️ This is a mock demonstration.')) {
+        if (confirm('Are you absolutely sure? This will delete everything!')) {
+          alert('Data clearing simulation...\n\n⚠️ In a real application, all your data would now be permanently deleted.');
+        }
+      }
+    }
+
+    function mockReport() {
+      alert('📊 Generate Report\n\nThis would create a comprehensive report including:\n• Combat performance analysis\n• Activity summary\n• Statistical breakdowns\n• Trend analysis\n• Comparative metrics\n\nReport: harleytg_activity_report.pdf\n\n⚠️ This is a mock demonstration.');
+    }
+
+    // Add some interactive feedback to disabled controls
+    document.addEventListener('DOMContentLoaded', function() {
+      const disabledInputs = document.querySelectorAll('input[readonly], input[disabled], select[disabled]');
+
+      disabledInputs.forEach(input => {
+        input.addEventListener('click', function() {
+          if (this.hasAttribute('readonly') || this.hasAttribute('disabled')) {
+            const tooltip = document.createElement('div');
+            tooltip.textContent = '⚠️ Mock Control - Read Only';
+            tooltip.style.cssText = `
+              position: absolute;
+              background: rgba(255, 149, 0, 0.9);
+              color: white;
+              padding: 5px 10px;
+              border-radius: 5px;
+              font-size: 0.8rem;
+              z-index: 1000;
+              pointer-events: none;
+              font-family: 'Exo 2', sans-serif;
+            `;
+
+            const rect = this.getBoundingClientRect();
+            tooltip.style.left = rect.left + 'px';
+            tooltip.style.top = (rect.top - 35) + 'px';
+
+            document.body.appendChild(tooltip);
+
+            setTimeout(() => {
+              document.body.removeChild(tooltip);
+            }, 2000);
+          }
+        });
+      });
+
+      // Add click feedback to toggle switches
+      const toggles = document.querySelectorAll('input[type="checkbox"][disabled]');
+      toggles.forEach(toggle => {
+        toggle.parentElement.addEventListener('click', function(e) {
+          e.preventDefault();
+          const tooltip = document.createElement('div');
+          tooltip.textContent = '⚠️ Mock Toggle - Disabled';
+          tooltip.style.cssText = `
+            position: absolute;
+            background: rgba(255, 149, 0, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            pointer-events: none;
+            font-family: 'Exo 2', sans-serif;
+          `;
+
+          const rect = this.getBoundingClientRect();
+          tooltip.style.left = rect.left + 'px';
+          tooltip.style.top = (rect.top - 35) + 'px';
+
+          document.body.appendChild(tooltip);
+
+          setTimeout(() => {
+            document.body.removeChild(tooltip);
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
