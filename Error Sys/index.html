@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error System | SC Kill Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(237, 28, 36, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 150, 255, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0f1c 0%, #1a252f 50%, #0f1419 100%);
+      color: #e0e6ed;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(1px 1px at 25px 35px, rgba(237, 28, 36, 0.4), transparent),
+        radial-gradient(1px 1px at 65px 15px, rgba(0, 150, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 85px 55px, rgba(237, 28, 36, 0.2), transparent);
+      background-repeat: repeat;
+      background-size: 100px 80px;
+      animation: starField 40s linear infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes starField {
+      0% { transform: translateY(0px) translateX(0px); }
+      100% { transform: translateY(-100px) translateX(50px); }
+    }
+
+    .container {
+      max-width: min(1200px, 95vw);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.9), rgba(15, 20, 25, 0.9));
+      border-radius: 20px;
+      border: 2px solid rgba(237, 28, 36, 0.4);
+      padding: 40px 20px;
+      box-shadow: 
+        0 0 50px rgba(237, 28, 36, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-icon {
+      font-size: 4rem;
+      color: #ed1c24;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(237, 28, 36, 0.8);
+    }
+
+    .header-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 900;
+      color: #ed1c24;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(237, 28, 36, 0.8);
+      letter-spacing: 2px;
+      line-height: 1.2;
+    }
+
+    .header-subtitle {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.1rem;
+      color: #b8c5d1;
+      line-height: 1.6;
+    }
+
+    .error-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .error-card {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.9), rgba(15, 20, 25, 0.9));
+      border-radius: 15px;
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      padding: 30px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-card:hover {
+      border-color: rgba(237, 28, 36, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(237, 28, 36, 0.3);
+    }
+
+    .error-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(237, 28, 36, 0.1), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .error-card:hover::before {
+      left: 100%;
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .card-404 { color: #ed1c24; }
+    .card-500 { color: #ff6400; }
+    .card-403 { color: #ed1c24; }
+    .card-maintenance { color: #0096ff; }
+    .card-error { color: #ffa500; }
+
+    .card-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .card-code {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      opacity: 0.8;
+    }
+
+    .card-description {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.95rem;
+      color: #b8c5d1;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .card-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card-features li {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      color: #8fa8b8;
+      margin-bottom: 5px;
+      padding-left: 15px;
+      position: relative;
+    }
+
+    .card-features li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #0096ff;
+      font-size: 0.7rem;
+    }
+
+    .navigation {
+      text-align: center;
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.9), rgba(15, 20, 25, 0.9));
+      border-radius: 15px;
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      color: #0096ff;
+      margin-bottom: 20px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(237, 28, 36, 0.5);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      border: 2px solid rgba(0, 150, 255, 0.5);
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 150, 255, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .error-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .header-title {
+        font-size: 2rem;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-icon">🛡️</div>
+      <h1 class="header-title">ERROR SYSTEM</h1>
+      <p class="header-subtitle">SC Kill Tracker Error Pages & System Status</p>
+    </div>
+
+    <div class="error-grid">
+      <a href="404.html" class="error-card">
+        <span class="card-icon card-404">🔍</span>
+        <h2 class="card-title">Page Not Found</h2>
+        <div class="card-code">HTTP 404</div>
+        <p class="card-description">Displayed when a requested page or resource cannot be found on the server.</p>
+        <ul class="card-features">
+          <li>Clean Star Citizen themed design</li>
+          <li>Helpful navigation options</li>
+          <li>Possible causes explanation</li>
+        </ul>
+      </a>
+
+      <a href="500.html" class="error-card">
+        <span class="card-icon card-500">⚠️</span>
+        <h2 class="card-title">Server Error</h2>
+        <div class="card-code">HTTP 500</div>
+        <p class="card-description">Shown when the server encounters an internal error and cannot complete the request.</p>
+        <ul class="card-features">
+          <li>Server status indicator</li>
+          <li>Auto-recovery messaging</li>
+          <li>Technical information display</li>
+        </ul>
+      </a>
+
+      <a href="403.html" class="error-card">
+        <span class="card-icon card-403">🔒</span>
+        <h2 class="card-title">Access Forbidden</h2>
+        <div class="card-code">HTTP 403</div>
+        <p class="card-description">Displayed when user lacks sufficient permissions to access the requested resource.</p>
+        <ul class="card-features">
+          <li>Security clearance indicator</li>
+          <li>Access level information</li>
+          <li>Security-themed animations</li>
+        </ul>
+      </a>
+
+      <a href="maintenance.html" class="error-card">
+        <span class="card-icon card-maintenance">⚙️</span>
+        <h2 class="card-title">Maintenance Mode</h2>
+        <div class="card-code">MAINTENANCE</div>
+        <p class="card-description">Shown during scheduled maintenance periods with progress updates and ETA.</p>
+        <ul class="card-features">
+          <li>Progress bar animation</li>
+          <li>Live countdown timer</li>
+          <li>Status update feed</li>
+        </ul>
+      </a>
+
+      <a href="error.html" class="error-card">
+        <span class="card-icon card-error">⚡</span>
+        <h2 class="card-title">General Error</h2>
+        <div class="card-code">SYSTEM ERROR</div>
+        <p class="card-description">Generic error page for unexpected system errors with detailed logging information.</p>
+        <ul class="card-features">
+          <li>Dynamic error ID generation</li>
+          <li>Timestamp and user agent logging</li>
+          <li>Retry functionality</li>
+        </ul>
+      </a>
+    </div>
+
+    <div class="navigation">
+      <h3 class="nav-title">🚀 Navigation</h3>
+      <div class="nav-buttons">
+        <a href="../index.html" class="btn btn-primary">
+          🏠 Return to Main Site
+        </a>
+        <a href="../profile.html" class="btn btn-secondary">
+          👤 View Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

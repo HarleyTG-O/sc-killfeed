@@ -273,8 +273,11 @@
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
+      justify-content: center;
       margin-top: 25px;
     }
+
+
 
     a.button, button.button {
       display: inline-block;
@@ -359,7 +362,7 @@
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
+      z-index: 10000;
       animation: overlayFadeIn 0.3s ease;
       backdrop-filter: blur(5px);
     }
@@ -498,7 +501,7 @@
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 10000;
+      z-index: 10001;
       animation: overlayFadeIn 0.3s ease;
     }
 
@@ -615,27 +618,56 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #0a0f1c 0%, #1a252f 50%, #0f1419 100%);
+      width: 100vw;
+      height: 100vh;
+      background:
+        linear-gradient(135deg, #0a0f1c 0%, #1a252f 50%, #0f1419 100%),
+        rgba(0, 0, 0, 0.95);
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 10001;
+      z-index: 10002;
       animation: overlayFadeIn 0.5s ease;
+      backdrop-filter: blur(15px);
+      overflow: hidden;
+      isolation: isolate;
     }
 
     .download-animation {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .download-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 20px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      box-shadow:
+        0 0 50px rgba(237, 28, 36, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
     }
 
     .download-progress-container {
-      width: 400px;
-      height: 8px;
+      width: 100%;
+      max-width: 400px;
+      height: 10px;
       background: rgba(237, 28, 36, 0.2);
       border-radius: 10px;
       overflow: hidden;
@@ -643,6 +675,7 @@
       box-shadow:
         0 0 20px rgba(237, 28, 36, 0.3),
         inset 0 0 10px rgba(0, 0, 0, 0.5);
+      margin: 0 auto;
     }
 
     .download-progress-bar {
@@ -685,6 +718,8 @@
       border-radius: 50%;
       animation: downloadSpin 1s linear infinite;
       position: relative;
+      margin: 0 auto;
+      flex-shrink: 0;
     }
 
     .download-spinner::before {
@@ -714,6 +749,9 @@
       text-shadow: 0 0 15px rgba(237, 28, 36, 0.8);
       text-align: center;
       animation: textPulse 2s ease-in-out infinite;
+      margin: 0;
+      line-height: 1.2;
+      flex-shrink: 0;
     }
 
     .download-subtext {
@@ -721,8 +759,11 @@
       font-family: 'Exo 2', sans-serif;
       font-size: 1rem;
       text-align: center;
-      margin-top: 10px;
       animation: textFade 3s ease-in-out infinite;
+      margin: 0;
+      line-height: 1.4;
+      max-width: 400px;
+      flex-shrink: 0;
     }
 
     .download-percentage {
@@ -730,8 +771,10 @@
       font-family: 'Orbitron', monospace;
       font-size: 1.2rem;
       font-weight: 600;
-      margin-top: 15px;
       text-shadow: 0 0 10px rgba(237, 28, 36, 0.6);
+      text-align: center;
+      margin: 0;
+      flex-shrink: 0;
     }
 
     @keyframes textPulse {
@@ -743,6 +786,710 @@
       0%, 100% { opacity: 0.6; }
       50% { opacity: 1; }
     }
+
+    /* Enhanced Download Confirmation Overlay */
+    .download-confirm {
+      max-width: 800px;
+      width: 92%;
+      height: 80vh;
+      max-height: 80vh;
+      overflow: hidden;
+      padding: 18px;
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.98), rgba(15, 20, 25, 0.98));
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(237, 28, 36, 0.4);
+      box-shadow:
+        0 0 50px rgba(237, 28, 36, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      gap: 10px;
+      position: relative;
+    }
+
+    .confirm-header {
+      text-align: center;
+      flex-shrink: 0;
+      padding-bottom: 8px;
+    }
+
+    .confirm-icon {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+      animation: confirmPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes confirmPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .confirm-header h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      color: #ed1c24;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+    }
+
+    .confirm-header p {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #b8c5d1;
+      margin: 0;
+    }
+
+    /* Hash Info Display */
+    .hash-info-display {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.15), rgba(0, 150, 255, 0.05));
+      border: 2px solid rgba(0, 150, 255, 0.4);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      margin-right: 10px;
+      display: block;
+      animation: hashInfoPulse 3s ease-in-out infinite;
+      flex-shrink: 0;
+      overflow: hidden;
+      word-wrap: break-word;
+      width: calc(100% - 10px);
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    @keyframes hashInfoPulse {
+      0%, 100% { border-color: rgba(0, 150, 255, 0.4); }
+      50% { border-color: rgba(0, 150, 255, 0.7); }
+    }
+
+    .hash-info-icon {
+      font-size: 1.2rem;
+      color: #0096ff;
+      float: left;
+      margin-right: 8px;
+      margin-top: 1px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .hash-info-content {
+      overflow: hidden;
+      width: calc(100% - 28px);
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .hash-info-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0096ff;
+      margin-bottom: 3px;
+      line-height: 1.1;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .hash-info-details {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.75rem;
+      color: #d0d6dd;
+      line-height: 1.2;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .hash-info-details code {
+      background: rgba(0, 150, 255, 0.1);
+      color: #0096ff;
+      padding: 1px 3px;
+      border-radius: 2px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      word-break: break-all;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      box-sizing: border-box;
+      margin-top: 1px;
+      max-width: none;
+    }
+
+    .hash-info-details strong {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      display: inline;
+      font-size: 0.75rem;
+    }
+
+    .hash-info-details br {
+      line-height: 1.1;
+    }
+
+    /* Ensure hash content doesn't overflow */
+    .hash-info-display::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .hash-info-display * {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Download Information */
+    .download-info {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(237, 28, 36, 0.3);
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-family: 'Exo 2', sans-serif;
+    }
+
+    .info-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-label {
+      color: #8fa8b8;
+      font-weight: 600;
+    }
+
+    .info-value {
+      color: #ed1c24;
+      font-weight: 700;
+      text-shadow: 0 0 5px rgba(237, 28, 36, 0.5);
+    }
+
+    /* Enhanced Button Layout */
+    .confirm-button-layout {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-shrink: 0;
+      margin-top: auto;
+      padding: 12px 18px 18px 18px;
+      border-top: 1px solid rgba(237, 28, 36, 0.2);
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.98), rgba(15, 20, 25, 0.98));
+      margin-left: -18px;
+      margin-right: -18px;
+      margin-bottom: -18px;
+      min-height: 60px;
+      align-items: center;
+    }
+
+    .confirm-button-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .confirm-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      min-width: 150px;
+      justify-content: center;
+    }
+
+    .confirm-button.primary {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.3);
+    }
+
+    .confirm-button.primary:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 28, 36, 0.5);
+    }
+
+    .confirm-button.secondary {
+      background: linear-gradient(145deg, rgba(143, 168, 184, 0.8), rgba(113, 138, 154, 0.8));
+      color: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .confirm-button.secondary:hover {
+      background: linear-gradient(145deg, rgba(163, 188, 204, 0.9), rgba(143, 168, 184, 0.9));
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .button-icon {
+      font-size: 1.2rem;
+    }
+
+    .button-text {
+      font-size: 0.9rem;
+    }
+
+    /* Hash Actions */
+    .hash-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 0;
+      border-top: 1px solid rgba(237, 28, 36, 0.3);
+      flex-shrink: 0;
+      margin-bottom: 8px;
+    }
+
+    .hash-action-btn {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .hash-action-btn:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(0, 150, 255, 0.4);
+    }
+
+    /* File Picker Styles */
+    .file-picker-section {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .picker-container {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+      padding-right: 5px;
+    }
+
+    .summary-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .picker-header {
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .summary-header-container {
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .picker-header h4 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.2rem;
+      color: #ed1c24;
+      margin-bottom: 6px;
+      text-shadow: 0 0 8px rgba(237, 28, 36, 0.5);
+      text-align: center;
+    }
+
+    .picker-header p {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #8fa8b8;
+      margin: 0 0 10px 0;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .picker-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(237, 28, 36, 0.2);
+      flex-shrink: 0;
+      margin-bottom: 10px;
+    }
+
+    .picker-controls-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    .picker-control-btn {
+      background: linear-gradient(145deg, rgba(237, 28, 36, 0.8), rgba(180, 20, 26, 0.8));
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .picker-control-btn:hover {
+      background: linear-gradient(145deg, rgba(255, 40, 50, 0.9), rgba(237, 28, 36, 0.9));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.4);
+    }
+
+    .selection-count {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ed1c24;
+      background: rgba(237, 28, 36, 0.1);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(237, 28, 36, 0.3);
+    }
+
+    .file-picker {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      padding: 12px;
+      border: 2px solid rgba(237, 28, 36, 0.4);
+      flex: 1;
+      overflow-y: auto;
+      min-height: 200px;
+      max-height: 280px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .file-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 8px;
+      border: 2px solid rgba(237, 28, 36, 0.2);
+      background: rgba(0, 0, 0, 0.4);
+      position: relative;
+      min-height: 65px;
+    }
+
+    .file-option:last-child {
+      margin-bottom: 0;
+    }
+
+    .file-option:hover {
+      background: rgba(237, 28, 36, 0.15);
+      border-color: rgba(237, 28, 36, 0.5);
+      transform: translateX(5px);
+      box-shadow: 0 5px 20px rgba(237, 28, 36, 0.2);
+    }
+
+    .file-option.selected {
+      background: rgba(237, 28, 36, 0.25);
+      border-color: rgba(237, 28, 36, 0.8);
+      box-shadow: 0 0 25px rgba(237, 28, 36, 0.5);
+      transform: translateX(3px);
+    }
+
+    .file-option.selected::before {
+      content: '✓';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+      box-shadow: 0 3px 12px rgba(237, 28, 36, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .file-option.loading-placeholder {
+      cursor: default;
+      opacity: 0.8;
+      background: rgba(0, 150, 255, 0.1);
+      border-color: rgba(0, 150, 255, 0.3);
+      animation: loadingPulse 2s ease-in-out infinite;
+    }
+
+    .file-option.loading-placeholder:hover {
+      background: rgba(0, 150, 255, 0.1);
+      border-color: rgba(0, 150, 255, 0.3);
+      transform: none;
+      box-shadow: none;
+    }
+
+    @keyframes loadingPulse {
+      0%, 100% {
+        border-color: rgba(0, 150, 255, 0.3);
+        box-shadow: 0 0 10px rgba(0, 150, 255, 0.2);
+      }
+      50% {
+        border-color: rgba(0, 150, 255, 0.6);
+        box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
+      }
+    }
+
+    .file-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      width: 55px;
+      text-align: center;
+      filter: drop-shadow(0 0 8px rgba(237, 28, 36, 0.3));
+    }
+
+    .file-details {
+      flex: 1;
+      min-width: 0;
+      padding-right: 10px;
+      overflow: hidden;
+    }
+
+    .file-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 5px;
+      word-break: break-all;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      line-height: 1.2;
+    }
+
+    .file-meta {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #b8c5d1;
+      line-height: 1.4;
+      font-weight: 500;
+      padding-right: 5px;
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+
+    .file-size {
+      color: #ed1c24;
+      font-weight: 700;
+      font-size: 1rem;
+      text-shadow: 0 0 6px rgba(237, 28, 36, 0.5);
+    }
+
+    .file-downloads {
+      color: #0096ff;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(0, 150, 255, 0.5);
+    }
+
+    .file-hash {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #8fa8b8;
+      opacity: 0.9;
+      margin-top: 4px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      word-break: break-all;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Selected Files Summary */
+    .selected-files-summary {
+      background: linear-gradient(145deg, rgba(237, 28, 36, 0.15), rgba(237, 28, 36, 0.05));
+      border: 2px solid rgba(237, 28, 36, 0.4);
+      border-radius: 8px;
+      padding: 12px;
+      animation: selectedPulse 2s ease-in-out infinite;
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    @keyframes selectedPulse {
+      0%, 100% { border-color: rgba(237, 28, 36, 0.4); }
+      50% { border-color: rgba(237, 28, 36, 0.7); }
+    }
+
+    .summary-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .summary-icon {
+      font-size: 1.1rem;
+      color: #28a745;
+      flex-shrink: 0;
+    }
+
+    .summary-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-transform: uppercase;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summary-count {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #0096ff;
+      background: rgba(0, 150, 255, 0.1);
+      padding: 4px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 150, 255, 0.3);
+      flex-shrink: 0;
+    }
+
+    .summary-content {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      min-height: 0;
+    }
+
+    .summary-placeholder {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      color: #8fa8b8;
+      text-align: center;
+      padding: 20px 8px;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .summary-file-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      margin-bottom: 6px;
+      border: 1px solid rgba(237, 28, 36, 0.2);
+    }
+
+    .summary-file-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-file-icon {
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+
+    .summary-file-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #e0e6ed;
+      flex: 1;
+      word-break: break-all;
+      line-height: 1.2;
+      min-width: 0;
+    }
+
+    .summary-file-size {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.7rem;
+      color: #ed1c24;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .summary-totals {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(237, 28, 36, 0.3);
+      flex-shrink: 0;
+    }
+
+    .total-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .total-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.65rem;
+      color: #8fa8b8;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      text-align: center;
+    }
+
+    .total-value {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-align: center;
+    }
+
+
 
     /* Enhanced legal document styling */
     .overlay-content .legal-content {
@@ -855,8 +1602,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 10001;
+      z-index: 10003;
       animation: overlayFadeIn 0.5s ease;
+      backdrop-filter: blur(10px);
     }
 
     .discord-screen::before {
@@ -1352,8 +2100,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 10001;
+      z-index: 10004;
       animation: overlayFadeIn 0.5s ease;
+      backdrop-filter: blur(10px);
     }
 
     .donation-screen::before {
@@ -1682,6 +2431,423 @@
       .donation-option-desc {
         font-size: 0.7rem;
       }
+
+      /* Clean download screen mobile */
+      .download-content {
+        padding: 30px 20px;
+        gap: 20px;
+        max-width: 95%;
+        margin: 20px;
+      }
+
+      .download-spinner {
+        width: 60px;
+        height: 60px;
+        border-width: 3px;
+      }
+
+      .download-spinner::before {
+        width: 45px;
+        height: 45px;
+        border-width: 2px;
+      }
+
+      .download-text {
+        font-size: 1.2rem;
+        line-height: 1.3;
+      }
+
+      .download-subtext {
+        font-size: 0.9rem;
+        max-width: 280px;
+        line-height: 1.4;
+      }
+
+      .download-progress-container {
+        max-width: 280px;
+        height: 8px;
+      }
+
+      .download-percentage {
+        font-size: 1rem;
+      }
+
+      /* Enhanced download confirmation mobile */
+      .download-confirm {
+        padding: 12px;
+        max-width: 98%;
+        width: 98%;
+        height: 85vh;
+        max-height: 85vh;
+        gap: 8px;
+      }
+
+      .confirm-header h3 {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+      }
+
+      .confirm-header p {
+        font-size: 0.8rem;
+      }
+
+      /* Hash info mobile */
+      .hash-info-display {
+        padding: 6px;
+        margin-bottom: 8px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .hash-info-content {
+        width: calc(100% - 24px);
+        overflow: hidden;
+      }
+
+      .hash-info-icon {
+        font-size: 0.9rem;
+        width: 18px;
+        margin-right: 6px;
+      }
+
+      .hash-info-title {
+        font-size: 0.7rem;
+        margin-bottom: 2px;
+        line-height: 1;
+      }
+
+      .hash-info-details {
+        font-size: 0.65rem;
+        line-height: 1.1;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .hash-info-details code {
+        font-size: 0.6rem;
+        padding: 1px 2px;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .hash-info-details strong {
+        font-size: 0.65rem;
+        word-break: break-word;
+      }
+
+      .hash-actions {
+        gap: 6px;
+        padding: 6px 0;
+        margin-bottom: 6px;
+      }
+
+      .hash-action-btn {
+        padding: 5px 8px;
+        font-size: 0.65rem;
+      }
+
+      /* Mobile: Stack vertically instead of side-by-side */
+      .file-picker-section {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .picker-container {
+        flex: none;
+      }
+
+      .summary-container {
+        flex: none;
+      }
+
+      .picker-header h4 {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      .picker-header p {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+      }
+
+      .summary-header-container h4 {
+        font-size: 1rem;
+        margin-bottom: 3px;
+      }
+
+      .summary-header-container p {
+        font-size: 0.75rem;
+        margin-bottom: 6px;
+      }
+
+      .picker-controls {
+        padding: 6px 8px;
+        margin-bottom: 8px;
+        gap: 8px;
+      }
+
+      .picker-control-btn {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+      }
+
+      .selection-count {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+      }
+
+      .file-picker {
+        min-height: 140px;
+        max-height: 180px;
+        padding: 10px;
+      }
+
+      .file-option {
+        padding: 8px;
+        gap: 10px;
+        min-height: 55px;
+        margin-bottom: 6px;
+      }
+
+      .file-icon {
+        font-size: 1.8rem;
+        width: 45px;
+      }
+
+      .file-name {
+        font-size: 0.95rem;
+        margin-bottom: 3px;
+      }
+
+      .file-meta {
+        font-size: 0.8rem;
+        line-height: 1.3;
+      }
+
+      .selected-files-summary {
+        padding: 8px;
+      }
+
+      .summary-header {
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .summary-title {
+        font-size: 0.85rem;
+      }
+
+      .summary-count {
+        font-size: 0.7rem;
+        padding: 3px 5px;
+      }
+
+      .summary-file-item {
+        padding: 6px;
+        gap: 5px;
+        margin-bottom: 4px;
+      }
+
+      .summary-file-name {
+        font-size: 0.7rem;
+      }
+
+      .summary-file-size {
+        font-size: 0.65rem;
+      }
+
+      .total-label {
+        font-size: 0.6rem;
+      }
+
+      .total-value {
+        font-size: 0.75rem;
+      }
+
+      .confirm-button-layout {
+        margin-left: -12px;
+        margin-right: -12px;
+        margin-bottom: -12px;
+        padding: 10px 12px 12px 12px;
+        min-height: 50px;
+        gap: 10px;
+      }
+
+      .confirm-button {
+        padding: 8px 16px;
+        font-size: 0.75rem;
+        min-width: 120px;
+        gap: 4px;
+      }
+
+      .picker-controls {
+        padding: 5px 8px;
+        margin-bottom: 5px;
+      }
+
+      .picker-control-btn {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+      }
+
+      .selection-count {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+      }
+
+      .confirm-icon {
+        font-size: 2.5rem;
+      }
+
+      .confirm-header h3 {
+        font-size: 1.5rem;
+      }
+
+      .confirm-header p {
+        font-size: 1rem;
+      }
+
+      .confirm-button-layout {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .left-confirm-buttons,
+      .right-confirm-buttons {
+        align-items: center;
+      }
+
+      .confirm-button {
+        min-width: 100%;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+
+      .hash-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hash-action-btn {
+        width: 100%;
+        padding: 10px;
+      }
+
+      /* File picker mobile */
+      .file-picker {
+        padding: 10px;
+      }
+
+      .file-option {
+        padding: 12px;
+        gap: 12px;
+        margin-bottom: 6px;
+      }
+
+      .file-icon {
+        font-size: 2rem;
+        width: 50px;
+      }
+
+      .file-name {
+        font-size: 1rem;
+      }
+
+      .file-meta {
+        font-size: 0.85rem;
+        padding-right: 8px;
+      }
+
+      .file-hash {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        word-break: break-all;
+        max-width: calc(100% - 10px);
+      }
+
+      .hash-info-display {
+        padding: 10px;
+        margin-bottom: 12px;
+        margin-right: 8px;
+        width: calc(100% - 8px);
+      }
+
+      .file-option.selected::before {
+        width: 20px;
+        height: 20px;
+        font-size: 0.9rem;
+        top: 10px;
+        right: 10px;
+      }
+
+      .selected-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .selected-separator {
+        display: none;
+      }
+
+      .selected-hash {
+        font-size: 0.7rem;
+        word-break: break-all;
+      }
+
+      /* Multi-selection mobile */
+      .picker-controls {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+      }
+
+      .picker-controls-left {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .picker-control-btn {
+        flex: 1;
+        padding: 10px;
+        font-size: 0.8rem;
+      }
+
+      .selection-count {
+        text-align: center;
+        font-size: 0.8rem;
+        width: 100%;
+      }
+
+      .confirm-button-layout {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .confirm-button {
+        min-width: 100%;
+      }
+
+      .summary-totals {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .summary-file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .summary-file-name {
+        font-size: 0.8rem;
+      }
+
+      .summary-file-size {
+        align-self: flex-end;
+      }
     }
 
     /* Login Animation Screen */
@@ -1699,9 +2865,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 99999;
+      z-index: 10005;
       animation: overlayFadeIn 0.5s ease;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(10px);
     }
 
     .login-screen::before {
@@ -2052,6 +3218,7 @@
     <section class="section">
       <h2>Welcome</h2>
       <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #b8c5d1;">Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths. Experience the ultimate kill tracking system designed for the Star Citizen universe.</p>
+
       <div class="button-group">
         <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">🚀 Download Latest</a>
         <button class="button" id="discordButton">💬 Join Discord</button>
@@ -2146,26 +3313,117 @@
     </div>
   </div>
 
-  <!-- Overlay for Download Confirmation -->
+  <!-- Enhanced Download Confirmation Overlay -->
   <div class="overlay" id="exitOverlay">
-    <div class="overlay-content">
-      <h3>Are you sure?</h3>
-      <p>Would you like to download the latest release?</p>
-      <button class="button" id="continueButton">Continue</button>
-      <button class="button" id="cancelButton">Cancel</button>
+    <div class="overlay-content download-confirm">
+      <div class="confirm-header">
+        <div class="confirm-icon">🚀</div>
+        <h3>Download SC Kill Tracker</h3>
+        <p>Are you ready to download the latest release?</p>
+      </div>
+
+      <!-- Hash Information Display -->
+      <div class="hash-info-display" id="hashInfoDisplay" style="display: none;">
+        <div class="hash-info-icon">🔗</div>
+        <div class="hash-info-content">
+          <div class="hash-info-title">Hash Parameters Detected</div>
+          <div class="hash-info-details" id="hashInfoDetails">Loading...</div>
+        </div>
+      </div>
+
+      <!-- File Picker Section -->
+      <div class="file-picker-section">
+        <!-- Left Side: File Picker -->
+        <div class="picker-container">
+          <div class="picker-header">
+            <h4>Choose Files to Download</h4>
+            <p>Select one or multiple assets from the Global release:</p>
+            <div class="picker-controls">
+              <div class="picker-controls-left">
+                <button class="picker-control-btn" id="selectAllBtn">📋 Select All</button>
+                <button class="picker-control-btn" id="clearAllBtn">🗑️ Clear All</button>
+              </div>
+              <span class="selection-count" id="selectionCount">0 files selected</span>
+            </div>
+          </div>
+
+          <div class="file-picker" id="filePicker">
+            <div class="file-option loading-placeholder">
+              <div class="file-icon">📦</div>
+              <div class="file-details">
+                <div class="file-name">Loading assets...</div>
+                <div class="file-meta">Please wait while we fetch available files</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Selected Files Summary -->
+        <div class="summary-container">
+          <div class="summary-header-container">
+            <h4 style="font-family: 'Orbitron', monospace; font-size: 1.1rem; color: #ed1c24; margin-bottom: 4px; text-shadow: 0 0 8px rgba(237, 28, 36, 0.5); text-align: center;">Selected Files</h4>
+            <p style="font-family: 'Exo 2', sans-serif; font-size: 0.85rem; color: #8fa8b8; margin: 0 0 8px 0; text-align: center;">Review your selection:</p>
+          </div>
+
+          <div class="selected-files-summary" id="selectedFilesSummary">
+            <div class="summary-header">
+              <span class="summary-icon">📋</span>
+              <span class="summary-title">Summary</span>
+              <span class="summary-count" id="summaryCount">0 files</span>
+            </div>
+            <div class="summary-content" id="summaryContent">
+              <div class="summary-placeholder">No files selected</div>
+            </div>
+            <div class="summary-totals" id="summaryTotals" style="display: none;">
+              <div class="total-item">
+                <span class="total-label">Total Size:</span>
+                <span class="total-value" id="totalSize">0 MB</span>
+              </div>
+              <div class="total-item">
+                <span class="total-label">Downloads:</span>
+                <span class="total-value" id="totalDownloads">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Button Layout -->
+      <div class="confirm-button-layout">
+        <div class="confirm-button-group left-confirm-buttons">
+          <button class="confirm-button primary" id="continueButton">
+            <span class="button-icon">✅</span>
+            <span class="button-text">Continue Download</span>
+          </button>
+        </div>
+        <div class="confirm-button-group right-confirm-buttons">
+          <button class="confirm-button secondary" id="cancelButton">
+            <span class="button-icon">❌</span>
+            <span class="button-text">Cancel</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hash Actions -->
+      <div class="hash-actions" id="hashActions" style="display: none;">
+        <button class="hash-action-btn" id="copyHashBtn">📋 Copy Hash Link</button>
+        <button class="hash-action-btn" id="clearHashBtn">🗑️ Clear Hash</button>
+      </div>
     </div>
   </div>
 
   <!-- Download Animation Screen -->
   <div class="download-screen" id="downloadScreen">
     <div class="download-animation">
-      <div class="download-spinner"></div>
-      <div class="download-text">DOWNLOADING KILL TRACKER</div>
-      <div class="download-subtext">Preparing your Star Citizen experience...</div>
-      <div class="download-progress-container">
-        <div class="download-progress-bar" id="downloadProgressBar"></div>
+      <div class="download-content">
+        <div class="download-spinner"></div>
+        <div class="download-text">DOWNLOADING KILL TRACKER</div>
+        <div class="download-subtext">Preparing your Star Citizen experience...</div>
+        <div class="download-progress-container">
+          <div class="download-progress-bar" id="downloadProgressBar"></div>
+        </div>
+        <div class="download-percentage" id="downloadPercentage">0%</div>
       </div>
-      <div class="download-percentage" id="downloadPercentage">0%</div>
     </div>
   </div>
 
@@ -2479,6 +3737,9 @@
     }
 
     function showLegalOverlay(type) {
+      // Hide any other overlays first
+      hideAllOverlays();
+
       const overlay = document.getElementById("legalOverlay");
       const title = document.getElementById("legalOverlayTitle");
       const text = document.getElementById("legalOverlayText");
@@ -2498,6 +3759,7 @@
       // Show loading state
       text.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner" style="margin: 0 auto;"></div><p style="margin-top: 20px; color: #8fa8b8;">Loading document...</p></div>';
       overlay.style.display = "flex";
+      overlay.style.zIndex = "10000";
       document.body.style.overflow = "hidden";
 
       fetch(url)
@@ -2540,15 +3802,401 @@
       }, 300);
     }
 
-    // Download overlay logic
+    // Enhanced Download Confirmation Logic
     const exitOverlay = document.getElementById("exitOverlay");
     const downloadButton = document.getElementById("downloadButton");
     const continueButton = document.getElementById("continueButton");
     const cancelButton = document.getElementById("cancelButton");
+    const hashInfoDisplay = document.getElementById("hashInfoDisplay");
+    const hashInfoDetails = document.getElementById("hashInfoDetails");
+    const hashActions = document.getElementById("hashActions");
+    const downloadVersion = document.getElementById("downloadVersion");
 
     function showOverlay() {
+      // Hide any other overlays first
+      hideAllOverlays();
+
       exitOverlay.style.display = "flex";
+      exitOverlay.style.zIndex = "10000";
+      document.body.style.overflow = "hidden";
+
+      // Check for hash parameters
+      checkHashParameters();
+
+      // Update version info
+      updateVersionInfo();
     }
+
+    function checkHashParameters() {
+      const hash = window.location.hash.substring(1);
+
+      if (hash) {
+        const params = new URLSearchParams(hash);
+        const action = params.get('action');
+        const data = params.get('data');
+        const source = params.get('source');
+        const timestamp = params.get('timestamp');
+
+        if (action || data || source) {
+          let details = '';
+          if (action) details += `Action: <strong>${action}</strong><br>`;
+          if (data) details += `Data: <strong>${data}</strong><br>`;
+          if (source) details += `Source: <strong>${source}</strong><br>`;
+          if (timestamp) {
+            const date = new Date(parseInt(timestamp));
+            details += `Timestamp: <strong>${date.toLocaleString()}</strong><br>`;
+          }
+          details += `Hash: <code style="color: #0096ff;">#${hash}</code>`;
+
+          hashInfoDetails.innerHTML = details;
+          hashInfoDisplay.style.display = 'flex';
+          hashActions.style.display = 'flex';
+
+          console.log('Hash parameters detected in download confirmation:', { action, data, source, timestamp });
+        }
+      } else {
+        hashInfoDisplay.style.display = 'none';
+        hashActions.style.display = 'none';
+      }
+    }
+
+    function updateVersionInfo() {
+      // Fetch real version and size from GitHub API
+      fetchGitHubReleaseInfo();
+    }
+
+    function fetchGitHubReleaseInfo() {
+      console.log('🚀 Starting GitHub API fetch for file picker...');
+
+      // GitHub API endpoint for the specific "Global" tag release
+      fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/tags/Global')
+        .then(response => {
+          console.log('📡 GitHub API response status:', response.status);
+          if (!response.ok) {
+            console.log('⚠️ Global tag not found, falling back to latest release');
+            // Fallback to latest release if Global tag doesn't exist
+            return fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest');
+          }
+          return response;
+        })
+        .then(response => {
+          console.log('📡 Final response status:', response.status);
+          if (!response.ok) throw new Error(`GitHub API request failed with status ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          console.log('✅ GitHub API data received:', data);
+          console.log('📦 Assets found:', data.assets ? data.assets.length : 0);
+
+          // Populate file picker with assets
+          if (data.assets && data.assets.length > 0) {
+            console.log('🎯 Populating file picker with', data.assets.length, 'assets');
+            populateFilePicker(data.assets);
+          } else {
+            console.error('❌ No assets found in release');
+            showFilePickerError('No assets found in the release');
+          }
+
+          console.log('📋 GitHub Global release info:', {
+            version: data.tag_name,
+            totalAssets: data.assets ? data.assets.length : 0,
+            allAssets: data.assets ? data.assets.map(a => ({
+              name: a.name,
+              size: `${(a.size / (1024 * 1024)).toFixed(1)} MB`,
+              downloads: a.download_count,
+              url: a.browser_download_url
+            })) : []
+          });
+        })
+        .catch(error => {
+          console.error('❌ Failed to fetch GitHub Global release info:', error);
+          console.log('🔄 Using fallback mock data for demonstration');
+
+          // Use mock data as fallback
+          const mockAssets = [
+            {
+              id: 1,
+              name: 'SCKillTrac.Global.zip',
+              size: 40082485,
+              download_count: 1247,
+              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip',
+              updated_at: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString() // 11 hours ago
+            },
+            {
+              id: 2,
+              name: 'startup_args.txt',
+              size: 105,
+              download_count: 892,
+              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/startup_args.txt',
+              updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
+            },
+            {
+              id: 3,
+              name: 'Welcome-SCKillTrac.txt',
+              size: 1556,
+              download_count: 634,
+              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/Welcome-SCKillTrac.txt',
+              updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
+            }
+          ];
+
+          populateFilePicker(mockAssets);
+        });
+    }
+
+    // Global variables for multi-selection
+    let selectedAssets = [];
+    let allAssets = [];
+
+    function populateFilePicker(assets) {
+      console.log('🎯 populateFilePicker called with:', assets);
+      const filePicker = document.getElementById('filePicker');
+
+      if (!filePicker) {
+        console.error('❌ File picker element not found!');
+        return;
+      }
+
+      if (!assets || assets.length === 0) {
+        console.log('⚠️ No assets provided to file picker');
+        filePicker.innerHTML = `
+          <div class="file-option loading-placeholder">
+            <div class="file-icon">❌</div>
+            <div class="file-details">
+              <div class="file-name">No files found</div>
+              <div class="file-meta">No assets available in this release</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      console.log('✅ Creating file options for', assets.length, 'assets');
+
+      // Clear loading placeholder
+      filePicker.innerHTML = '';
+
+      // Store all assets globally
+      allAssets = assets;
+      selectedAssets = [];
+
+      // Create file options for each asset
+      assets.forEach((asset, index) => {
+        console.log(`📄 Creating option ${index + 1}:`, asset.name);
+        const fileOption = createFileOption(asset, false); // Don't auto-select
+        filePicker.appendChild(fileOption);
+      });
+
+      // Auto-select the first file (usually SCKillTrac.Global.zip)
+      if (assets.length > 0) {
+        console.log('🎯 Auto-selecting first file:', assets[0].name);
+        toggleFileSelection(assets[0]);
+      }
+
+      // Initialize control buttons
+      initializeControlButtons();
+    }
+
+    function createFileOption(asset, isDefault = false) {
+      const fileOption = document.createElement('div');
+      fileOption.className = `file-option ${isDefault ? 'selected' : ''}`;
+      fileOption.dataset.assetId = asset.id;
+
+      // Determine file icon based on file type
+      const fileIcon = getFileIcon(asset.name);
+
+      // Format file size
+      const sizeInMB = (asset.size / (1024 * 1024)).toFixed(1);
+      const sizeInBytes = asset.size.toLocaleString();
+
+      // Format upload time
+      const uploadTime = getRelativeTime(asset.updated_at);
+
+      fileOption.innerHTML = `
+        <div class="file-icon">${fileIcon}</div>
+        <div class="file-details">
+          <div class="file-name">${asset.name}</div>
+          <div class="file-meta">
+            <span class="file-size">${sizeInMB} MB</span> (${sizeInBytes} bytes) •
+            <span class="file-downloads">${asset.download_count.toLocaleString()} downloads</span> •
+            ${uploadTime}
+            <br>
+            <span class="file-hash">SHA256: ${getAssetHash(asset.name)}</span>
+          </div>
+        </div>
+      `;
+
+      fileOption.addEventListener('click', () => {
+        // Toggle selection for this file
+        toggleFileSelection(asset);
+      });
+
+      return fileOption;
+    }
+
+    function getFileIcon(filename) {
+      const ext = filename.split('.').pop().toLowerCase();
+      switch(ext) {
+        case 'zip': return '📦';
+        case 'txt': return '📄';
+        case 'exe': return '⚙️';
+        case 'dll': return '🔧';
+        default: return '📁';
+      }
+    }
+
+    function getAssetHash(filename) {
+      // Known hashes for the files you provided
+      const hashes = {
+        'SCKillTrac.Global.zip': 'c3828ccb0913de9636ce4969a56fc47f3882486b38015cc9393646cf24f3bc71',
+        'startup_args.txt': '8ef237572a6b25eaded292aeddf2725c4f60a9a63c74dbd97ab62ad5857ac317',
+        'Welcome-SCKillTrac.txt': 'f5bd91c2dd7385ff25d3561eca576beee170aa17aae693d7b73a388da61e81ee'
+      };
+      return hashes[filename] || 'Not available';
+    }
+
+    function getRelativeTime(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+
+      if (diffInHours < 1) return 'Less than an hour ago';
+      if (diffInHours < 24) return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`;
+
+      const diffInDays = Math.floor(diffInHours / 24);
+      if (diffInDays < 7) return `${diffInDays} day${diffInDays !== 1 ? 's' : ''} ago`;
+
+      return date.toLocaleDateString();
+    }
+
+    function toggleFileSelection(asset) {
+      const index = selectedAssets.findIndex(selected => selected.id === asset.id);
+
+      if (index > -1) {
+        // Remove from selection
+        selectedAssets.splice(index, 1);
+        console.log('🗑️ Removed from selection:', asset.name);
+      } else {
+        // Add to selection
+        selectedAssets.push(asset);
+        console.log('✅ Added to selection:', asset.name);
+      }
+
+      // Update UI
+      updateFileOptionUI(asset);
+      updateSelectionSummary();
+      updateSelectionCount();
+    }
+
+    function updateFileOptionUI(asset) {
+      const fileOption = document.querySelector(`[data-asset-id="${asset.id}"]`);
+      if (fileOption) {
+        const isSelected = selectedAssets.some(selected => selected.id === asset.id);
+        fileOption.classList.toggle('selected', isSelected);
+      }
+    }
+
+    function updateSelectionCount() {
+      const selectionCount = document.getElementById('selectionCount');
+      if (selectionCount) {
+        const count = selectedAssets.length;
+        selectionCount.textContent = `${count} file${count !== 1 ? 's' : ''} selected`;
+      }
+    }
+
+    function updateSelectionSummary() {
+      const selectedFilesSummary = document.getElementById('selectedFilesSummary');
+      const summaryCount = document.getElementById('summaryCount');
+      const summaryContent = document.getElementById('summaryContent');
+      const summaryTotals = document.getElementById('summaryTotals');
+      const totalSize = document.getElementById('totalSize');
+      const totalDownloads = document.getElementById('totalDownloads');
+
+      if (!selectedFilesSummary) return;
+
+      if (selectedAssets.length === 0) {
+        selectedFilesSummary.style.display = 'none';
+        return;
+      }
+
+      // Show summary
+      selectedFilesSummary.style.display = 'block';
+      summaryCount.textContent = `${selectedAssets.length} file${selectedAssets.length !== 1 ? 's' : ''}`;
+
+      // Create file items
+      summaryContent.innerHTML = '';
+      selectedAssets.forEach(asset => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'summary-file-item';
+        fileItem.innerHTML = `
+          <div class="summary-file-icon">${getFileIcon(asset.name)}</div>
+          <div class="summary-file-name">${asset.name}</div>
+          <div class="summary-file-size">${(asset.size / (1024 * 1024)).toFixed(1)} MB</div>
+        `;
+        summaryContent.appendChild(fileItem);
+      });
+
+      // Calculate totals
+      const totalSizeBytes = selectedAssets.reduce((sum, asset) => sum + asset.size, 0);
+      const totalDownloadCount = selectedAssets.reduce((sum, asset) => sum + asset.download_count, 0);
+
+      totalSize.textContent = `${(totalSizeBytes / (1024 * 1024)).toFixed(1)} MB`;
+      totalDownloads.textContent = totalDownloadCount.toLocaleString();
+      summaryTotals.style.display = 'flex';
+    }
+
+    function initializeControlButtons() {
+      const selectAllBtn = document.getElementById('selectAllBtn');
+      const clearAllBtn = document.getElementById('clearAllBtn');
+
+      if (selectAllBtn) {
+        selectAllBtn.addEventListener('click', () => {
+          console.log('📋 Selecting all files');
+          selectedAssets = [...allAssets];
+
+          // Update all file option UIs
+          allAssets.forEach(asset => updateFileOptionUI(asset));
+          updateSelectionSummary();
+          updateSelectionCount();
+        });
+      }
+
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+          console.log('🗑️ Clearing all selections');
+          selectedAssets = [];
+
+          // Update all file option UIs
+          allAssets.forEach(asset => updateFileOptionUI(asset));
+          updateSelectionSummary();
+          updateSelectionCount();
+        });
+      }
+    }
+
+    function showFilePickerError(customMessage = null) {
+      console.log('🚨 Showing file picker error:', customMessage);
+      const filePicker = document.getElementById('filePicker');
+
+      if (!filePicker) {
+        console.error('❌ File picker element not found!');
+        return;
+      }
+
+      const errorMessage = customMessage || 'Unable to fetch assets from GitHub. Please try again later.';
+
+      filePicker.innerHTML = `
+        <div class="file-option loading-placeholder">
+          <div class="file-icon">❌</div>
+          <div class="file-details">
+            <div class="file-name">Failed to load files</div>
+            <div class="file-meta">${errorMessage}</div>
+          </div>
+        </div>
+      `;
+    }
+
+
 
     // Only override default if the button exists
     if (downloadButton) {
@@ -2562,13 +4210,36 @@
       continueButton.addEventListener("click", function () {
         // Hide the confirmation overlay
         exitOverlay.style.display = "none";
+        document.body.style.overflow = "auto";
 
         // Show download animation
         showDownloadAnimation();
 
-        // Start the actual download after a short delay
+        // Start the actual downloads after a short delay
         setTimeout(() => {
-          window.location.href = downloadButton.href;
+          if (selectedAssets && selectedAssets.length > 0) {
+            console.log(`🚀 Starting download of ${selectedAssets.length} file(s)`);
+
+            // Download each selected file with a small delay between downloads
+            selectedAssets.forEach((asset, index) => {
+              setTimeout(() => {
+                console.log(`📥 Downloading file ${index + 1}/${selectedAssets.length}:`, asset.name);
+
+                // Create a temporary link to trigger download
+                const link = document.createElement('a');
+                link.href = asset.browser_download_url;
+                link.download = asset.name;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }, index * 1000); // 1 second delay between downloads
+            });
+          } else {
+            // Fallback to default download
+            window.location.href = downloadButton.href;
+            console.log('No files selected, using default download');
+          }
         }, 500);
       });
     }
@@ -2576,7 +4247,91 @@
     if (cancelButton) {
       cancelButton.addEventListener("click", function () {
         exitOverlay.style.display = "none";
+        document.body.style.overflow = "auto";
       });
+    }
+
+    // Hash Action Buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      const copyHashBtn = document.getElementById('copyHashBtn');
+      const clearHashBtn = document.getElementById('clearHashBtn');
+
+      if (copyHashBtn) {
+        copyHashBtn.addEventListener('click', function() {
+          const currentUrl = window.location.href;
+          navigator.clipboard.writeText(currentUrl).then(() => {
+            showNotification('Hash link copied to clipboard!', 'success');
+          }).catch(() => {
+            showNotification('Failed to copy hash link', 'error');
+          });
+        });
+      }
+
+      if (clearHashBtn) {
+        clearHashBtn.addEventListener('click', function() {
+          history.replaceState(null, null, window.location.pathname);
+          if (hashInfoDisplay) hashInfoDisplay.style.display = 'none';
+          if (hashActions) hashActions.style.display = 'none';
+          showNotification('Hash parameters cleared', 'info');
+        });
+      }
+    });
+
+    // Notification system for hash actions
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      const colors = {
+        success: 'rgba(40, 167, 69, 0.9)',
+        error: 'rgba(220, 53, 69, 0.9)',
+        info: 'rgba(0, 150, 255, 0.9)'
+      };
+
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${colors[type] || colors.info};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-family: 'Exo 2', sans-serif;
+        font-size: 0.9rem;
+        z-index: 10002;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        animation: slideInRight 0.3s ease;
+        max-width: 300px;
+      `;
+
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      // Auto-remove after 3 seconds
+      setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            document.body.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+
+    // Add CSS for notifications
+    if (!document.getElementById('notificationStyles')) {
+      const style = document.createElement('style');
+      style.id = 'notificationStyles';
+      style.textContent = `
+        @keyframes slideInRight {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
     }
 
     // Fetch and display version in header and status info
@@ -2615,13 +4370,39 @@
         if (statusDiv) statusDiv.textContent = 'Failed to load status information.';
       });
 
+    // Utility function to hide all overlays
+    function hideAllOverlays() {
+      const overlays = [
+        'legalOverlay',
+        'exitOverlay',
+        'downloadScreen',
+        'discordScreen',
+        'donationScreen',
+        'loginScreen'
+      ];
+
+      overlays.forEach(overlayId => {
+        const overlay = document.getElementById(overlayId);
+        if (overlay && overlay.style.display === 'flex') {
+          overlay.style.display = 'none';
+        }
+      });
+
+      // Reset body overflow
+      document.body.style.overflow = 'auto';
+    }
+
     // Download Animation Functions
     function showDownloadAnimation() {
+      // Hide any other overlays first
+      hideAllOverlays();
+
       const downloadScreen = document.getElementById('downloadScreen');
       const progressBar = document.getElementById('downloadProgressBar');
       const percentage = document.getElementById('downloadPercentage');
 
       downloadScreen.style.display = 'flex';
+      downloadScreen.style.zIndex = '10002';
       document.body.style.overflow = 'hidden';
 
       // Animate progress bar
@@ -2689,10 +4470,14 @@
     let discordCountdownTimer;
 
     function showDiscordAnimation() {
+      // Hide any other overlays first
+      hideAllOverlays();
+
       const discordScreen = document.getElementById('discordScreen');
       const countdownElement = document.getElementById('discordCountdown');
 
       discordScreen.style.display = 'flex';
+      discordScreen.style.zIndex = '10003';
       document.body.style.overflow = 'hidden';
 
       // Start countdown
@@ -2815,8 +4600,12 @@
 
     // Donation Animation Functions
     function showDonationAnimation() {
+      // Hide any other overlays first
+      hideAllOverlays();
+
       const donationScreen = document.getElementById('donationScreen');
       donationScreen.style.display = 'flex';
+      donationScreen.style.zIndex = '10004';
       document.body.style.overflow = 'hidden';
     }
 
@@ -2853,6 +4642,9 @@
     // Login Animation Functions
     function showLoginAnimation() {
       console.log('Showing login animation');
+      // Hide any other overlays first
+      hideAllOverlays();
+
       const loginScreen = document.getElementById('loginScreen');
       console.log('Login screen element:', loginScreen);
 
@@ -2860,6 +4652,7 @@
         loginScreen.style.display = 'flex';
         loginScreen.style.visibility = 'visible';
         loginScreen.style.opacity = '1';
+        loginScreen.style.zIndex = '10005';
         document.body.style.overflow = 'hidden';
         console.log('Login screen should now be visible');
       } else {
@@ -3039,6 +4832,8 @@
         }
       });
     });
+
+
   </script>
 </body>
 </html>
