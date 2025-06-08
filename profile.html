@@ -109,6 +109,102 @@
       letter-spacing: 2px;
     }
 
+    /* User Profile Card */
+    .user-profile-card {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.8), rgba(15, 20, 25, 0.8));
+      border: 2px solid rgba(237, 28, 36, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 25px;
+      border-bottom: 1px solid rgba(237, 28, 36, 0.2);
+    }
+
+    .user-details {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .detail-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0096ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .detail-value-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .detail-value {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      cursor: text;
+      user-select: all;
+    }
+
+    .detail-value:focus {
+      outline: none;
+      border-color: rgba(237, 28, 36, 0.6);
+      box-shadow: 0 0 10px rgba(237, 28, 36, 0.2);
+    }
+
+    .uuid-field {
+      font-size: 0.8rem;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      min-width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 150, 255, 0.3);
+    }
+
+    .copy-btn.copied {
+      background: linear-gradient(145deg, rgba(81, 207, 102, 0.8), rgba(51, 177, 72, 0.8));
+    }
+
     /* Profile section */
     .profile-section {
       display: grid;
@@ -806,6 +902,32 @@
         font-size: 1.8rem;
       }
 
+      .user-profile-card {
+        margin-bottom: 20px;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+      }
+
+      .user-details {
+        padding: 20px;
+        gap: 15px;
+      }
+
+      .detail-value-container {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .copy-btn {
+        width: 100%;
+        min-width: auto;
+      }
+
       .profile-section {
         grid-template-columns: 1fr;
         text-align: center;
@@ -968,6 +1090,258 @@
       .sort-select {
         width: 100%;
       }
+
+      /* Additional Mobile Enhancements */
+      .modal-overlay {
+        padding: 10px;
+      }
+
+      .modal-container {
+        max-width: 95vw;
+        max-height: 90vh;
+        margin: 0;
+        border-radius: 15px;
+      }
+
+      .modal-header {
+        padding: 15px;
+        gap: 10px;
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+      }
+
+      .modal-content {
+        padding: 15px;
+        max-height: calc(90vh - 80px);
+        overflow-y: auto;
+      }
+
+      .reset-form {
+        gap: 15px;
+      }
+
+      .form-group {
+        gap: 8px;
+      }
+
+      .form-label {
+        font-size: 0.85rem;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .form-display {
+        padding: 10px;
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-cancel,
+      .btn-submit {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+
+      /* Notification Mobile */
+      .notification-container {
+        top: 10px !important;
+        right: 10px !important;
+        left: 10px !important;
+        max-width: none !important;
+      }
+
+      .custom-notification {
+        transform: translateY(-100px) !important;
+        margin-bottom: 10px;
+        padding: 15px;
+      }
+
+      .custom-notification.show {
+        transform: translateY(0) !important;
+      }
+
+      .notification-header {
+        gap: 10px;
+      }
+
+      .notification-title {
+        font-size: 1rem;
+      }
+
+      .notification-message {
+        font-size: 0.85rem;
+      }
+
+      .notification-details {
+        font-size: 0.8rem;
+      }
+
+      .notification-actions {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .notification-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+
+      /* Auth status mobile adjustments */
+      .auth-status {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .auth-button {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Small Mobile Devices (up to 480px) */
+    @media (max-width: 480px) {
+      .container {
+        margin: 5px;
+        padding: 10px;
+      }
+
+      .user-profile-card {
+        margin-bottom: 15px;
+      }
+
+      .profile-header {
+        padding: 15px;
+        gap: 10px;
+      }
+
+      .profile-avatar img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .profile-title {
+        font-size: 1.5rem;
+      }
+
+      .profile-subtitle {
+        font-size: 0.8rem;
+      }
+
+      .user-details {
+        padding: 15px;
+        gap: 12px;
+      }
+
+      .detail-label {
+        font-size: 0.8rem;
+      }
+
+      .detail-value {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+
+      .copy-btn {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
+
+      .control-card {
+        padding: 15px;
+      }
+
+      .control-header {
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .control-icon {
+        font-size: 1.2rem;
+        width: 30px;
+        height: 30px;
+      }
+
+      .control-title {
+        font-size: 1rem;
+      }
+
+      .setting-label {
+        font-size: 0.8rem;
+      }
+
+      .setting-input,
+      .setting-select {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+
+      .modal-container {
+        max-width: 98vw;
+        max-height: 95vh;
+      }
+
+      .modal-header {
+        padding: 12px;
+      }
+
+      .modal-title {
+        font-size: 1.1rem;
+      }
+
+      .modal-content {
+        padding: 12px;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+
+      .notification-container {
+        top: 5px !important;
+        right: 5px !important;
+        left: 5px !important;
+      }
+
+      .custom-notification {
+        padding: 12px;
+      }
+
+      .notification-title {
+        font-size: 0.9rem;
+      }
+
+      .notification-message {
+        font-size: 0.8rem;
+      }
+
+      .notification-details {
+        font-size: 0.75rem;
+      }
+
+      .notification-btn {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
     }
 
     /* Mock Notice */
@@ -1030,6 +1404,21 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
+      width: 100%;
+    }
+
+    .wide-card {
+      grid-column: 1 / -1;
+      min-width: 100%;
+    }
+
+    .wide-card .control-content {
+      padding: 30px;
+    }
+
+    .wide-card .coming-soon {
+      padding: 40px 60px;
+      max-width: none;
     }
 
     .control-card {
@@ -1114,6 +1503,78 @@
       outline: none;
       border-color: rgba(237, 28, 36, 0.6);
       box-shadow: 0 0 10px rgba(237, 28, 36, 0.2);
+    }
+
+    .auth-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .auth-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .auth-indicator.enabled {
+      background: linear-gradient(145deg, rgba(81, 207, 102, 0.2), rgba(51, 177, 72, 0.2));
+      color: #51cf66;
+      border: 1px solid rgba(81, 207, 102, 0.3);
+    }
+
+    .auth-indicator.warning {
+      background: linear-gradient(145deg, rgba(255, 149, 0, 0.2), rgba(200, 120, 0, 0.2));
+      color: #ff9500;
+      border: 1px solid rgba(255, 149, 0, 0.3);
+    }
+
+    .auth-indicator.info {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.2), rgba(0, 120, 200, 0.2));
+      color: #0096ff;
+      border: 1px solid rgba(0, 150, 255, 0.3);
+    }
+
+    .auth-indicator.disabled {
+      background: linear-gradient(145deg, rgba(255, 107, 107, 0.2), rgba(200, 80, 80, 0.2));
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .auth-icon {
+      font-size: 1rem;
+    }
+
+    .auth-text {
+      font-weight: 600;
+    }
+
+    .auth-button {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.75rem;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .auth-button:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 150, 255, 0.3);
     }
 
     .setting-input[readonly] {
@@ -1997,30 +2458,48 @@
       </div>
     </div>
 
-    <div class="profile-section">
-      <div class="profile-avatar">
-        <img src="https://avatars.githubusercontent.com/u/78422734?s=400&u=a55ec5365cf78e9fd0f1240e74c1c02fd0a2ef1f&v=4" alt="HarleyTG Avatar">
-      </div>
-      <div class="profile-info">
-        <h2 class="profile-title">HarleyTG</h2>
-        <p class="profile-subtitle">Star Citizen Kill Tracker Account</p>
-      </div>
-    </div>
-
-    <div class="info-cards">
-      <div class="info-card">
-        <div class="card-label">Username</div>
-        <div class="card-value">HarleyTG</div>
+    <!-- User Profile Card -->
+    <div class="user-profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <img src="https://avatars.githubusercontent.com/u/78422734?s=400&u=a55ec5365cf78e9fd0f1240e74c1c02fd0a2ef1f&v=4" alt="HarleyTG Avatar">
+        </div>
+        <div class="profile-info">
+          <h2 class="profile-title">HarleyTG</h2>
+          <p class="profile-subtitle">Star Citizen Kill Tracker Account</p>
+        </div>
       </div>
 
-      <div class="info-card">
-        <div class="card-label">SCKillTrac ID</div>
-        <div class="card-value">HarleyTG@SCKillTrac</div>
-      </div>
+      <div class="user-details">
+        <div class="detail-item">
+          <label class="detail-label">Username</label>
+          <div class="detail-value-container">
+            <input type="text" class="detail-value" value="HarleyTG" readonly>
+            <button class="copy-btn" onclick="copyToClipboard('HarleyTG', this)" title="Copy Username">
+              📋
+            </button>
+          </div>
+        </div>
 
-      <div class="info-card">
-        <div class="card-label">UUID</div>
-        <div class="card-value">HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54</div>
+        <div class="detail-item">
+          <label class="detail-label">SCKillTrac ID</label>
+          <div class="detail-value-container">
+            <input type="text" class="detail-value" value="HarleyTG@SCKillTrac" readonly>
+            <button class="copy-btn" onclick="copyToClipboard('HarleyTG@SCKillTrac', this)" title="Copy SCKillTrac ID">
+              📋
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <label class="detail-label">UUID</label>
+          <div class="detail-value-container">
+            <input type="text" class="detail-value uuid-field" value="HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54" readonly>
+            <button class="copy-btn" onclick="copyToClipboard('HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54', this)" title="Copy UUID">
+              📋
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2284,7 +2763,56 @@
 
         <div class="control-card">
           <div class="control-header">
-            <div class="control-icon">📊</div>
+            <div class="control-icon">�</div>
+            <div class="control-title">Security Settings</div>
+          </div>
+          <div class="control-content">
+            <div class="setting-item">
+              <label class="setting-label">Google Passkeys</label>
+              <div class="auth-status">
+                <div class="auth-indicator enabled">
+                  <span class="auth-icon">🔑</span>
+                  <span class="auth-text">Enabled</span>
+                </div>
+                <button class="auth-button" onclick="mockPasskeySettings()">⚙️ Manage</button>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Two-Factor Authentication</label>
+              <div class="auth-status">
+                <div class="auth-indicator enabled">
+                  <span class="auth-icon">📱</span>
+                  <span class="auth-text">Google Authenticator</span>
+                </div>
+                <button class="auth-button" onclick="mock2FASettings()">⚙️ Configure</button>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Backup Codes</label>
+              <div class="auth-status">
+                <div class="auth-indicator warning">
+                  <span class="auth-icon">📋</span>
+                  <span class="auth-text">8 remaining</span>
+                </div>
+                <button class="auth-button" onclick="mockBackupCodes()">🔄 Generate</button>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Login Sessions</label>
+              <div class="auth-status">
+                <div class="auth-indicator info">
+                  <span class="auth-icon">💻</span>
+                  <span class="auth-text">3 active</span>
+                </div>
+                <button class="auth-button" onclick="mockSessions()">👁️ View</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <div class="control-header">
+            <div class="control-icon">�📊</div>
             <div class="control-title">Tracking Settings</div>
           </div>
           <div class="control-content">
@@ -2335,16 +2863,19 @@
           </div>
         </div>
 
-        <div class="control-card">
+        <div class="control-card wide-card">
           <div class="control-header">
             <div class="control-icon">�</div>
-            <div class="control-title">Account Logs</div>
+            <div class="control-title">Account Logs & Audit Trail</div>
           </div>
           <div class="control-content">
             <div class="coming-soon">
               <div class="coming-soon-icon">�</div>
               <div class="coming-soon-text">Coming Soon</div>
-              <div class="coming-soon-desc">Account activity logs and audit trail will be available in a future update.</div>
+              <div class="coming-soon-desc">
+                Comprehensive account activity logs and audit trail will be available in a future update. This will include login history,
+                security events, data modifications, request tracking, and detailed activity monitoring for enhanced account security and transparency.
+              </div>
             </div>
           </div>
         </div>
@@ -2377,8 +2908,8 @@
           <div class="data-icon">🗑️</div>
           <div class="data-info">
             <div class="data-title">Clear Data</div>
-            <div class="data-desc">Remove all tracking data (irreversible)</div>
-            <button class="data-button danger" onclick="mockClear()">🗑️ Clear All</button>
+            <div class="data-desc">Request removal of all tracking data (irreversible)</div>
+            <button class="data-button danger" onclick="openClearDataForm()">🗑️ Request Clear</button>
           </div>
         </div>
 
@@ -2533,6 +3064,26 @@
           }
         ]
       });
+    }
+
+    function executeLogout() {
+      // Clear authentication tokens
+      localStorage.removeItem('sckt_logged_in');
+      localStorage.removeItem('sckt_session_token');
+      localStorage.removeItem('sckt_username');
+      localStorage.removeItem('sckt_login_time');
+
+      showNotification({
+        title: 'Logout Successful',
+        message: 'You have been logged out of your SC Kill Tracker account.',
+        details: 'Thank you for using SC Kill Tracker. Your session has been ended securely.\n\n⚠️ This is a mock demonstration.',
+        type: 'success',
+        duration: 3000
+      });
+
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 2000);
     }
 
     function confirmLogout() {
@@ -2712,6 +3263,140 @@
       console.log('Mock network data initialized - IP: 192.168.1.100 (fake for privacy)');
     }
 
+    // Copy to clipboard function
+    function copyToClipboard(text, button) {
+      navigator.clipboard.writeText(text).then(function() {
+        // Show success feedback
+        const originalContent = button.innerHTML;
+        button.innerHTML = '✅';
+        button.classList.add('copied');
+
+        showNotification({
+          title: 'Copied to Clipboard',
+          message: 'User information has been copied successfully.',
+          details: `Copied: ${text}`,
+          type: 'success',
+          duration: 3000
+        });
+
+        // Reset button after 2 seconds
+        setTimeout(function() {
+          button.innerHTML = originalContent;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(function(err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        showNotification({
+          title: 'Copied to Clipboard',
+          message: 'User information has been copied successfully.',
+          details: `Copied: ${text}`,
+          type: 'success',
+          duration: 3000
+        });
+
+        // Show success feedback
+        const originalContent = button.innerHTML;
+        button.innerHTML = '✅';
+        button.classList.add('copied');
+
+        setTimeout(function() {
+          button.innerHTML = originalContent;
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // Mock Authentication Functions
+    function mockPasskeySettings() {
+      showNotification({
+        title: 'Google Passkeys Management',
+        message: 'Manage your registered passkeys for secure authentication.',
+        details: 'Registered Devices:\n• Chrome on Windows (Primary)\n• iPhone 14 Pro (Touch ID)\n• MacBook Pro (Touch ID)\n\nYou can add, remove, or rename your passkeys.\n\n⚠️ This is a mock demonstration.',
+        type: 'info',
+        duration: 8000,
+        actions: [
+          {
+            text: 'Add Passkey',
+            type: 'primary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          }
+        ]
+      });
+    }
+
+    function mock2FASettings() {
+      showNotification({
+        title: 'Two-Factor Authentication',
+        message: 'Configure your 2FA settings for enhanced security.',
+        details: 'Current Setup:\n• Google Authenticator (Active)\n• Backup codes: 8 remaining\n• Last used: 2 hours ago\n\nYou can switch to other authenticator apps or disable 2FA.\n\n⚠️ This is a mock demonstration.',
+        type: 'info',
+        duration: 8000,
+        actions: [
+          {
+            text: 'Reconfigure',
+            type: 'primary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          }
+        ]
+      });
+    }
+
+    function mockBackupCodes() {
+      showNotification({
+        title: 'Generate New Backup Codes',
+        message: 'This will generate new backup codes and invalidate the old ones.',
+        details: 'Current Status:\n• 8 codes remaining\n• Generated: 3 weeks ago\n• Used: 2 codes\n\nNew codes will be provided for download after generation.\n\n⚠️ This is a mock demonstration.',
+        type: 'warning',
+        duration: 0,
+        actions: [
+          {
+            text: 'Cancel',
+            type: 'secondary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          },
+          {
+            text: 'Generate',
+            type: 'primary',
+            onclick: 'generateMockCodes()'
+          }
+        ]
+      });
+    }
+
+    function generateMockCodes() {
+      showNotification({
+        title: 'Backup Codes Generated',
+        message: 'New backup codes have been generated successfully.',
+        details: 'New Backup Codes:\n• ABC123-DEF456\n• GHI789-JKL012\n• MNO345-PQR678\n• STU901-VWX234\n• YZA567-BCD890\n\nSave these codes in a secure location.\n\n⚠️ This is a mock demonstration.',
+        type: 'success',
+        duration: 12000
+      });
+    }
+
+    function mockSessions() {
+      showNotification({
+        title: 'Active Login Sessions',
+        message: 'View and manage your active login sessions.',
+        details: 'Active Sessions:\n\n1. Current Session\n   • Windows Chrome\n   • IP: 192.168.1.100\n   • Started: Now\n\n2. Mobile Session\n   • iPhone Safari\n   • IP: 192.168.1.101\n   • Started: 2 hours ago\n\n3. Previous Session\n   • macOS Chrome\n   • IP: 192.168.1.102\n   • Started: 1 day ago\n\n⚠️ This is a mock demonstration.',
+        type: 'info',
+        duration: 10000,
+        actions: [
+          {
+            text: 'End All Others',
+            type: 'primary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          }
+        ]
+      });
+    }
+
     // Check for welcome notification from login/register
     function checkForWelcomeNotification() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -2785,6 +3470,56 @@
       });
 
       closeUserIDFileForm();
+    }
+
+    // Clear Data Form Functions
+    function openClearDataForm() {
+      document.getElementById('clearDataModal').style.display = 'flex';
+    }
+
+    function closeClearDataForm() {
+      document.getElementById('clearDataModal').style.display = 'none';
+      document.getElementById('clearDataForm').reset();
+      document.getElementById('clearCharCount').textContent = '0';
+    }
+
+    function submitClearDataRequest() {
+      const reason = document.getElementById('clearReason').value;
+      const explanation = document.getElementById('clearExplanation').value;
+      const confirmation = document.getElementById('clearConfirmation').checked;
+      const email = document.getElementById('clearContactEmail').value;
+
+      if (!reason || !explanation) {
+        showNotification({
+          title: 'Form Validation',
+          message: 'Please fill in all required fields before submitting.',
+          type: 'warning',
+          duration: 4000
+        });
+        return;
+      }
+
+      if (!confirmation) {
+        showNotification({
+          title: 'Confirmation Required',
+          message: 'You must confirm that you understand this action will permanently delete all your data.',
+          type: 'warning',
+          duration: 5000
+        });
+        return;
+      }
+
+      // Mock submission
+      const requestId = 'CLEAR-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+      showNotification({
+        title: 'Data Clearing Request Submitted',
+        message: 'Your data clearing request has been submitted for staff review.',
+        details: `Request ID: ${requestId}\nReason: ${reason}\nStatus: Pending Review\n\nDue to the critical nature of this request, it will be reviewed by senior staff. You will receive an email confirmation and updates on the request status.\n\n⚠️ This is a mock demonstration.`,
+        type: 'success',
+        duration: 10000
+      });
+
+      closeClearDataForm();
     }
 
     // Activity Search and Sort Functionality
@@ -2951,8 +3686,28 @@
       renderActivityFeed();
     }
 
+    // Authentication check - redirect if not logged in
+    function checkAuthentication() {
+      // Check for authentication token/session
+      const isLoggedIn = localStorage.getItem('sckt_logged_in');
+      const sessionToken = localStorage.getItem('sckt_session_token');
+
+      // If no valid session, redirect to 401 error page
+      if (!isLoggedIn || !sessionToken) {
+        window.location.href = 'Error Sys/401.html';
+        return false;
+      }
+
+      return true;
+    }
+
     // Add some interactive feedback to disabled controls
     document.addEventListener('DOMContentLoaded', function() {
+      // Check authentication first
+      if (!checkAuthentication()) {
+        return; // Stop execution if not authenticated
+      }
+
       // Initialize mock client data
       initializeMockClientData();
 
@@ -3142,6 +3897,34 @@
           }
         });
       }
+
+      // Clear Data Form submission
+      const clearForm = document.getElementById('clearDataForm');
+      if (clearForm) {
+        clearForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          submitClearDataRequest();
+        });
+      }
+
+      // Character counter for Clear Data form
+      const clearTextarea = document.getElementById('clearExplanation');
+      const clearCharCount = document.getElementById('clearCharCount');
+
+      if (clearTextarea && clearCharCount) {
+        clearTextarea.addEventListener('input', function() {
+          const count = this.value.length;
+          clearCharCount.textContent = count;
+
+          if (count > 500) {
+            clearCharCount.style.color = '#ff453a';
+            this.value = this.value.substring(0, 500);
+            clearCharCount.textContent = '500';
+          } else {
+            clearCharCount.style.color = '#8fa8b8';
+          }
+        });
+      }
     });
   </script>
 
@@ -3161,6 +3944,15 @@
         </div>
 
         <form id="hwidResetForm" class="reset-form">
+          <div class="form-group">
+            <label class="form-label">User Information</label>
+            <div class="form-display">
+              <strong>Username:</strong> HarleyTG<br>
+              <strong>SCKillTrac ID:</strong> HarleyTG@SCKillTrac<br>
+              <strong>UUID:</strong> HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54
+            </div>
+          </div>
+
           <div class="form-group">
             <label class="form-label">Current HWID</label>
             <div class="form-display" id="modalCurrentHWID">HW-7F8A9B2C-D4E5F6G7-H8I9J0K1</div>
@@ -3218,7 +4010,11 @@
         <form id="userIDFileForm" class="reset-form">
           <div class="form-group">
             <label class="form-label">User Information</label>
-            <div class="form-display">HarleyTG@SCKillTrac</div>
+            <div class="form-display">
+              <strong>Username:</strong> HarleyTG<br>
+              <strong>SCKillTrac ID:</strong> HarleyTG@SCKillTrac<br>
+              <strong>UUID:</strong> HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54
+            </div>
           </div>
 
           <div class="form-group">
@@ -3254,6 +4050,76 @@
 
           <div class="form-actions">
             <button type="button" class="btn-cancel" onclick="closeUserIDFileForm()">Cancel</button>
+            <button type="submit" class="btn-submit">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clear Data Request Modal -->
+  <div id="clearDataModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">🗑️ Data Clearing Request</h3>
+        <button class="modal-close" onclick="closeClearDataForm()">✕</button>
+      </div>
+      <div class="modal-content">
+        <div class="modal-warning">
+          <div class="warning-icon">⚠️</div>
+          <div class="warning-text">
+            <strong>CRITICAL WARNING:</strong> This request will permanently delete ALL your tracking data including kills, deaths, statistics, and activity history. This action cannot be undone and requires staff approval.
+          </div>
+        </div>
+
+        <form id="clearDataForm" class="reset-form">
+          <div class="form-group">
+            <label class="form-label">User Information</label>
+            <div class="form-display">
+              <strong>Username:</strong> HarleyTG<br>
+              <strong>SCKillTrac ID:</strong> HarleyTG@SCKillTrac<br>
+              <strong>UUID:</strong> HarleyTG - SCKillTrac - 37933ece-966b-471f-98cd-e77a0f8ccc54
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Reason for Data Clearing <span class="required">*</span></label>
+            <select class="form-select" id="clearReason" required>
+              <option value="">Select reason...</option>
+              <option value="privacy_concerns">Privacy Concerns</option>
+              <option value="account_reset">Fresh Start / Account Reset</option>
+              <option value="data_corruption">Data Corruption Issues</option>
+              <option value="leaving_service">Leaving Service</option>
+              <option value="gdpr_request">GDPR Data Deletion Request</option>
+              <option value="other">Other (explain below)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Detailed Explanation <span class="required">*</span></label>
+            <textarea class="form-textarea" id="clearExplanation" placeholder="Please provide a detailed explanation for why you need all your data cleared. This helps our staff process your request appropriately..." rows="4" required></textarea>
+            <div class="char-counter">
+              <span id="clearCharCount">0</span>/500 characters
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Confirmation</label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+              <input type="checkbox" id="clearConfirmation" required style="width: 18px; height: 18px; accent-color: #ed1c24;">
+              <label for="clearConfirmation" style="font-family: 'Exo 2', sans-serif; font-size: 0.9rem; color: #e0e6ed; cursor: pointer;">
+                I understand this will permanently delete ALL my data and cannot be undone
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Contact Email</label>
+            <input type="email" class="form-input" id="clearContactEmail" placeholder="your.email@example.com" value="harley@sckilltrac.com">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeClearDataForm()">Cancel</button>
             <button type="submit" class="btn-submit">Submit Request</button>
           </div>
         </form>

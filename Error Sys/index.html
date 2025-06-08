@@ -257,24 +257,218 @@
       box-shadow: 0 8px 25px rgba(0, 150, 255, 0.4);
     }
 
+    /* Enhanced Mobile and Tablet Support */
+
+    /* Tablets (768px - 1024px) */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .container {
+        margin: 30px;
+        padding: 35px 25px;
+        max-width: 85vw;
+      }
+
+      .header-icon {
+        font-size: 3.5rem;
+      }
+
+      .header-title {
+        font-size: 2.5rem;
+      }
+
+      .header-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .error-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .nav-buttons {
+        gap: 15px;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Mobile Devices (up to 768px) */
     @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        margin: 10px;
+        padding: 25px 20px;
+        max-width: 95vw;
+      }
+
+      .header {
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
+      .header-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .header-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+
+      .header-subtitle {
+        font-size: 0.9rem;
+      }
+
       .error-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
 
-      .header-title {
-        font-size: 2rem;
+      .error-card {
+        padding: 20px;
+      }
+
+      .error-icon {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+      }
+
+      .error-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .error-description {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
       }
 
       .nav-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 12px;
+        margin-top: 25px;
       }
 
       .btn {
         width: 100%;
-        max-width: 250px;
+        max-width: 280px;
+        padding: 15px 20px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+    }
+
+    /* Small Mobile Devices (up to 480px) */
+    @media (max-width: 480px) {
+      .container {
+        margin: 5px;
+        padding: 20px 15px;
+        max-width: 98vw;
+      }
+
+      .header {
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .header-icon {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+      }
+
+      .header-title {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .header-subtitle {
+        font-size: 0.8rem;
+      }
+
+      .error-grid {
+        gap: 15px;
+      }
+
+      .error-card {
+        padding: 15px;
+      }
+
+      .error-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .error-title {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .error-description {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+      }
+
+      .nav-buttons {
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .btn {
+        max-width: 100%;
+        padding: 12px 15px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Very Small Screens (up to 360px) */
+    @media (max-width: 360px) {
+      .container {
+        margin: 2px;
+        padding: 15px 10px;
+      }
+
+      .header {
+        padding: 12px;
+      }
+
+      .header-icon {
+        font-size: 2rem;
+      }
+
+      .header-title {
+        font-size: 1.2rem;
+      }
+
+      .header-subtitle {
+        font-size: 0.75rem;
+      }
+
+      .error-card {
+        padding: 12px;
+      }
+
+      .error-icon {
+        font-size: 1.8rem;
+      }
+
+      .error-title {
+        font-size: 0.9rem;
+      }
+
+      .error-description {
+        font-size: 0.75rem;
+      }
+
+      .btn {
+        padding: 10px 12px;
+        font-size: 0.8rem;
       }
     }
   </style>

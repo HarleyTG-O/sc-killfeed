@@ -2072,47 +2072,142 @@
       box-shadow: 0 8px 20px rgba(237, 28, 36, 0.4);
     }
 
-    /* Responsive Design Enhancements */
-    @media (max-width: 768px) {
+    /* Enhanced Responsive Design */
+
+    /* Large Tablets and Small Desktops (1024px - 1200px) */
+    @media (max-width: 1200px) and (min-width: 1025px) {
       .container {
-        margin: 10px;
-        padding: 25px 30px;
+        max-width: 95%;
+        margin: 20px auto;
+      }
+
+      .media-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* Tablets (768px - 1024px) */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .container {
+        margin: 15px;
+        padding: 25px;
+        max-width: 95%;
       }
 
       header {
         flex-direction: column;
         text-align: center;
         gap: 20px;
+        padding: 20px;
       }
 
       .header-left {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
       }
 
       .header-buttons {
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
       }
 
       header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .section h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
 
       .button-group {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        gap: 15px;
       }
 
       a.button, button.button {
         text-align: center;
+        width: 100%;
+        max-width: 400px;
+        padding: 15px 25px;
+      }
+
+      .media-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .media-gallery img,
+      .media-gallery video {
+        height: 250px;
+      }
+    }
+
+    /* Mobile Devices (up to 768px) */
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        padding: 20px;
+        border-radius: 15px;
+      }
+
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .header-left {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .header-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+      }
+
+      .section {
+        padding: 20px 15px;
+      }
+
+      .section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+      }
+
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      a.button, button.button {
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
       }
 
       .media-gallery {
         grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .media-gallery img,
+      .media-gallery video {
+        height: 200px;
+        border-radius: 10px;
       }
 
       /* Discord responsive adjustments */
@@ -5591,6 +5686,12 @@
 
             // Check for correct demo credentials
             if (username === 'HarleyTG' && password === 'Password') {
+              // Set authentication tokens for session
+              localStorage.setItem('sckt_logged_in', 'true');
+              localStorage.setItem('sckt_session_token', 'mock_token_' + Date.now());
+              localStorage.setItem('sckt_username', username);
+              localStorage.setItem('sckt_login_time', new Date().toISOString());
+
               // Simulate successful login
               hideLoginAnimation();
 
