@@ -100,11 +100,32 @@
     header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 30px;
       margin-bottom: 40px;
       padding: 20px 0;
       border-bottom: 2px solid rgba(237, 28, 36, 0.3);
       position: relative;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex: 1;
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-login-btn {
+      font-size: 0.9rem !important;
+      padding: 10px 20px !important;
+      min-width: auto !important;
+      white-space: nowrap;
     }
 
     header::after {
@@ -1970,6 +1991,15 @@
         gap: 20px;
       }
 
+      .header-left {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .header-buttons {
+        justify-content: center;
+      }
+
       header h1 {
         font-size: 2rem;
       }
@@ -3200,11 +3230,15 @@
 <body>
   <div class="container">
     <header>
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo" />
-      <h1>
-        Star Citizen Kill Tracker
-        <span id="version"></span>
-      </h1>
+      <div class="header-left">
+        <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo" />
+        <h1>
+          Star Citizen Kill Tracker
+        </h1>
+      </div>
+      <div class="header-buttons">
+        <button class="button header-login-btn" id="loginButton">👤 Login / Register</button>
+      </div>
     </header>
 
     <!-- New Status Section -->
@@ -3223,7 +3257,6 @@
         <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">🚀 Download Latest</a>
         <button class="button" id="discordButton">💬 Join Discord</button>
         <button class="button" id="donationButton">💰 Support Development</button>
-        <button class="button" id="loginButton">👤 Login / Register</button>
       </div>
     </section>
 

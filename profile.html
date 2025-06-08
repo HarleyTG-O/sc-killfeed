@@ -733,6 +733,33 @@
         width: 100%;
         padding: 10px;
       }
+
+      .client-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .client-card {
+        padding: 15px;
+      }
+
+      .client-header {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+      }
+
+      .client-icon {
+        font-size: 1.3rem;
+      }
+
+      .client-title {
+        font-size: 1rem;
+      }
+
+      .hwid-reset-btn {
+        padding: 10px 15px;
+        font-size: 0.75rem;
+      }
     }
 
     /* Mock Notice */
@@ -1043,6 +1070,704 @@
       background: linear-gradient(145deg, #ff8080, #ff6b6b);
       box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
     }
+
+    /* Client Details Section */
+    .client-section {
+      margin-bottom: 40px;
+    }
+
+    .client-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ed1c24;
+      margin-bottom: 25px;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .client-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .client-card {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.9), rgba(15, 20, 25, 0.9));
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .client-card:hover {
+      border-color: rgba(0, 150, 255, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 150, 255, 0.2);
+    }
+
+    .client-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 150, 255, 0.2);
+    }
+
+    .client-icon {
+      font-size: 1.5rem;
+      color: #0096ff;
+      text-shadow: 0 0 8px rgba(0, 150, 255, 0.6);
+    }
+
+    .client-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .client-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .client-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .client-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #8fa8b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .client-value {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.95rem;
+      color: #e0e6ed;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 150, 255, 0.2);
+    }
+
+    .hwid-value {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      word-break: break-all;
+      color: #0096ff;
+    }
+
+    .hwid-reset-btn {
+      background: linear-gradient(145deg, #ff6b6b, #e55555);
+      color: white;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: 100%;
+    }
+
+    .hwid-reset-btn:hover {
+      background: linear-gradient(145deg, #ff8080, #ff6b6b);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    }
+
+    .hwid-reset-btn:disabled {
+      background: linear-gradient(145deg, #666, #555);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .id-file-btn {
+      background: linear-gradient(145deg, #0096ff, #0078cc);
+      color: white;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: 100%;
+      box-shadow: 0 3px 10px rgba(0, 150, 255, 0.3);
+    }
+
+    .id-file-btn:hover {
+      background: linear-gradient(145deg, #00b3ff, #0096ff);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 150, 255, 0.4);
+    }
+
+    .id-file-btn:disabled {
+      background: linear-gradient(145deg, #666, #555);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .id-file-btn {
+      background: linear-gradient(145deg, #0096ff, #0078cc);
+      color: white;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: 100%;
+      box-shadow: 0 3px 10px rgba(0, 150, 255, 0.3);
+    }
+
+    .id-file-btn:hover {
+      background: linear-gradient(145deg, #00b3ff, #0096ff);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 150, 255, 0.4);
+    }
+
+    .id-file-btn:disabled {
+      background: linear-gradient(145deg, #666, #555);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Coming Soon Section */
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      border: 2px dashed rgba(255, 149, 0, 0.3);
+    }
+
+    .coming-soon-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ff9500;
+      text-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
+    }
+
+    .coming-soon-text {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ff9500;
+      margin-bottom: 8px;
+      text-shadow: 0 0 8px rgba(255, 149, 0, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .coming-soon-desc {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #b8c5d1;
+      line-height: 1.4;
+      opacity: 0.8;
+    }
+
+    /* Cool Status Badges */
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.1), rgba(0, 120, 200, 0.05));
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+    }
+
+    .status-badge.available {
+      background: linear-gradient(145deg, rgba(0, 255, 127, 0.15), rgba(0, 200, 100, 0.05));
+      border-color: rgba(0, 255, 127, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3);
+    }
+
+    .status-badge.banned {
+      background: linear-gradient(145deg, rgba(255, 69, 58, 0.15), rgba(200, 50, 40, 0.05));
+      border-color: rgba(255, 69, 58, 0.4);
+      box-shadow: 0 4px 15px rgba(255, 69, 58, 0.3);
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00ff7f;
+      box-shadow: 0 0 10px rgba(0, 255, 127, 0.8);
+      animation: statusGlow 2s ease-in-out infinite;
+    }
+
+    .status-badge.banned .status-indicator {
+      background: #ff453a;
+      box-shadow: 0 0 10px rgba(255, 69, 58, 0.8);
+    }
+
+    @keyframes statusGlow {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 127, 0.8);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(0, 255, 127, 1);
+        transform: scale(1.1);
+      }
+    }
+
+    .status-icon {
+      font-size: 1.2rem;
+      text-shadow: 0 0 8px rgba(0, 255, 127, 0.6);
+    }
+
+    .status-badge.banned .status-icon {
+      text-shadow: 0 0 8px rgba(255, 69, 58, 0.6);
+    }
+
+    .status-text {
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #00ff7f;
+      text-shadow: 0 0 8px rgba(0, 255, 127, 0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .status-badge.banned .status-text {
+      color: #ff453a;
+      text-shadow: 0 0 8px rgba(255, 69, 58, 0.6);
+    }
+
+    .status-pulse {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 25px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 127, 0.1), transparent);
+      animation: statusPulse 3s linear infinite;
+    }
+
+    .status-badge.banned .status-pulse {
+      background: linear-gradient(90deg, transparent, rgba(255, 69, 58, 0.1), transparent);
+    }
+
+    @keyframes statusPulse {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .status-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 255, 127, 0.4);
+    }
+
+    .status-badge.banned:hover {
+      box-shadow: 0 8px 25px rgba(255, 69, 58, 0.4);
+    }
+
+    /* HWID Reset Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-container {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.95), rgba(15, 20, 25, 0.95));
+      border: 2px solid rgba(237, 28, 36, 0.4);
+      border-radius: 20px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 0 50px rgba(237, 28, 36, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 25px;
+      border-bottom: 1px solid rgba(237, 28, 36, 0.2);
+    }
+
+    .modal-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ed1c24;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #8fa8b8;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 69, 58, 0.2);
+      color: #ff453a;
+    }
+
+    .modal-content {
+      padding: 25px;
+    }
+
+    .modal-warning {
+      display: flex;
+      gap: 12px;
+      background: rgba(255, 149, 0, 0.1);
+      border: 1px solid rgba(255, 149, 0, 0.3);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .warning-icon {
+      font-size: 1.2rem;
+      color: #ff9500;
+    }
+
+    .warning-text {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      line-height: 1.4;
+    }
+
+    .reset-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0096ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .required {
+      color: #ed1c24;
+    }
+
+    .form-display {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 150, 255, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #0096ff;
+      word-break: break-all;
+    }
+
+    .form-select,
+    .form-input,
+    .form-textarea {
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      transition: all 0.3s ease;
+    }
+
+    .form-select:focus,
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: rgba(0, 150, 255, 0.6);
+      box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .char-counter {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.8rem;
+      color: #8fa8b8;
+      text-align: right;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .btn-cancel,
+    .btn-submit {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-cancel {
+      background: linear-gradient(145deg, rgba(108, 117, 125, 0.8), rgba(73, 80, 87, 0.8));
+      color: white;
+      border: 2px solid rgba(108, 117, 125, 0.5);
+    }
+
+    .btn-cancel:hover {
+      background: linear-gradient(145deg, rgba(128, 137, 145, 0.9), rgba(108, 117, 125, 0.9));
+      transform: translateY(-2px);
+    }
+
+    .btn-submit {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(237, 28, 36, 0.5);
+    }
+
+    /* Custom Notification System */
+    .notification-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 20000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+    }
+
+    .custom-notification {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.98), rgba(15, 20, 25, 0.98));
+      border: 2px solid rgba(237, 28, 36, 0.6);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      transform: translateX(450px);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      opacity: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .custom-notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .notification-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .notification-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(237, 28, 36, 0.8);
+      box-shadow: 0 4px 15px rgba(237, 28, 36, 0.4);
+    }
+
+    .notification-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-shadow: 0 0 8px rgba(237, 28, 36, 0.5);
+      flex: 1;
+    }
+
+    .notification-close {
+      background: none;
+      border: none;
+      color: #8fa8b8;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notification-close:hover {
+      background: rgba(255, 69, 58, 0.2);
+      color: #ff453a;
+    }
+
+    .notification-content {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .notification-details {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 150, 255, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #0096ff;
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .notification-btn {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .notification-btn.primary {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      box-shadow: 0 3px 10px rgba(237, 28, 36, 0.3);
+    }
+
+    .notification-btn.primary:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.5);
+    }
+
+    .notification-btn.secondary {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      border: 1px solid rgba(0, 150, 255, 0.5);
+    }
+
+    .notification-btn.secondary:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-1px);
+    }
+
+    .notification-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ed1c24, #ff2832);
+      border-radius: 0 0 15px 15px;
+      transition: width 0.1s linear;
+    }
+
+    @media (max-width: 768px) {
+      .notification-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
+
+      .custom-notification {
+        transform: translateY(-100px);
+      }
+
+      .custom-notification.show {
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -1050,7 +1775,16 @@
     <div class="header">
       <a href="index.html" class="back-button">← Back to Home</a>
       <h1>User Profile</h1>
-      <div></div> <!-- Spacer for flexbox -->
+      <button class="back-button" onclick="mockLogout()" style="background: linear-gradient(145deg, rgba(255, 107, 107, 0.8), rgba(229, 85, 85, 0.8)); border-color: rgba(255, 107, 107, 0.5);">🚪 Logout</button>
+    </div>
+
+    <!-- Mock Service Notice -->
+    <div class="mock-notice">
+      <div class="mock-icon">⚠️</div>
+      <div class="mock-content">
+        <div class="mock-title">MOCK SERVICE DEMONSTRATION</div>
+        <div class="mock-text">This is a demonstration profile. All data, controls, and features are simulated for showcase purposes only. No actual tracking or data storage occurs.</div>
+      </div>
     </div>
 
     <div class="profile-section">
@@ -1187,14 +1921,99 @@
       </div>
     </section>
 
-    <!-- Mock Service Notice -->
-    <div class="mock-notice">
-      <div class="mock-icon">⚠️</div>
-      <div class="mock-content">
-        <div class="mock-title">MOCK SERVICE DEMONSTRATION</div>
-        <div class="mock-text">This is a demonstration profile. All data, controls, and features are simulated for showcase purposes only. No actual tracking or data storage occurs.</div>
+    <!-- Client Details Section -->
+    <section class="client-section">
+      <h2>Client Information</h2>
+      <div class="client-grid">
+        <div class="client-card">
+          <div class="client-header">
+            <div class="client-icon">🌐</div>
+            <div class="client-title">Network Details</div>
+          </div>
+          <div class="client-content">
+            <div class="client-item">
+              <label class="client-label">IP Address</label>
+              <div class="client-value" id="clientIP">192.168.1.100</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Location</label>
+              <div class="client-value">Canada, Ontario</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">ISP</label>
+              <div class="client-value">Bell Canada</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="client-card">
+          <div class="client-header">
+            <div class="client-icon">🔧</div>
+            <div class="client-title">Hardware ID</div>
+          </div>
+          <div class="client-content">
+            <div class="client-item">
+              <label class="client-label">Current HWID</label>
+              <div class="client-value hwid-value" id="currentHWID">HW-7F8A9B2C-D4E5F6G7-H8I9J0K1</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Last Reset</label>
+              <div class="client-value">Never</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Reset Available</label>
+              <div class="client-value">
+                <button class="hwid-reset-btn" onclick="openHWIDResetForm()">🔄 Request Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="client-card">
+          <div class="client-header">
+            <div class="client-icon">💻</div>
+            <div class="client-title">Client Information</div>
+          </div>
+          <div class="client-content">
+            <div class="client-item">
+              <label class="client-label">Operating System</label>
+              <div class="client-value">Windows 11 Pro</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Client Version</label>
+              <div class="client-value">v2.1.3-beta</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Last Update</label>
+              <div class="client-value">2 days ago</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="client-card">
+          <div class="client-header">
+            <div class="client-icon">📄</div>
+            <div class="client-title">User ID File</div>
+          </div>
+          <div class="client-content">
+            <div class="client-item">
+              <label class="client-label">File Status</label>
+              <div class="client-value">Available for Download</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Purpose</label>
+              <div class="client-value">Client and Server Synchronization</div>
+            </div>
+            <div class="client-item">
+              <label class="client-label">Request Status</label>
+              <div class="client-value">
+                <button class="id-file-btn" onclick="openUserIDFileForm()">📄 Submit Request</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Settings & Controls Section -->
     <section class="controls-section">
@@ -1215,12 +2034,22 @@
               <input type="text" class="setting-input" value="Eclipse Legion" readonly>
             </div>
             <div class="setting-item">
-              <label class="setting-label">Status</label>
-              <select class="setting-select" disabled>
-                <option>Active</option>
-                <option>Away</option>
-                <option>Offline</option>
-              </select>
+              <label class="setting-label">Client Access</label>
+              <div class="status-badge available">
+                <div class="status-indicator"></div>
+                <span class="status-icon">�️</span>
+                <span class="status-text">AUTHORIZED</span>
+                <div class="status-pulse"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">Network Access</label>
+              <div class="status-badge available">
+                <div class="status-indicator"></div>
+                <span class="status-icon">🌐</span>
+                <span class="status-text">CLEARED</span>
+                <div class="status-pulse"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1275,37 +2104,19 @@
                 <label for="deathNotif" class="toggle-label"></label>
               </div>
             </div>
-            <div class="setting-item">
-              <label class="setting-label">Discord Webhook</label>
-              <input type="text" class="setting-input" placeholder="https://discord.com/api/webhooks/..." readonly>
-            </div>
           </div>
         </div>
 
         <div class="control-card">
           <div class="control-header">
-            <div class="control-icon">🛡️</div>
-            <div class="control-title">Privacy & Security</div>
+            <div class="control-icon">�</div>
+            <div class="control-title">Account Logs</div>
           </div>
           <div class="control-content">
-            <div class="setting-item">
-              <label class="setting-label">Profile Visibility</label>
-              <select class="setting-select" disabled>
-                <option>Public</option>
-                <option>Friends Only</option>
-                <option>Private</option>
-              </select>
-            </div>
-            <div class="setting-item">
-              <label class="setting-label">Data Sharing</label>
-              <div class="toggle-switch">
-                <input type="checkbox" id="dataSharing" disabled>
-                <label for="dataSharing" class="toggle-label"></label>
-              </div>
-            </div>
-            <div class="setting-item">
-              <label class="setting-label">API Access</label>
-              <input type="text" class="setting-input" value="sk_demo_1234567890abcdef" readonly>
+            <div class="coming-soon">
+              <div class="coming-soon-icon">�</div>
+              <div class="coming-soon-text">Coming Soon</div>
+              <div class="coming-soon-desc">Account activity logs and audit trail will be available in a future update.</div>
             </div>
           </div>
         </div>
@@ -1354,39 +2165,175 @@
       </div>
     </section>
 
-    <div class="action-buttons">
-      <button class="action-button" onclick="mockEdit()">🔧 Edit Profile</button>
-      <button class="action-button" onclick="mockStats()">📊 View Statistics</button>
-      <button class="action-button" onclick="mockSettings()">⚙️ Advanced Settings</button>
-      <button class="action-button" onclick="mockLogout()">🚪 Logout</button>
-    </div>
+
   </div>
 
+  <!-- Custom Notification Container -->
+  <div id="notificationContainer" class="notification-container"></div>
+
   <script>
-    // Mock function implementations
-    function mockEdit() {
-      alert('🔧 Edit Profile\n\nThis would open a profile editing interface where you could:\n• Update display name\n• Change organization\n• Upload new avatar\n• Modify bio and preferences\n\n⚠️ This is a mock demonstration.');
+    // Custom Notification System
+    function showNotification(options) {
+      const {
+        title = 'SC Kill Tracker',
+        message = '',
+        details = '',
+        type = 'info', // info, success, warning, error
+        duration = 5000,
+        actions = []
+      } = options;
+
+      const container = document.getElementById('notificationContainer');
+      const notificationId = 'notification-' + Date.now();
+
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = 'custom-notification';
+      notification.id = notificationId;
+
+      // Determine icon based on type
+      let icon = '🛡️'; // Default SC Kill Tracker icon
+      let borderColor = 'rgba(237, 28, 36, 0.6)';
+
+      switch(type) {
+        case 'success':
+          icon = '✅';
+          borderColor = 'rgba(0, 255, 127, 0.6)';
+          break;
+        case 'warning':
+          icon = '⚠️';
+          borderColor = 'rgba(255, 149, 0, 0.6)';
+          break;
+        case 'error':
+          icon = '❌';
+          borderColor = 'rgba(255, 69, 58, 0.6)';
+          break;
+        case 'info':
+          icon = 'ℹ️';
+          borderColor = 'rgba(0, 150, 255, 0.6)';
+          break;
+      }
+
+      notification.style.borderColor = borderColor;
+
+      // Build notification HTML
+      let actionsHTML = '';
+      if (actions.length > 0) {
+        actionsHTML = '<div class="notification-actions">';
+        actions.forEach(action => {
+          actionsHTML += `<button class="notification-btn ${action.type || 'secondary'}" onclick="${action.onclick}">${action.text}</button>`;
+        });
+        actionsHTML += '</div>';
+      }
+
+      notification.innerHTML = `
+        <div class="notification-header">
+          <div class="notification-logo">${icon}</div>
+          <div class="notification-title">${title}</div>
+          <button class="notification-close" onclick="closeNotification('${notificationId}')">✕</button>
+        </div>
+        <div class="notification-content">${message}</div>
+        ${details ? `<div class="notification-details">${details}</div>` : ''}
+        ${actionsHTML}
+        <div class="notification-progress" style="width: 100%"></div>
+      `;
+
+      container.appendChild(notification);
+
+      // Animate in
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+
+      // Auto-close with progress bar
+      if (duration > 0) {
+        const progressBar = notification.querySelector('.notification-progress');
+        let width = 100;
+        const interval = setInterval(() => {
+          width -= (100 / (duration / 100));
+          progressBar.style.width = width + '%';
+
+          if (width <= 0) {
+            clearInterval(interval);
+            closeNotification(notificationId);
+          }
+        }, 100);
+
+        // Store interval for manual close
+        notification.dataset.interval = interval;
+      }
+
+      return notificationId;
     }
 
-    function mockStats() {
-      alert('📊 View Statistics\n\nThis would show detailed statistics including:\n• Kill/Death ratios\n• Weapon usage analytics\n• Zone activity heatmaps\n• Performance trends over time\n• Leaderboard rankings\n\n⚠️ This is a mock demonstration.');
-    }
+    function closeNotification(notificationId) {
+      const notification = document.getElementById(notificationId);
+      if (notification) {
+        // Clear auto-close interval if exists
+        if (notification.dataset.interval) {
+          clearInterval(notification.dataset.interval);
+        }
 
-    function mockSettings() {
-      alert('⚙️ Advanced Settings\n\nThis would open advanced configuration options:\n• API key management\n• Webhook configurations\n• Data retention policies\n• Export/import settings\n• Integration preferences\n\n⚠️ This is a mock demonstration.');
-    }
-
-    function mockLogout() {
-      if (confirm('🚪 Logout\n\nAre you sure you want to logout?\n\n⚠️ This is a mock demonstration.')) {
-        alert('Logging out...');
+        notification.classList.remove('show');
         setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 1000);
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 400);
       }
     }
 
+    // Mock function implementations
+
+    function mockLogout() {
+      showNotification({
+        title: 'Logout Confirmation',
+        message: 'Are you sure you want to logout of SC Kill Tracker?',
+        details: '⚠️ This is a mock demonstration.',
+        type: 'warning',
+        duration: 0, // Don't auto-close
+        actions: [
+          {
+            text: 'Cancel',
+            type: 'secondary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          },
+          {
+            text: 'Logout',
+            type: 'primary',
+            onclick: 'confirmLogout()'
+          }
+        ]
+      });
+    }
+
+    function confirmLogout() {
+      showNotification({
+        title: 'Logging Out',
+        message: 'Redirecting to login page...',
+        type: 'info',
+        duration: 2000
+      });
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    }
+
     function mockExport() {
-      alert('📥 Export Data\n\nThis would generate and download a JSON file containing:\n• All kill/death records\n• Combat statistics\n• Activity timeline\n• User preferences\n\nFile: harleytg_killtracker_data.json\n\n⚠️ This is a mock demonstration.');
+      showNotification({
+        title: 'Export Data',
+        message: 'This would generate and download a JSON file containing all your SC Kill Tracker data.',
+        details: 'File: harleytg_killtracker_data.json\n• All kill/death records\n• Combat statistics\n• Activity timeline\n• User preferences\n\n⚠️ This is a mock demonstration.',
+        type: 'info',
+        duration: 8000,
+        actions: [
+          {
+            text: 'Download',
+            type: 'primary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          }
+        ]
+      });
     }
 
     function mockSync() {
@@ -1406,19 +2353,180 @@
     }
 
     function mockClear() {
-      if (confirm('🗑️ Clear All Data\n\nThis would permanently delete:\n• All kill/death records\n• Combat statistics\n• Activity history\n\nThis action cannot be undone!\n\n⚠️ This is a mock demonstration.')) {
-        if (confirm('Are you absolutely sure? This will delete everything!')) {
-          alert('Data clearing simulation...\n\n⚠️ In a real application, all your data would now be permanently deleted.');
-        }
-      }
+      showNotification({
+        title: 'Clear All Data',
+        message: 'This will permanently delete ALL your SC Kill Tracker data. This action cannot be undone!',
+        details: 'Data to be deleted:\n• All kill/death records\n• Combat statistics\n• Activity history\n\n⚠️ This is a mock demonstration.',
+        type: 'error',
+        duration: 0,
+        actions: [
+          {
+            text: 'Cancel',
+            type: 'secondary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          },
+          {
+            text: 'Continue',
+            type: 'primary',
+            onclick: 'showFinalClearConfirmation()'
+          }
+        ]
+      });
+    }
+
+    function showFinalClearConfirmation() {
+      showNotification({
+        title: 'Final Confirmation',
+        message: 'Are you absolutely sure? This will delete EVERYTHING!',
+        details: 'This is your last chance to cancel. All data will be permanently lost.',
+        type: 'error',
+        duration: 0,
+        actions: [
+          {
+            text: 'Cancel',
+            type: 'secondary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          },
+          {
+            text: 'Delete Everything',
+            type: 'primary',
+            onclick: 'executeClearData()'
+          }
+        ]
+      });
+    }
+
+    function executeClearData() {
+      showNotification({
+        title: 'Data Clearing Complete',
+        message: 'Data clearing simulation completed.',
+        details: '⚠️ In a real application, all your data would now be permanently deleted.',
+        type: 'success',
+        duration: 6000
+      });
     }
 
     function mockReport() {
-      alert('📊 Generate Report\n\nThis would create a comprehensive report including:\n• Combat performance analysis\n• Activity summary\n• Statistical breakdowns\n• Trend analysis\n• Comparative metrics\n\nReport: harleytg_activity_report.pdf\n\n⚠️ This is a mock demonstration.');
+      showNotification({
+        title: 'Generate Report',
+        message: 'This would create a comprehensive performance report for your SC Kill Tracker data.',
+        details: 'Report: harleytg_activity_report.pdf\n\nIncludes:\n• Combat performance analysis\n• Activity summary\n• Statistical breakdowns\n• Trend analysis\n• Comparative metrics\n\n⚠️ This is a mock demonstration.',
+        type: 'info',
+        duration: 8000,
+        actions: [
+          {
+            text: 'Generate',
+            type: 'primary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          }
+        ]
+      });
+    }
+
+    function mockHWIDReset() {
+      showNotification({
+        title: 'Reset Hardware ID',
+        message: 'This will generate a new Hardware ID for your client.',
+        details: 'This action:\n• Cannot be undone\n• May require re-authentication\n• Will update your client fingerprint\n\n⚠️ This is a mock demonstration.',
+        type: 'warning',
+        duration: 0,
+        actions: [
+          {
+            text: 'Cancel',
+            type: 'secondary',
+            onclick: 'closeNotification(this.closest(".custom-notification").id)'
+          },
+          {
+            text: 'Reset HWID',
+            type: 'primary',
+            onclick: 'executeHWIDReset()'
+          }
+        ]
+      });
+    }
+
+    function executeHWIDReset() {
+      const button = event.target;
+      const hwidElement = document.getElementById('currentHWID');
+      const originalText = button.textContent;
+
+      // Disable button and show processing
+      button.textContent = '🔄 Resetting...';
+      button.disabled = true;
+
+      // Generate new mock HWID
+      const newHWID = 'HW-' + Math.random().toString(36).substr(2, 8).toUpperCase() + '-' +
+                     Math.random().toString(36).substr(2, 8).toUpperCase() + '-' +
+                     Math.random().toString(36).substr(2, 8).toUpperCase();
+
+      setTimeout(() => {
+        hwidElement.textContent = newHWID;
+        button.textContent = '✅ Reset Complete';
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+
+          showNotification({
+            title: 'Hardware ID Reset Complete',
+            message: 'Your client has been updated with the new hardware identifier.',
+            details: `New HWID: ${newHWID}\n\n⚠️ This is a mock demonstration.`,
+            type: 'success',
+            duration: 8000
+          });
+        }, 2000);
+      }, 3000);
+    }
+
+    // Mock client information - all data is simulated for demonstration
+    function initializeMockClientData() {
+      // Network data is pre-set to mock values for privacy and demonstration purposes
+      console.log('Mock network data initialized - IP: 192.168.1.100 (fake for privacy)');
+    }
+
+    // User ID File Form Functions
+    function openUserIDFileForm() {
+      document.getElementById('userIDFileModal').style.display = 'flex';
+    }
+
+    function closeUserIDFileForm() {
+      document.getElementById('userIDFileModal').style.display = 'none';
+      document.getElementById('userIDFileForm').reset();
+      document.getElementById('fileCharCount').textContent = '0';
+    }
+
+    function submitUserIDFileRequest() {
+      const purpose = document.getElementById('filePurpose').value;
+      const details = document.getElementById('fileDetails').value;
+      const email = document.getElementById('fileContactEmail').value;
+
+      if (!purpose) {
+        showNotification({
+          title: 'Form Validation',
+          message: 'Please select a purpose for your User ID file request.',
+          type: 'warning',
+          duration: 4000
+        });
+        return;
+      }
+
+      // Mock submission
+      const requestId = 'IDFILE-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+      showNotification({
+        title: 'User ID File Request Submitted',
+        message: 'Your User ID file request has been submitted successfully.',
+        details: `Request ID: ${requestId}\nPurpose: ${purpose}\nStatus: Pending Review\n\nYou will receive the file via support ticket within 24-48 hours.\n\n⚠️ This is a mock demonstration.`,
+        type: 'success',
+        duration: 8000
+      });
+
+      closeUserIDFileForm();
     }
 
     // Add some interactive feedback to disabled controls
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize mock client data
+      initializeMockClientData();
       const disabledInputs = document.querySelectorAll('input[readonly], input[disabled], select[disabled]');
 
       disabledInputs.forEach(input => {
@@ -1451,37 +2559,260 @@
         });
       });
 
-      // Add click feedback to toggle switches
-      const toggles = document.querySelectorAll('input[type="checkbox"][disabled]');
+      // Make toggle switches functional
+      const toggles = document.querySelectorAll('input[type="checkbox"]');
       toggles.forEach(toggle => {
-        toggle.parentElement.addEventListener('click', function(e) {
-          e.preventDefault();
+        // Remove disabled attribute to make them functional
+        toggle.removeAttribute('disabled');
+
+        toggle.addEventListener('change', function() {
+          const settingName = this.id.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+          const status = this.checked ? 'enabled' : 'disabled';
+
+          // Show feedback tooltip
           const tooltip = document.createElement('div');
-          tooltip.textContent = '⚠️ Mock Toggle - Disabled';
+          tooltip.textContent = `✅ ${settingName} ${status}`;
           tooltip.style.cssText = `
             position: absolute;
-            background: rgba(255, 149, 0, 0.9);
+            background: rgba(0, 150, 255, 0.9);
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
             z-index: 1000;
             pointer-events: none;
             font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 150, 255, 0.3);
           `;
 
-          const rect = this.getBoundingClientRect();
-          tooltip.style.left = rect.left + 'px';
-          tooltip.style.top = (rect.top - 35) + 'px';
+          const rect = this.parentElement.getBoundingClientRect();
+          tooltip.style.left = (rect.left + rect.width + 10) + 'px';
+          tooltip.style.top = (rect.top + rect.height / 2 - 15) + 'px';
 
           document.body.appendChild(tooltip);
 
           setTimeout(() => {
-            document.body.removeChild(tooltip);
+            if (document.body.contains(tooltip)) {
+              document.body.removeChild(tooltip);
+            }
           }, 2000);
+
+          console.log(`Setting changed: ${settingName} is now ${status}`);
         });
       });
     });
+
+    // HWID Reset Form Functions
+    function openHWIDResetForm() {
+      document.getElementById('hwidResetModal').style.display = 'flex';
+      document.getElementById('modalCurrentHWID').textContent = document.getElementById('currentHWID').textContent;
+    }
+
+    function closeHWIDResetForm() {
+      document.getElementById('hwidResetModal').style.display = 'none';
+      document.getElementById('hwidResetForm').reset();
+      document.getElementById('charCount').textContent = '0';
+    }
+
+    // Character counter for textarea
+    document.addEventListener('DOMContentLoaded', function() {
+      const textarea = document.getElementById('resetExplanation');
+      const charCount = document.getElementById('charCount');
+
+      if (textarea && charCount) {
+        textarea.addEventListener('input', function() {
+          const count = this.value.length;
+          charCount.textContent = count;
+
+          if (count > 500) {
+            charCount.style.color = '#ff453a';
+            this.value = this.value.substring(0, 500);
+            charCount.textContent = '500';
+          } else {
+            charCount.style.color = '#8fa8b8';
+          }
+        });
+      }
+
+      // Form submission
+      const form = document.getElementById('hwidResetForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const reason = document.getElementById('resetReason').value;
+          const explanation = document.getElementById('resetExplanation').value;
+          const email = document.getElementById('contactEmail').value;
+
+          if (!reason || !explanation) {
+            showNotification({
+              title: 'Form Validation',
+              message: 'Please fill in all required fields before submitting.',
+              type: 'warning',
+              duration: 4000
+            });
+            return;
+          }
+
+          // Mock submission
+          const requestId = 'HWID-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+          showNotification({
+            title: 'HWID Reset Request Submitted',
+            message: 'Your Hardware ID reset request has been submitted successfully.',
+            details: `Request ID: ${requestId}\nReason: ${reason}\nStatus: Pending Review\n\nYou will receive an email confirmation shortly.\n\n⚠️ This is a mock demonstration.`,
+            type: 'success',
+            duration: 8000
+          });
+
+          closeHWIDResetForm();
+        });
+      }
+
+      // User ID File Form submission
+      const fileForm = document.getElementById('userIDFileForm');
+      if (fileForm) {
+        fileForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          submitUserIDFileRequest();
+        });
+      }
+
+      // Character counter for User ID File form
+      const fileTextarea = document.getElementById('fileDetails');
+      const fileCharCount = document.getElementById('fileCharCount');
+
+      if (fileTextarea && fileCharCount) {
+        fileTextarea.addEventListener('input', function() {
+          const count = this.value.length;
+          fileCharCount.textContent = count;
+
+          if (count > 300) {
+            fileCharCount.style.color = '#ff453a';
+            this.value = this.value.substring(0, 300);
+            fileCharCount.textContent = '300';
+          } else {
+            fileCharCount.style.color = '#8fa8b8';
+          }
+        });
+      }
+    });
   </script>
+
+  <!-- HWID Reset Request Modal -->
+  <div id="hwidResetModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">🔧 Hardware ID Reset Request</h3>
+        <button class="modal-close" onclick="closeHWIDResetForm()">✕</button>
+      </div>
+      <div class="modal-content">
+        <div class="modal-warning">
+          <div class="warning-icon">⚠️</div>
+          <div class="warning-text">
+            <strong>Important:</strong> HWID resets are monitored and require approval. Abuse of this system may result in account restrictions.
+          </div>
+        </div>
+
+        <form id="hwidResetForm" class="reset-form">
+          <div class="form-group">
+            <label class="form-label">Current HWID</label>
+            <div class="form-display" id="modalCurrentHWID">HW-7F8A9B2C-D4E5F6G7-H8I9J0K1</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Reason for Reset <span class="required">*</span></label>
+            <select class="form-select" id="resetReason" required>
+              <option value="">Select a reason...</option>
+              <option value="hardware_change">Hardware Change/Upgrade</option>
+              <option value="system_reinstall">System Reinstall/Format</option>
+              <option value="technical_issue">Technical Issues</option>
+              <option value="security_concern">Security Concern</option>
+              <option value="other">Other (explain below)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Detailed Explanation <span class="required">*</span></label>
+            <textarea class="form-textarea" id="resetExplanation" placeholder="Please provide a detailed explanation of why you need an HWID reset..." rows="4" required></textarea>
+            <div class="char-counter">
+              <span id="charCount">0</span>/500 characters
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Contact Email</label>
+            <input type="email" class="form-input" id="contactEmail" placeholder="your.email@example.com" value="harley@sckilltrac.com">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeHWIDResetForm()">Cancel</button>
+            <button type="submit" class="btn-submit">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- User ID File Request Modal -->
+  <div id="userIDFileModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">📄 User ID File Request</h3>
+        <button class="modal-close" onclick="closeUserIDFileForm()">✕</button>
+      </div>
+      <div class="modal-content">
+        <div class="modal-warning">
+          <div class="warning-icon">ℹ️</div>
+          <div class="warning-text">
+            <strong>Note:</strong> User ID files are required for Client and Server synchronization. Files are provided via support ticket within 24-48 hours.
+          </div>
+        </div>
+
+        <form id="userIDFileForm" class="reset-form">
+          <div class="form-group">
+            <label class="form-label">User Information</label>
+            <div class="form-display">HarleyTG@SCKillTrac</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Request Purpose <span class="required">*</span></label>
+            <select class="form-select" id="filePurpose" required>
+              <option value="">Select purpose...</option>
+              <option value="initial_setup">Initial Client Setup</option>
+              <option value="client_reinstall">Client Reinstallation</option>
+              <option value="sync_issues">Synchronization Issues</option>
+              <option value="server_migration">Server Migration</option>
+              <option value="backup_restore">Backup/Restore</option>
+              <option value="other">Other (explain below)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Additional Details</label>
+            <textarea class="form-textarea" id="fileDetails" placeholder="Please provide any additional details about your request..." rows="3"></textarea>
+            <div class="char-counter">
+              <span id="fileCharCount">0</span>/300 characters
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Client Version</label>
+            <input type="text" class="form-input" id="clientVersion" value="v2.1.3-beta" readonly>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Contact Email</label>
+            <input type="email" class="form-input" id="fileContactEmail" placeholder="your.email@example.com" value="harley@sckilltrac.com">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeUserIDFileForm()">Cancel</button>
+            <button type="submit" class="btn-submit">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
