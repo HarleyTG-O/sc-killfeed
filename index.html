@@ -596,11 +596,86 @@
       background: linear-gradient(145deg, rgba(34, 44, 58, 0.9), rgba(20, 30, 40, 0.9));
       border-radius: 15px;
       padding: 25px 30px;
-      white-space: pre-line;
       border: 1px solid rgba(237, 28, 36, 0.3);
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
+    }
+
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 8px 0;
+    }
+
+    .status-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .status-label {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      color: #8fa8b8;
+      font-size: 0.9rem;
+    }
+
+    .status-value {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .status-indicator {
+      font-size: 0.9rem;
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    .status-text.offline {
+      color: #ff6b6b;
+      text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+    }
+
+    .status-text.online {
+      color: #51cf66;
+      text-shadow: 0 0 5px rgba(81, 207, 102, 0.5);
+    }
+
+    @keyframes statusPulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+      }
+    }
+
+    .server-status-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .server-status-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .server-status-note {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.7rem;
+      color: #8fa8b8;
+      font-style: italic;
+      opacity: 0.8;
+      text-align: right;
     }
 
     #statusList::before {
@@ -632,6 +707,25 @@
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    @keyframes filmGrain {
+      0% { transform: translate(0, 0); }
+      10% { transform: translate(-1px, -1px); }
+      20% { transform: translate(1px, 0px); }
+      30% { transform: translate(-1px, 1px); }
+      40% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 0px); }
+      60% { transform: translate(1px, 1px); }
+      70% { transform: translate(0px, -1px); }
+      80% { transform: translate(-1px, -1px); }
+      90% { transform: translate(1px, 0px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes loadingShine {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
 
     /* Download Animation Screen */
@@ -2898,6 +2992,7 @@
       z-index: 10005;
       animation: overlayFadeIn 0.5s ease;
       backdrop-filter: blur(10px);
+      z-index: 10000;
     }
 
     .login-screen::before {
@@ -3068,6 +3163,68 @@
       background: rgba(0, 0, 0, 0.4);
     }
 
+    .show-password-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .show-password-checkbox {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #0096ff;
+    }
+
+    .show-password-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      color: #8fa8b8;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+
+    .show-password-label:hover {
+      color: #0096ff;
+    }
+
+    .forgot-password-container {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .forgot-password-btn {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.1), rgba(0, 120, 200, 0.1));
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      color: #0096ff;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .forgot-password-btn:hover {
+      color: #ffffff;
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      border-color: rgba(0, 150, 255, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 150, 255, 0.4);
+    }
+
+    .forgot-password-btn:active {
+      transform: translateY(0);
+    }
+
     .form-input::placeholder {
       color: #8fa8b8;
       opacity: 0.7;
@@ -3225,6 +3382,233 @@
         gap: 10px;
       }
     }
+
+    /* Custom Notification System */
+    .notification-container {
+      position: fixed !important;
+      top: 20px !important;
+      right: 20px !important;
+      z-index: 2147483647 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+      max-width: 400px !important;
+      pointer-events: none !important;
+      isolation: isolate !important;
+      contain: layout style paint !important;
+    }
+
+    .custom-notification {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.98), rgba(15, 20, 25, 0.98)) !important;
+      border: 2px solid rgba(237, 28, 36, 0.6) !important;
+      border-radius: 15px !important;
+      padding: 20px !important;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8) !important;
+      backdrop-filter: blur(10px) !important;
+      transform: translateX(450px) !important;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+      opacity: 0 !important;
+      position: relative !important;
+      overflow: hidden !important;
+      pointer-events: auto !important;
+      z-index: 2147483647 !important;
+    }
+
+    .custom-notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .notification-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .notification-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(237, 28, 36, 0.8);
+      box-shadow: 0 4px 15px rgba(237, 28, 36, 0.4);
+    }
+
+    .notification-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ed1c24;
+      text-shadow: 0 0 8px rgba(237, 28, 36, 0.5);
+      flex: 1;
+    }
+
+    .notification-close {
+      background: none;
+      border: none;
+      color: #8fa8b8;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notification-close:hover {
+      background: rgba(255, 69, 58, 0.2);
+      color: #ff453a;
+    }
+
+    .notification-content {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .notification-details {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 150, 255, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #0096ff;
+    }
+
+    .notification-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ed1c24, #ff2832);
+      border-radius: 0 0 15px 15px;
+      transition: width 0.1s linear;
+    }
+
+    .custom-notification.success {
+      border-color: rgba(0, 255, 127, 0.6);
+    }
+
+    .custom-notification.success .notification-progress {
+      background: linear-gradient(90deg, #00ff7f, #00e676);
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 15px;
+    }
+
+    .notification-btn {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .notification-btn.primary {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      box-shadow: 0 3px 10px rgba(237, 28, 36, 0.3);
+    }
+
+    .notification-btn.primary:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.5);
+    }
+
+    .notification-btn.secondary {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      border: 1px solid rgba(0, 150, 255, 0.5);
+    }
+
+    .notification-btn.secondary:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-1px);
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 15px;
+    }
+
+    .notification-btn {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .notification-btn.primary {
+      background: linear-gradient(145deg, #ed1c24, #b0141a);
+      color: white;
+      box-shadow: 0 3px 10px rgba(237, 28, 36, 0.3);
+    }
+
+    .notification-btn.primary:hover {
+      background: linear-gradient(145deg, #ff2832, #ed1c24);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(237, 28, 36, 0.5);
+    }
+
+    .notification-btn.secondary {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.8), rgba(0, 120, 200, 0.8));
+      color: white;
+      border: 1px solid rgba(0, 150, 255, 0.5);
+    }
+
+    .notification-btn.secondary:hover {
+      background: linear-gradient(145deg, rgba(0, 170, 255, 0.9), rgba(0, 150, 255, 0.9));
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .notification-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
+
+      .custom-notification {
+        transform: translateY(-100px);
+      }
+
+      .custom-notification.show {
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -3317,14 +3701,90 @@
     z-index: 10000;
     transition: opacity 0.5s ease;
   ">
-    <div class="loading-spinner"></div>
-    <p style="
-      color: #ed1c24;
-      font-family: 'Orbitron', monospace;
-      font-size: 1.2rem;
-      text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
-      margin-top: 20px;
-    ">INITIALIZING KILL TRACKER...</p>
+    <!-- Film Grain Overlay -->
+    <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 25% 25%, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px, transparent 4px),
+        radial-gradient(circle at 75% 75%, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px, transparent 4px),
+        radial-gradient(circle at 50% 50%, transparent 1px, rgba(255,255,255,0.015) 1px, rgba(255,255,255,0.015) 3px, transparent 3px);
+      background-size: 50px 50px, 80px 80px, 30px 30px;
+      opacity: 0.8;
+      z-index: 1;
+      animation: filmGrain 0.2s steps(10) infinite;
+    "></div>
+
+    <!-- Background Logo -->
+    <div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: url('https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo_grayscale_transparent.png?raw=true') center center no-repeat;
+      background-size: contain;
+      opacity: 0.25;
+      z-index: 2;
+      filter: contrast(1.2) brightness(1.1);
+    "></div>
+
+    <!-- Content -->
+    <div style="
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    ">
+      <div style="
+        font-family: 'Orbitron', monospace;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #ed1c24;
+        text-shadow: 0 0 20px rgba(237, 28, 36, 0.8);
+        margin-bottom: 40px;
+        text-align: center;
+        animation: pulse 2s ease-in-out infinite;
+      ">STAR CITIZEN KILL TRACKER</div>
+
+      <!-- Loading Bar Container -->
+      <div style="
+        width: 400px;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+        border: 1px solid rgba(237, 28, 36, 0.3);
+        margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+      ">
+        <!-- Loading Bar -->
+        <div id="loadingBar" style="
+          width: 0%;
+          height: 100%;
+          background: linear-gradient(90deg, #ed1c24, #ff2832, #ed1c24);
+          background-size: 200% 100%;
+          border-radius: 3px;
+          transition: width 0.3s ease;
+          animation: loadingShine 2s ease-in-out infinite;
+        "></div>
+      </div>
+
+      <div class="loading-spinner"></div>
+
+      <p id="loadingText" style="
+        color: #8fa8b8;
+        font-family: 'Exo 2', sans-serif;
+        font-size: 1.1rem;
+        margin-top: 20px;
+        text-align: center;
+      ">Initializing Combat Tracking Systems...</p>
+    </div>
   </div>
 
 
@@ -3594,15 +4054,27 @@
           <div class="form-group">
             <label class="form-label">Password</label>
             <input type="password" class="form-input" id="passwordInput" placeholder="Enter your password" required>
+            <div class="show-password-container">
+              <input type="checkbox" id="showPasswordCheck" class="show-password-checkbox" onchange="togglePasswordVisibility('passwordInput', this)">
+              <label for="showPasswordCheck" class="show-password-label">Show Password</label>
+            </div>
           </div>
 
           <div class="form-group register-only" id="confirmPasswordGroup" style="display: none;">
             <label class="form-label">Confirm Password</label>
             <input type="password" class="form-input" id="confirmPasswordInput" placeholder="Confirm your password">
+            <div class="show-password-container">
+              <input type="checkbox" id="showConfirmPasswordCheck" class="show-password-checkbox" onchange="togglePasswordVisibility('confirmPasswordInput', this)">
+              <label for="showConfirmPasswordCheck" class="show-password-label">Show Password</label>
+            </div>
           </div>
 
           <div class="login-buttons">
             <button type="submit" class="login-btn" id="submitBtn">🚀 Login</button>
+
+            <div class="forgot-password-container">
+              <button type="button" class="forgot-password-btn" id="forgotPasswordBtn">🔑 Forgot Password?</button>
+            </div>
 
             <div class="login-divider">
               <span id="dividerText">or</span>
@@ -3631,17 +4103,186 @@
     </div>
   </div>
 
+  <!-- Forgot Password Modal -->
+  <div class="login-screen" id="forgotPasswordScreen" style="display: none;">
+    <div class="login-animation">
+      <div class="login-container" style="max-width: 450px;">
+        <button class="login-close" id="forgotPasswordCloseBtn">✕</button>
+
+        <div class="login-header">
+          <div class="login-logo">🔑</div>
+          <h2 class="login-title">RESET PASSWORD</h2>
+          <p class="login-subtitle">Enter your email to receive reset instructions</p>
+          <div style="background: rgba(255, 149, 0, 0.1); border: 1px solid rgba(255, 149, 0, 0.3); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 0.8rem; color: #ff9500; text-align: center;">
+            <strong>⚠️ MOCK SERVICE</strong><br>
+            This is a demonstration - no actual emails will be sent.
+          </div>
+        </div>
+
+        <form class="login-form" id="forgotPasswordForm">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="resetEmailInput" placeholder="Enter your email address" required>
+          </div>
+
+          <div class="login-buttons">
+            <button type="submit" class="login-btn">📧 Send Reset Link</button>
+
+            <div class="login-divider">
+              <span>or</span>
+            </div>
+
+            <button type="button" class="login-btn register-btn" id="backToLoginBtn">
+              🚀 Back to Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Loading screen functionality
     window.addEventListener('load', function() {
-      setTimeout(function() {
-        const loadingScreen = document.getElementById('loadingScreen');
-        loadingScreen.style.opacity = '0';
-        setTimeout(function() {
-          loadingScreen.style.display = 'none';
-        }, 500);
-      }, 1500);
+      const loadingBar = document.getElementById('loadingBar');
+      const loadingText = document.getElementById('loadingText');
+
+      const loadingSteps = [
+        { progress: 20, text: 'Loading Core Systems...' },
+        { progress: 40, text: 'Connecting to Network...' },
+        { progress: 60, text: 'Initializing Combat Tracking...' },
+        { progress: 80, text: 'Loading User Interface...' },
+        { progress: 100, text: 'Ready!' }
+      ];
+
+      let currentStep = 0;
+
+      function updateLoading() {
+        if (currentStep < loadingSteps.length) {
+          const step = loadingSteps[currentStep];
+          loadingBar.style.width = step.progress + '%';
+          loadingText.textContent = step.text;
+          currentStep++;
+
+          setTimeout(updateLoading, 300);
+        } else {
+          setTimeout(function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(function() {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }, 500);
+        }
+      }
+
+      // Start loading animation after a brief delay
+      setTimeout(updateLoading, 200);
     });
+
+    // Custom Notification System
+    function showNotification(options) {
+      const {
+        title = 'SC Kill Tracker',
+        message = '',
+        details = '',
+        type = 'info', // info, success, warning, error
+        duration = 5000,
+        actions = []
+      } = options;
+
+      const container = document.getElementById('notificationContainer');
+      const notificationId = 'notification-' + Date.now();
+
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `custom-notification ${type}`;
+      notification.id = notificationId;
+
+      // Determine icon based on type
+      let icon = '🛡️'; // Default SC Kill Tracker icon
+
+      switch(type) {
+        case 'success':
+          icon = '✅';
+          break;
+        case 'warning':
+          icon = '⚠️';
+          break;
+        case 'error':
+          icon = '❌';
+          break;
+        case 'info':
+          icon = 'ℹ️';
+          break;
+      }
+
+      // Build notification HTML
+      let actionsHTML = '';
+      if (actions.length > 0) {
+        actionsHTML = '<div class="notification-actions">';
+        actions.forEach(action => {
+          actionsHTML += `<button class="notification-btn ${action.type || 'secondary'}" onclick="${action.onclick}">${action.text}</button>`;
+        });
+        actionsHTML += '</div>';
+      }
+
+      notification.innerHTML = `
+        <div class="notification-header">
+          <div class="notification-logo">${icon}</div>
+          <div class="notification-title">${title}</div>
+          <button class="notification-close" onclick="closeNotification('${notificationId}')">✕</button>
+        </div>
+        <div class="notification-content">${message}</div>
+        ${details ? `<div class="notification-details">${details}</div>` : ''}
+        ${actionsHTML}
+        <div class="notification-progress" style="width: 100%"></div>
+      `;
+
+      container.appendChild(notification);
+
+      // Animate in
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+
+      // Auto-close with progress bar
+      if (duration > 0) {
+        const progressBar = notification.querySelector('.notification-progress');
+        let width = 100;
+        const interval = setInterval(() => {
+          width -= (100 / (duration / 100));
+          progressBar.style.width = width + '%';
+
+          if (width <= 0) {
+            clearInterval(interval);
+            closeNotification(notificationId);
+          }
+        }, 100);
+
+        // Store interval for manual close
+        notification.dataset.interval = interval;
+      }
+
+      return notificationId;
+    }
+
+    function closeNotification(notificationId) {
+      const notification = document.getElementById(notificationId);
+      if (notification) {
+        // Clear auto-close interval if exists
+        if (notification.dataset.interval) {
+          clearInterval(notification.dataset.interval);
+        }
+
+        notification.classList.remove('show');
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 400);
+      }
+    }
 
     // Media Viewer Functionality
     let currentMediaIndex = 0;
@@ -4391,16 +5032,65 @@
           const mandatoryUpdate = data.mandatory_update === true ? 'Yes' : 'No';
           const version = data.version || 'Unknown';
 
-          statusDiv.textContent = 
-            `Disable Client:     ${disableClient}\n` +
-            `Current Version:    ${version}`;
+          statusDiv.innerHTML =
+            `<div class="status-item">
+              <span class="status-label">Server Status:</span>
+              <span class="status-value">
+                <div class="server-status-container">
+                  <div class="server-status-main">
+                    <span class="status-indicator offline">🔴</span>
+                    <span class="status-text offline">Offline</span>
+                  </div>
+                  <div class="server-status-note">Under Construction / Development</div>
+                </div>
+              </span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Client Status:</span>
+              <span class="status-value">
+                <span class="status-indicator online">🟢</span>
+                <span class="status-text online">Working</span>
+              </span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Disable Client:</span>
+              <span class="status-value">${disableClient}</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Current Version:</span>
+              <span class="status-value">${version}</span>
+            </div>`;
         }
       })
       .catch(() => {
         const versionSpan = document.getElementById('version');
         if (versionSpan) versionSpan.textContent = '(failed to load version)';
         const statusDiv = document.getElementById('statusList');
-        if (statusDiv) statusDiv.textContent = 'Failed to load status information.';
+        if (statusDiv) statusDiv.innerHTML = `
+          <div class="status-item">
+            <span class="status-label">Server Status:</span>
+            <span class="status-value">
+              <div class="server-status-container">
+                <div class="server-status-main">
+                  <span class="status-indicator offline">🔴</span>
+                  <span class="status-text offline">Offline</span>
+                </div>
+                <div class="server-status-note">Under Construction / Development</div>
+              </div>
+            </span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Client Status:</span>
+            <span class="status-value">
+              <span class="status-indicator online">🟢</span>
+              <span class="status-text online">Working</span>
+            </span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Status:</span>
+            <span class="status-value" style="color: #ff6b6b;">Failed to load information</span>
+          </div>
+        `;
       });
 
     // Utility function to hide all overlays
@@ -4704,6 +5394,51 @@
       }, 500);
     }
 
+    // Forgot Password Animation Functions
+    function showForgotPasswordAnimation() {
+      console.log('Showing forgot password animation');
+      // Hide login screen first
+      hideLoginAnimation();
+
+      setTimeout(() => {
+        const forgotPasswordScreen = document.getElementById('forgotPasswordScreen');
+        console.log('Forgot password screen element:', forgotPasswordScreen);
+
+        if (forgotPasswordScreen) {
+          forgotPasswordScreen.style.display = 'flex';
+          forgotPasswordScreen.style.visibility = 'visible';
+          forgotPasswordScreen.style.opacity = '1';
+          forgotPasswordScreen.style.zIndex = '10005';
+          document.body.style.overflow = 'hidden';
+          console.log('Forgot password screen should now be visible');
+        } else {
+          console.error('Forgot password screen element not found!');
+        }
+      }, 300);
+    }
+
+    function hideForgotPasswordAnimation() {
+      const forgotPasswordScreen = document.getElementById('forgotPasswordScreen');
+      forgotPasswordScreen.style.opacity = '0';
+
+      setTimeout(() => {
+        forgotPasswordScreen.style.display = 'none';
+        forgotPasswordScreen.style.opacity = '1';
+        document.body.style.overflow = 'auto';
+      }, 500);
+    }
+
+    // Password visibility toggle functionality
+    function togglePasswordVisibility(inputId, checkbox) {
+      const passwordInput = document.getElementById(inputId);
+
+      if (checkbox.checked) {
+        passwordInput.type = 'text';
+      } else {
+        passwordInput.type = 'password';
+      }
+    }
+
     // Login/Registration functionality
     let isRegistrationMode = false;
 
@@ -4762,6 +5497,10 @@
       const loginCloseBtn = document.getElementById('loginCloseBtn');
       const loginForm = document.getElementById('loginForm');
       const toggleBtn = document.getElementById('toggleBtn');
+      const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+      const forgotPasswordCloseBtn = document.getElementById('forgotPasswordCloseBtn');
+      const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+      const backToLoginBtn = document.getElementById('backToLoginBtn');
 
       if (loginButton) {
         console.log('Login button found, adding event listener');
@@ -4798,22 +5537,43 @@
             const org = document.getElementById('orgInput').value;
 
             if (!username || !email || !password || !confirmPassword) {
-              alert('Please fill in all required fields');
+              showNotification({
+                title: 'Form Validation',
+                message: 'Please fill in all required fields to continue.',
+                type: 'warning',
+                duration: 4000
+              });
               return;
             }
 
             if (password !== confirmPassword) {
-              alert('Passwords do not match');
+              showNotification({
+                title: 'Password Mismatch',
+                message: 'The passwords you entered do not match. Please check and try again.',
+                type: 'error',
+                duration: 5000
+              });
               return;
             }
 
             if (password.length < 6) {
-              alert('Password must be at least 6 characters long');
+              showNotification({
+                title: 'Password Too Short',
+                message: 'Password must be at least 6 characters long for security.',
+                type: 'warning',
+                duration: 4000
+              });
               return;
             }
 
             // Mock registration success
-            alert(`Account created successfully!\n\nUsername: ${username}\nSCKillTrac ID: ${username}@SCKillTrac\nOrganization: ${org || 'None'}\n\nYou can now login with your credentials.`);
+            showNotification({
+              title: 'Account Created Successfully!',
+              message: 'Your SC Kill Tracker account has been created and is ready to use.',
+              details: `Username: ${username}\nSCKillTrac ID: ${username}@SCKillTrac\nOrganization: ${org || 'None'}\n\nYou can now login with your credentials.\n\n⚠️ This is a mock demonstration.`,
+              type: 'success',
+              duration: 8000
+            });
 
             // Switch back to login mode
             toggleRegistrationMode();
@@ -4834,12 +5594,19 @@
               // Simulate successful login
               hideLoginAnimation();
 
-              // Redirect to profile page after short delay
+              // Redirect to profile page with login success info
               setTimeout(() => {
-                window.location.href = 'profile.html';
+                const loginType = isRegistrationMode ? 'register' : 'login';
+                window.location.href = `profile.html?welcome=${loginType}&user=${encodeURIComponent(username)}`;
               }, 500);
             } else {
-              alert('Invalid credentials!\n\nDemo Login:\nUsername: HarleyTG\nPassword: Password\n\n⚠️ This is a mock service for demonstration purposes.');
+              showNotification({
+                title: 'Invalid Credentials',
+                message: 'The username or password you entered is incorrect.',
+                details: 'Demo Login Credentials:\nUsername: HarleyTG\nPassword: Password\n\n⚠️ This is a mock service for demonstration purposes.',
+                type: 'error',
+                duration: 8000
+              });
             }
           }
         });
@@ -4851,11 +5618,72 @@
         });
       }
 
-      // Update escape key handler to include login screen
+      // Forgot Password event listeners
+      if (forgotPasswordBtn) {
+        forgotPasswordBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          showForgotPasswordAnimation();
+        });
+      }
+
+      if (forgotPasswordCloseBtn) {
+        forgotPasswordCloseBtn.addEventListener('click', function() {
+          hideForgotPasswordAnimation();
+        });
+      }
+
+      if (backToLoginBtn) {
+        backToLoginBtn.addEventListener('click', function() {
+          hideForgotPasswordAnimation();
+          setTimeout(() => {
+            showLoginAnimation();
+          }, 300);
+        });
+      }
+
+      if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const email = document.getElementById('resetEmailInput').value;
+
+          if (!email) {
+            showNotification({
+              title: 'Email Required',
+              message: 'Please enter your email address to receive password reset instructions.',
+              type: 'warning',
+              duration: 4000
+            });
+            return;
+          }
+
+          // Mock password reset
+          showNotification({
+            title: 'Password Reset Request Sent',
+            message: 'A password reset link has been sent to your email address.',
+            details: `Email: ${email}\n\nPlease check your email and follow the instructions to reset your password.\n\n⚠️ This is a mock demonstration - no actual email will be sent.`,
+            type: 'success',
+            duration: 8000
+          });
+
+          // Clear form and return to login
+          document.getElementById('resetEmailInput').value = '';
+          hideForgotPasswordAnimation();
+          setTimeout(() => {
+            showLoginAnimation();
+          }, 300);
+        });
+      }
+
+      // Update escape key handler to include login and forgot password screens
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           const loginScreen = document.getElementById('loginScreen');
-          if (loginScreen.style.display === 'flex') {
+          const forgotPasswordScreen = document.getElementById('forgotPasswordScreen');
+
+          if (forgotPasswordScreen.style.display === 'flex') {
+            hideForgotPasswordAnimation();
+          } else if (loginScreen.style.display === 'flex') {
             hideLoginAnimation();
             // Reset to login mode when closing with escape
             if (isRegistrationMode) {
@@ -4868,5 +5696,8 @@
 
 
   </script>
+
+  <!-- Custom Notification Container - Must be at end of body -->
+  <div id="notificationContainer" class="notification-container"></div>
 </body>
 </html>

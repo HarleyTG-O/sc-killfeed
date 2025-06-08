@@ -381,14 +381,99 @@
       margin-bottom: 40px;
     }
 
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .activity-section h2 {
       font-family: 'Orbitron', monospace;
       font-size: 1.8rem;
       font-weight: 700;
       color: #ed1c24;
       text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
-      margin-bottom: 25px;
-      text-align: center;
+      margin: 0;
+    }
+
+    .activity-controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .search-container {
+      position: relative;
+    }
+
+    .search-input {
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(0, 150, 255, 0.3);
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+      width: 250px;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: rgba(0, 150, 255, 0.6);
+      box-shadow: 0 0 15px rgba(0, 150, 255, 0.3);
+    }
+
+    .search-input::placeholder {
+      color: #8fa8b8;
+    }
+
+    .sort-container {
+      position: relative;
+    }
+
+    .sort-select {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.95), rgba(15, 20, 25, 0.95));
+      border: 2px solid rgba(237, 28, 36, 0.5);
+      border-radius: 25px;
+      padding: 12px 18px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 180px;
+      box-shadow: 0 4px 15px rgba(237, 28, 36, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .sort-select:focus {
+      outline: none;
+      border-color: rgba(237, 28, 36, 0.8);
+      box-shadow: 0 0 20px rgba(237, 28, 36, 0.5);
+      background: linear-gradient(145deg, rgba(237, 28, 36, 0.1), rgba(22, 32, 43, 0.95));
+    }
+
+    .sort-select:hover {
+      border-color: rgba(237, 28, 36, 0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(237, 28, 36, 0.3);
+    }
+
+    .sort-select option {
+      background: rgba(15, 20, 25, 0.98);
+      color: #ffffff;
+      padding: 10px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+    }
+
+    .sort-select option:hover {
+      background: rgba(237, 28, 36, 0.2);
     }
 
     .activity-feed {
@@ -398,6 +483,110 @@
       max-height: 400px;
       overflow-y: auto;
       padding-right: 10px;
+    }
+
+    .activity-item {
+      background: linear-gradient(145deg, rgba(22, 32, 43, 0.8), rgba(15, 20, 25, 0.8));
+      border: 1px solid rgba(237, 28, 36, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .activity-item:hover {
+      border-color: rgba(237, 28, 36, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(237, 28, 36, 0.1);
+    }
+
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .activity-type {
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .activity-type.pvp {
+      background: linear-gradient(145deg, rgba(237, 28, 36, 0.2), rgba(180, 20, 28, 0.2));
+      color: #ff4757;
+      border: 1px solid rgba(237, 28, 36, 0.3);
+    }
+
+    .activity-type.pve {
+      background: linear-gradient(145deg, rgba(0, 150, 255, 0.2), rgba(0, 120, 200, 0.2));
+      color: #0096ff;
+      border: 1px solid rgba(0, 150, 255, 0.3);
+    }
+
+    .activity-type.environmental {
+      background: linear-gradient(145deg, rgba(255, 149, 0, 0.2), rgba(200, 120, 0, 0.2));
+      color: #ff9500;
+      border: 1px solid rgba(255, 149, 0, 0.3);
+    }
+
+    .activity-time {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.8rem;
+      color: #8fa8b8;
+    }
+
+    .activity-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .activity-participants {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .activity-info {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .victim, .killer, .weapon, .zone {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      color: #e0e6ed;
+    }
+
+    .victim {
+      color: #ff6b6b;
+    }
+
+    .killer {
+      color: #4ecdc4;
+    }
+
+    .weapon {
+      color: #ffa726;
+    }
+
+    .zone {
+      color: #66bb6a;
+    }
+
+    .activity-description {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      color: #b8c5d1;
+      font-style: italic;
+      margin-top: 5px;
     }
 
     .activity-feed::-webkit-scrollbar {
@@ -759,6 +948,25 @@
       .hwid-reset-btn {
         padding: 10px 15px;
         font-size: 0.75rem;
+      }
+
+      .activity-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+      }
+
+      .activity-controls {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .sort-select {
+        width: 100%;
       }
     }
 
@@ -1604,11 +1812,12 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 20000;
+      z-index: 2147483647;
       display: flex;
       flex-direction: column;
       gap: 10px;
       max-width: 400px;
+      pointer-events: none;
     }
 
     .custom-notification {
@@ -1623,6 +1832,7 @@
       opacity: 0;
       position: relative;
       overflow: hidden;
+      pointer-events: auto;
     }
 
     .custom-notification.show {
@@ -1858,8 +2068,26 @@
 
     <!-- Recent Activity Section -->
     <section class="activity-section">
-      <h2>Recent Activity</h2>
-      <div class="activity-feed">
+      <div class="activity-header">
+        <h2>Recent Activity</h2>
+        <div class="activity-controls">
+          <div class="search-container">
+            <input type="text" id="activitySearch" class="search-input" placeholder="🔍 Search by victim, killer, weapon...">
+          </div>
+          <div class="sort-container">
+            <select id="activitySort" class="sort-select">
+              <option value="newest">📅 Newest First</option>
+              <option value="oldest">📅 Oldest First</option>
+              <option value="a-z">🔤 A-Z (Victim)</option>
+              <option value="z-a">🔤 Z-A (Victim)</option>
+              <option value="type-pvp">⚔️ PvP First</option>
+              <option value="type-pve">🤖 PvE First</option>
+              <option value="type-env">🌍 Environmental First</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="activity-feed" id="activityFeed">
         <div class="activity-item suicide">
           <div class="activity-icon">🔥</div>
           <div class="activity-content">
@@ -2484,6 +2712,42 @@
       console.log('Mock network data initialized - IP: 192.168.1.100 (fake for privacy)');
     }
 
+    // Check for welcome notification from login/register
+    function checkForWelcomeNotification() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const welcomeType = urlParams.get('welcome');
+      const username = urlParams.get('user');
+
+      if (welcomeType && username) {
+        // Clear URL parameters to avoid showing notification on refresh
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+
+        // Show welcome notification after a short delay
+        setTimeout(() => {
+          let title, message, details;
+
+          if (welcomeType === 'register') {
+            title = `Welcome to SC Kill Tracker, ${username}!`;
+            message = 'Your account has been successfully created and you are now logged in.';
+            details = `Account Created: ${new Date().toLocaleString()}\nUsername: ${username}\nStatus: Active\n\n🛡️ Your SC Kill Tracker profile is ready for combat tracking!\n\n⚠️ This is a mock demonstration.`;
+          } else {
+            title = `Welcome Back, ${username}!`;
+            message = 'You have successfully logged into your SC Kill Tracker account.';
+            details = `Login Time: ${new Date().toLocaleString()}\nUsername: ${username}\nStatus: Active\n\n🛡️ All systems operational and ready for tracking!\n\n⚠️ This is a mock demonstration.`;
+          }
+
+          showNotification({
+            title: title,
+            message: message,
+            details: details,
+            type: 'success',
+            duration: 15000 // 15 seconds as requested
+          });
+        }, 1000); // Show after 1 second delay
+      }
+    }
+
     // User ID File Form Functions
     function openUserIDFileForm() {
       document.getElementById('userIDFileModal').style.display = 'flex';
@@ -2523,10 +2787,192 @@
       closeUserIDFileForm();
     }
 
+    // Activity Search and Sort Functionality
+    let activityData = [
+      {
+        id: 1,
+        timestamp: new Date('2024-01-15T14:30:00'),
+        type: 'PvP',
+        victim: 'HarleyTG',
+        killer: 'EnemyPlayer1',
+        weapon: 'Ballistic Rifle',
+        zone: 'Stanton System',
+        details: 'Combat engagement in asteroid field'
+      },
+      {
+        id: 2,
+        timestamp: new Date('2024-01-15T13:45:00'),
+        type: 'PvE',
+        victim: 'PirateNPC',
+        killer: 'HarleyTG',
+        weapon: 'Energy Cannon',
+        zone: 'Crusader',
+        details: 'Bounty hunting mission completed'
+      },
+      {
+        id: 3,
+        timestamp: new Date('2024-01-15T12:20:00'),
+        type: 'Environmental',
+        victim: 'HarleyTG',
+        killer: 'Atmospheric Entry',
+        weapon: 'Heat Damage',
+        zone: 'Hurston',
+        details: 'Ship overheated during atmospheric entry'
+      },
+      {
+        id: 4,
+        timestamp: new Date('2024-01-14T16:15:00'),
+        type: 'PvP',
+        victim: 'AllyPlayer',
+        killer: 'HarleyTG',
+        weapon: 'Plasma Rifle',
+        zone: 'ArcCorp',
+        details: 'Friendly fire incident during combat'
+      },
+      {
+        id: 5,
+        timestamp: new Date('2024-01-14T11:30:00'),
+        type: 'PvE',
+        victim: 'VanduulFighter',
+        killer: 'HarleyTG',
+        weapon: 'Missile Strike',
+        zone: 'Pyro System',
+        details: 'Vanduul incursion defense'
+      }
+    ];
+
+    let filteredData = [...activityData];
+
+    function renderActivityFeed() {
+      const feed = document.getElementById('activityFeed');
+      if (!feed) return;
+
+      if (filteredData.length === 0) {
+        feed.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #8fa8b8;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🔍</div>
+            <div>No activity found matching your search criteria.</div>
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = filteredData.map(activity => `
+        <div class="activity-item">
+          <div class="activity-header">
+            <span class="activity-type ${activity.type.toLowerCase()}">${getTypeIcon(activity.type)} ${activity.type}</span>
+            <span class="activity-time">${formatTime(activity.timestamp)}</span>
+          </div>
+          <div class="activity-details">
+            <div class="activity-participants">
+              <span class="victim">💀 ${activity.victim}</span>
+              <span class="killer">⚔️ ${activity.killer}</span>
+            </div>
+            <div class="activity-info">
+              <span class="weapon">🔫 ${activity.weapon}</span>
+              <span class="zone">🌍 ${activity.zone}</span>
+            </div>
+            <div class="activity-description">${activity.details}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getTypeIcon(type) {
+      switch(type) {
+        case 'PvP': return '⚔️';
+        case 'PvE': return '🤖';
+        case 'Environmental': return '🌍';
+        default: return '💀';
+      }
+    }
+
+    function formatTime(timestamp) {
+      const now = new Date();
+      const diff = now - timestamp;
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const days = Math.floor(hours / 24);
+
+      if (days > 0) return `${days}d ago`;
+      if (hours > 0) return `${hours}h ago`;
+      return 'Just now';
+    }
+
+    function searchAndSort() {
+      const searchTerm = document.getElementById('activitySearch').value.toLowerCase();
+      const sortBy = document.getElementById('activitySort').value;
+
+      // Filter data
+      filteredData = activityData.filter(activity => {
+        return activity.victim.toLowerCase().includes(searchTerm) ||
+               activity.killer.toLowerCase().includes(searchTerm) ||
+               activity.weapon.toLowerCase().includes(searchTerm) ||
+               activity.zone.toLowerCase().includes(searchTerm) ||
+               activity.type.toLowerCase().includes(searchTerm);
+      });
+
+      // Sort data
+      switch(sortBy) {
+        case 'newest':
+          filteredData.sort((a, b) => b.timestamp - a.timestamp);
+          break;
+        case 'oldest':
+          filteredData.sort((a, b) => a.timestamp - b.timestamp);
+          break;
+        case 'a-z':
+          filteredData.sort((a, b) => a.victim.localeCompare(b.victim));
+          break;
+        case 'z-a':
+          filteredData.sort((a, b) => b.victim.localeCompare(a.victim));
+          break;
+        case 'type-pvp':
+          filteredData.sort((a, b) => {
+            if (a.type === 'PvP' && b.type !== 'PvP') return -1;
+            if (a.type !== 'PvP' && b.type === 'PvP') return 1;
+            return b.timestamp - a.timestamp;
+          });
+          break;
+        case 'type-pve':
+          filteredData.sort((a, b) => {
+            if (a.type === 'PvE' && b.type !== 'PvE') return -1;
+            if (a.type !== 'PvE' && b.type === 'PvE') return 1;
+            return b.timestamp - a.timestamp;
+          });
+          break;
+        case 'type-env':
+          filteredData.sort((a, b) => {
+            if (a.type === 'Environmental' && b.type !== 'Environmental') return -1;
+            if (a.type !== 'Environmental' && b.type === 'Environmental') return 1;
+            return b.timestamp - a.timestamp;
+          });
+          break;
+      }
+
+      renderActivityFeed();
+    }
+
     // Add some interactive feedback to disabled controls
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize mock client data
       initializeMockClientData();
+
+      // Check for welcome notification from login/register
+      checkForWelcomeNotification();
+
+      // Initialize activity feed
+      renderActivityFeed();
+
+      // Add event listeners for search and sort
+      const searchInput = document.getElementById('activitySearch');
+      const sortSelect = document.getElementById('activitySort');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', searchAndSort);
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', searchAndSort);
+      }
       const disabledInputs = document.querySelectorAll('input[readonly], input[disabled], select[disabled]');
 
       disabledInputs.forEach(input => {
