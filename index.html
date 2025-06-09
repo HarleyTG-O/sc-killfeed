@@ -3909,23 +3909,46 @@
       </div>
     </header>
 
+    <section class="section">
+      <h2>Welcome</h2>
+      <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #b8c5d1;">Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths. Experience the ultimate kill tracking system designed for the Star Citizen universe.</p>
+
+      <div class="button-group">
+        <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">🚀 Download Latest</a>
+        <button class="button" id="discordButton">💬 Join Discord</button>
+      </div>
+    </section>
 
     <!-- Donation Goal Section -->
     <section class="section">
-      <h2>Donation Goal</h2>
+      <h2>Community Donations</h2>
       <div class="donation-content">
         <div class="donation-text">
-          🚀 Help us reach $1500+ for servers, website, Discord bot & more!
+          💝 Community Support Goal: $1500+ for servers, website, Discord bot & more!
         </div>
         <div class="donation-progress-container">
           <div class="donation-progress-bar">
             <div class="donation-progress-fill" id="donationProgressFill"></div>
             <div class="donation-progress-percentage" id="donationPercentage">0%</div>
           </div>
-          <div class="donation-progress-label">Raised: $120 / $1500</div>
+          <div class="donation-progress-label">Community Donations: $0 / $1500+</div>
+        </div>
+        <div class="button-group" style="margin-top: 20px;">
+          <button class="button" id="donationButton">💰 Support Development</button>
+        </div>
+        <div style="margin-top: 15px; padding: 15px; background: rgba(0, 150, 255, 0.1); border: 1px solid rgba(0, 150, 255, 0.3); border-radius: 8px;">
+          <div style="font-family: 'Orbitron', monospace; font-size: 0.9rem; color: #0096ff; margin-bottom: 8px; font-weight: 600;">
+            ℹ️ Important Note
+          </div>
+          <div style="font-family: 'Exo 2', sans-serif; font-size: 0.85rem; color: #d0d6dd; line-height: 1.4;">
+            <strong>Donations are separate from user/organization payments.</strong><br>
+            This goal is purely for community support to keep the project running and improve features for everyone.
+          </div>
         </div>
       </div>
     </section>
+
+
 
 
 
@@ -3937,16 +3960,7 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>Welcome</h2>
-      <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #b8c5d1;">Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths. Experience the ultimate kill tracking system designed for the Star Citizen universe.</p>
 
-      <div class="button-group">
-        <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">🚀 Download Latest</a>
-        <button class="button" id="discordButton">💬 Join Discord</button>
-        <button class="button" id="donationButton">💰 Support Development</button>
-      </div>
-    </section>
 
     <section class="section">
       <h2>Legal Information</h2>
@@ -4284,9 +4298,9 @@
         <div class="donation-logo">💰</div>
       </div>
 
-      <div class="donation-text">SUPPORT THE VERSE</div>
+      <div class="donation-text">COMMUNITY SUPPORT</div>
       <div class="donation-subtext">
-        Help fund the development of SC Kill Tracker and keep the servers running. Your support enables new features and improvements for the Star Citizen community.
+        Support the development of SC Kill Tracker through voluntary donations. These contributions help fund servers, development, and new features for the entire Star Citizen community. Donations are separate from any user or organization service payments.
       </div>
 
       <div class="donation-options">
@@ -4495,32 +4509,24 @@
       const donationPercentage = document.getElementById('donationPercentage');
 
       if (donationProgressFill && donationPercentage) {
-        // Start from 0 and animate to 8% ($120 / $1500 = 8%) with sophisticated timing
+        // Reset to 0% since we're starting fresh with community donations
         donationProgressFill.style.width = '0%';
         donationPercentage.textContent = '0%';
 
-        // Multi-stage animation for more dramatic effect
+        // Keep at 0% to show we're starting fresh with community donations
         setTimeout(function() {
-          donationProgressFill.style.width = '3%';
-          donationPercentage.textContent = '3%';
+          donationProgressFill.style.width = '0%';
+          donationPercentage.textContent = '0%';
         }, 300);
 
-        setTimeout(function() {
-          donationProgressFill.style.width = '6%';
-          donationPercentage.textContent = '6%';
-        }, 800);
-
-        setTimeout(function() {
-          donationProgressFill.style.width = '8%';
-          donationPercentage.textContent = '8%';
-        }, 1200);
-
-        // Add a subtle pulse effect to the percentage when animation completes
+        // Add a subtle pulse effect to indicate it's ready for donations
         setTimeout(function() {
           donationPercentage.style.animation = 'countdownPulse 2s ease-in-out infinite';
-        }, 1500);
+        }, 800);
       }
     }
+
+
 
     // Custom Notification System
     function showNotification(options) {
