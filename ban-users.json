@@ -3,24 +3,30 @@
     "Username": "Dampiel",
     "SCKillTrac ID": "Dampiel@SCKillTrac",
     "UUID": "Dampiel - SCKillTrac - b65dbeae-8cbe-4d40-90b8-77038a71b937",
-    "reason": "Violation of terms of service"
+    "reason": "Account suspended due to violation of the Terms of Service."
   },
   {
     "Username": "dsfdfd",
     "SCKillTrac ID": "dsfdfd@SCKillTrac",
     "UUID": "dsfdfd - SCKillTrac - 048c2862-28fd-4c25-899f-c9dcb4ac89f9",
-    "reason": "Violation of Unknown Account Contact Support"
+    "reason": "Unrecognized account. Please contact support for verification."
   },
   {
     "Username": "Zaides",
     "SCKillTrac ID": "Zaides@SCKillTrac",
     "UUID": "Zaides - SCKillTrac - 0907c819-a616-41e4-aa5c-321dae69cca9",
-    "reason": "Violation of TOS Account Termanated HWID Banned"
+    "reason": "Account permanently banned due to Terms of Service violations and hardware ID restrictions."
   },
   {
     "Username": "NuclearThermalRocket",
     "SCKillTrac ID": "NuclearThermalRocket@SCKillTrac",
     "UUID": "NuclearThermalRocket - SCKillTrac - dda1c24c-fbd4-4cce-835e-48b8b5bce72b",
-    "reason": "User broke EULA, left Discord server / is not in Discord server"
+    "reason": "Removed for EULA breach and disengagement from the official Discord server."
+  },
+  {
+    "Username": "Ryze_O",
+    "SCKillTrac ID": "Ryze_O@SCKillTrac",
+    "UUID": "Ryze_O - SCKillTrac - 5b4e97ef-9fe1-410e-a84d-c3ff15031d94",
+    "reason": "Unrecognized account. Please contact support for verification."
   }
 ]
