@@ -55,6 +55,6 @@ Star Citizen Kill Tracker includes:
 ---
 
 <p align="center">
-  <sub>Made for the Star Citizen community • Harley's Flight Bay</sub>
+  <sub>Made for the Star Citizen community • Harley's Studios • SC Kill Tracker Team </sub>
 </p>
 
