@@ -1,4 +1,5 @@
 # Star Citizen Kill Tracker
+<img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Star Citizen Kill Tracker Logo" width="200"/>
 
 A lightweight, kill tracker for *Star Citizen* that monitors the game log file and sends PvP, suicide, or environmental death notifications directly to a configured Discord webhook. It includes:
 
