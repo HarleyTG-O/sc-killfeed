@@ -4889,74 +4889,74 @@
     }
 
     function fetchGitHubReleaseInfo() {
-      console.log('🚀 Starting GitHub API fetch for SC Kill Tracker release...');
-    
-      const GLOBAL_RELEASE_URL = 'https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/tags/Global';
-      const LATEST_RELEASE_URL = 'https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest';
-    
-      fetch(GLOBAL_RELEASE_URL)
-        .then(response => {
-          console.log('📡 GitHub API response status:', response.status);
-          if (!response.ok) {
-            console.warn('⚠️ Global tag not found, falling back to latest release...');
-            return fetch(LATEST_RELEASE_URL);
-          }
-          return response;
-        })
-        .then(response => {
-          if (!response.ok) throw new Error(`GitHub API request failed with status ${response.status}`);
-          return response.json();
-        })
-        .then(data => {
-          if (!data.assets || data.assets.length === 0) {
-            console.error('❌ No assets found in the release.');
-            showFilePickerError?.('No downloadable files found in the release.');
-            return;
-          }
-    
-          const assets = data.assets.map(asset => ({
-            id: asset.id,
-            name: asset.name,
-            size: asset.size,
-            readableSize: `${(asset.size / (1024 * 1024)).toFixed(2)} MB`,
-            download_count: asset.download_count,
-            browser_download_url: asset.browser_download_url,
-            updated_at: asset.updated_at
-          }));
-    
-          console.log(`📦 ${assets.length} assets found in release "${data.tag_name}"`);
-          console.table(assets, ['name', 'readableSize', 'download_count']);
-    
-          populateFilePicker(assets);
-        })
-        .catch(error => {
-          console.error('❌ Failed to fetch release info from GitHub:', error.message);
-    
-          // Optional: Fallback mock data
-          const fallbackAssets = [
-            {
-              id: 1,
-              name: 'SCKillTrac.Global.zip',
-              size: 40082485,
-              readableSize: '38.23 MB',
-              download_count: 1247,
-              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip',
-              updated_at: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString() // 11 hours ago
-            },
-            {
-              id: 2,
-              name: 'Welcome-SCKillTrac.txt',
-              size: 1556,
-              readableSize: '1.52 KB',
-              download_count: 634,
-              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/Welcome-SCKillTrac.txt',
-              updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
+        console.log('🚀 Starting GitHub API fetch for SC Kill Tracker release...');
+      
+        const GLOBAL_RELEASE_URL = 'https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/tags/Global';
+        const LATEST_RELEASE_URL = 'https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest';
+      
+        fetch(GLOBAL_RELEASE_URL)
+          .then(response => {
+            console.log('📡 GitHub API response status:', response.status);
+            if (!response.ok) {
+              console.warn('⚠️ Global tag not found, falling back to latest release...');
+              return fetch(LATEST_RELEASE_URL);
             }
-          ];
-    
-          populateFilePicker(fallbackAssets);
-        });
-    }
+            return response;
+          })
+          .then(response => {
+            if (!response.ok) throw new Error(`GitHub API request failed with status ${response.status}`);
+            return response.json();
+          })
+          .then(data => {
+            if (!data.assets || data.assets.length === 0) {
+              console.error('❌ No assets found in the release.');
+              showFilePickerError?.('No downloadable files found in the release.');
+              return;
+            }
+      
+            const assets = data.assets.map(asset => ({
+              id: asset.id,
+              name: asset.name,
+              size: asset.size,
+              readableSize: `${(asset.size / (1024 * 1024)).toFixed(2)} MB`,
+              download_count: asset.download_count,
+              browser_download_url: asset.browser_download_url,
+              updated_at: asset.updated_at
+            }));
+      
+            console.log(`📦 ${assets.length} assets found in release "${data.tag_name}"`);
+            console.table(assets, ['name', 'readableSize', 'download_count']);
+      
+            populateFilePicker(assets);
+          })
+          .catch(error => {
+            console.error('❌ Failed to fetch release info from GitHub:', error.message);
+      
+            // Optional: Fallback mock data
+            const fallbackAssets = [
+              {
+                id: 1,
+                name: 'SCKillTrac.Global.zip',
+                size: 40082485,
+                readableSize: '38.23 MB',
+                download_count: 1247,
+                browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip',
+                updated_at: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString() // 11 hours ago
+              },
+              {
+                id: 2,
+                name: 'Welcome-SCKillTrac.txt',
+                size: 1556,
+                readableSize: '1.52 KB',
+                download_count: 634,
+                browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/Welcome-SCKillTrac.txt',
+                updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
+              }
+            ];
+      
+            populateFilePicker(fallbackAssets);
+          });
+      }
 
     // Global variables for multi-selection
     let selectedAssets = [];
