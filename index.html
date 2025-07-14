@@ -4963,6 +4963,21 @@
     let allAssets = [];
 
     function populateFilePicker(assets) {
+    const filePicker = document.getElementById('file-picker');
+        if (!filePicker) return console.warn('⚠️ No #file-picker element found.');
+      
+        filePicker.innerHTML = ''; // Clear previous
+      
+        assets.forEach(asset => {
+          const option = document.createElement('option');
+          option.value = asset.browser_download_url;
+          option.textContent = `${asset.name} (${asset.readableSize}) - Downloads: ${asset.download_count}`;
+          filePicker.appendChild(option);
+        });
+      }
+
+
+    function populateFilePicker(assets) {
       console.log('🎯 populateFilePicker called with:', assets);
       const filePicker = document.getElementById('filePicker');
 
