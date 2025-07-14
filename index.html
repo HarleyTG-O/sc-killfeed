@@ -4776,7 +4776,8 @@
       } else if (type === "eula") {
         title.textContent = "End User License Agreement";
         url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/EULA.md";
-      }
+      } else if (type === "license";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/refs/heads/main/eula-sckt.md";
 
       // Show loading state
       text.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner" style="margin: 0 auto;"></div><p style="margin-top: 20px; color: #8fa8b8;">Loading document...</p></div>';
@@ -4888,81 +4889,72 @@
     }
 
     function fetchGitHubReleaseInfo() {
-      console.log('🚀 Starting GitHub API fetch for file picker...');
-
-      // GitHub API endpoint for the specific "Global" tag release
-      fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/tags/Global')
+      console.log('🚀 Starting GitHub API fetch for SC Kill Tracker release...');
+    
+      const GLOBAL_RELEASE_URL = 'https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/tags/Global';
+      const LATEST_RELEASE_URL = 'https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest';
+    
+      fetch(GLOBAL_RELEASE_URL)
         .then(response => {
           console.log('📡 GitHub API response status:', response.status);
           if (!response.ok) {
-            console.log('⚠️ Global tag not found, falling back to latest release');
-            // Fallback to latest release if Global tag doesn't exist
-            return fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest');
+            console.warn('⚠️ Global tag not found, falling back to latest release...');
+            return fetch(LATEST_RELEASE_URL);
           }
           return response;
         })
         .then(response => {
-          console.log('📡 Final response status:', response.status);
           if (!response.ok) throw new Error(`GitHub API request failed with status ${response.status}`);
           return response.json();
         })
         .then(data => {
-          console.log('✅ GitHub API data received:', data);
-          console.log('📦 Assets found:', data.assets ? data.assets.length : 0);
-
-          // Populate file picker with assets
-          if (data.assets && data.assets.length > 0) {
-            console.log('🎯 Populating file picker with', data.assets.length, 'assets');
-            populateFilePicker(data.assets);
-          } else {
-            console.error('❌ No assets found in release');
-            showFilePickerError('No assets found in the release');
+          if (!data.assets || data.assets.length === 0) {
+            console.error('❌ No assets found in the release.');
+            showFilePickerError?.('No downloadable files found in the release.');
+            return;
           }
-
-          console.log('📋 GitHub Global release info:', {
-            version: data.tag_name,
-            totalAssets: data.assets ? data.assets.length : 0,
-            allAssets: data.assets ? data.assets.map(a => ({
-              name: a.name,
-              size: `${(a.size / (1024 * 1024)).toFixed(1)} MB`,
-              downloads: a.download_count,
-              url: a.browser_download_url
-            })) : []
-          });
+    
+          const assets = data.assets.map(asset => ({
+            id: asset.id,
+            name: asset.name,
+            size: asset.size,
+            readableSize: `${(asset.size / (1024 * 1024)).toFixed(2)} MB`,
+            download_count: asset.download_count,
+            browser_download_url: asset.browser_download_url,
+            updated_at: asset.updated_at
+          }));
+    
+          console.log(`📦 ${assets.length} assets found in release "${data.tag_name}"`);
+          console.table(assets, ['name', 'readableSize', 'download_count']);
+    
+          populateFilePicker(assets);
         })
         .catch(error => {
-          console.error('❌ Failed to fetch GitHub Global release info:', error);
-          console.log('🔄 Using fallback mock data for demonstration');
-
-          // Use mock data as fallback
-          const mockAssets = [
+          console.error('❌ Failed to fetch release info from GitHub:', error.message);
+    
+          // Optional: Fallback mock data
+          const fallbackAssets = [
             {
               id: 1,
               name: 'SCKillTrac.Global.zip',
               size: 40082485,
+              readableSize: '38.23 MB',
               download_count: 1247,
               browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip',
               updated_at: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString() // 11 hours ago
             },
             {
               id: 2,
-              name: 'startup_args.txt',
-              size: 105,
-              download_count: 892,
-              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/startup_args.txt',
-              updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
-            },
-            {
-              id: 3,
               name: 'Welcome-SCKillTrac.txt',
               size: 1556,
+              readableSize: '1.52 KB',
               download_count: 634,
               browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/Welcome-SCKillTrac.txt',
               updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
             }
           ];
-
-          populateFilePicker(mockAssets);
+    
+          populateFilePicker(fallbackAssets);
         });
     }
 
