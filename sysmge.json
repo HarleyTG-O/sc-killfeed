@@ -4,13 +4,13 @@
   },
   "messages": [
     {
-      "id": "6db6f564e441f3830b20ac7d4e8a060f",
-      "title": "Live Patch Coming Soon",
-      "description": "Version 0.1.4.1 Coming Soon",
+      "id": "6db6f564e441f3830b20ac7d4e8a065f",
+      "title": "Coming Soon - Pre Release",
+      "description": "Version 0.1.4.2 Coming Soon",
       "type": "update",
       "date": "2025-07-15",
       "priority": "low",
-      "link": "https://github.com/HarleyTG-O/sc-killfeed/releases/tag/Global"
+      "link": "https://github.com/HarleyTG-O/sc-killfeed/releases/tag/Pre-Release"
     }
   ],
   "features": [
