@@ -1,18 +1,32 @@
-
-    "features": [
-        {
-            "title": "Death Message Toggles",
-            "description": "You can now enable or disable specific death message types in the settings.",
-            "version": "2.0.0",
-            "date": "2024-06-20",
-            "category": "settings"
-        },
-        {
-            "title": "Multi-Language Support",
-            "description": "English, Español, Français, Deutsch, and 中文 now available.",
-            "version": "1.9.0",
-            "date": "2024-06-15",
-            "category": "localization"
-        }
-    ]
+{
+  "app_info": {
+    "name": "SC Kill Tracker"
+  },
+  "messages": [
+    {
+      "title": "Live Patch Coming Soon",
+      "description": "Version 0.1.4.1 Coming Soon",
+      "type": "update",
+      "date": "2024-07-15",
+      "priority": "low",
+    }
+  ],
+  "features": [
+    {
+      "title": "Death Message Toggles",
+      "description": "You can now enable or disable specific death message types in the settings.",
+      "version": "2.0.0",
+      "date": "2024-06-20",
+      "category": "settings",
+      "link": "https://github.com/HarleyTG-O/sc-killfeed/wiki/Settings"
+    },
+    {
+      "title": "Multi-Language Support",
+      "description": "English, Español, Français, Deutsch, and 中文 now available.",
+      "version": "1.9.0",
+      "date": "2024-06-15",
+      "category": "localization",
+      "link": "https://github.com/HarleyTG-O/sc-killfeed/wiki/Language-Support"
+    }
+  ]
 }
