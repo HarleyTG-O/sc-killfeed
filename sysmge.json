@@ -8,7 +8,8 @@
       "description": "Version 0.1.4.1 Coming Soon",
       "type": "update",
       "date": "2025-07-15",
-      "priority": "low"
+      "priority": "low",
+      "link": "https://github.com/HarleyTG-O/sc-killfeed/releases/tag/Global"
     }
   ],
   "features": [
@@ -26,3 +27,4 @@
     }
   ]
 }
+
