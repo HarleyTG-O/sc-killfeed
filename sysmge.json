@@ -15,18 +15,14 @@
     {
       "title": "Death Message Toggles",
       "description": "You can now enable or disable specific death message types in the settings.",
-      "version": "2.0.0",
       "date": "2024-06-20",
       "category": "settings",
-      "link": "https://github.com/HarleyTG-O/sc-killfeed/wiki/Settings"
     },
     {
       "title": "Multi-Language Support",
       "description": "English, Español, Français, Deutsch, and 中文 now available.",
-      "version": "1.9.0",
       "date": "2024-06-15",
       "category": "localization",
-      "link": "https://github.com/HarleyTG-O/sc-killfeed/wiki/Language-Support"
     }
   ]
 }
