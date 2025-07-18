@@ -4,6 +4,7 @@
   },
   "messages": [
     {
+      "id": "6db6f564e441f3830b20ac7d4e8a060f",
       "title": "Live Patch Coming Soon",
       "description": "Version 0.1.4.1 Coming Soon",
       "type": "update",
@@ -14,12 +15,14 @@
   ],
   "features": [
     {
+      "id": "e9f0cfaab263b9927c613fb0b74a8a8c",
       "title": "Death Message Toggles",
       "description": "You can now enable or disable specific death message types in the settings.",
       "date": "2025-07-04",
       "category": "settings"
     },
     {
+      "id": "a10be0f9459eea22b7c2337a3858fa1d",
       "title": "Multi-Language Support",
       "description": "English, Español, Français, Deutsch, and 中文 now available.",
       "date": "2024-07-04",
@@ -27,4 +30,3 @@
     }
   ]
 }
-
