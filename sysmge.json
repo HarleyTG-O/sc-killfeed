@@ -7,7 +7,7 @@
       "title": "Live Patch Coming Soon",
       "description": "Version 0.1.4.1 Coming Soon",
       "type": "update",
-      "date": "2024-07-15",
+      "date": "2025-07-15",
       "priority": "low",
     }
   ],
@@ -15,13 +15,13 @@
     {
       "title": "Death Message Toggles",
       "description": "You can now enable or disable specific death message types in the settings.",
-      "date": "2024-06-20",
+      "date": "2025-07-04",
       "category": "settings",
     },
     {
       "title": "Multi-Language Support",
       "description": "English, Español, Français, Deutsch, and 中文 now available.",
-      "date": "2024-06-15",
+      "date": "2024-07-04",
       "category": "localization",
     }
   ]
