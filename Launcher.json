@@ -1,10 +1,10 @@
 {
   "disable_live_download": false,
   "disable_live_launch": false,
-  "disable_prerelease_download": false,
-  "disable_prerelease_launch": false,
+  "disable_prerelease_download": true,
+  "disable_prerelease_launch": true,
   "VERSION_NUMBER_MAP": {
-    "Live": "0.1.4.1",
-    "Pre-Release": "0.1.4.2"
+    "Live": "0.1.4.2",
+    "Pre-Release": "0.1.4.3"
   }
 }
