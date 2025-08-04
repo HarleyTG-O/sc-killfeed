@@ -913,5 +913,6 @@
     "PU_Human-Xenothreat-Grunt-Male-Medium_01_Sniper": "XenoThreat Grunt Medium 01 Sniper",
     "PU_Human-Xenothreat-Grunt-Male-Medium_01_Soldier": "XenoThreat Grunt Medium 01 Soldier",
     "PU_Human-Xenothreat-Gunner-Male-Light": "XenoThreat Gunner Light",
-    "PU_Human-Xenothreat-Pilot-Male-Light": "XenoThreat Pilot Light"
+    "PU_Human-Xenothreat-Pilot-Male-Light": "XenoThreat Pilot Light",
+    "AIModule_Unmanned_PU_Advocacy": "Advocacy Turret"
 }
