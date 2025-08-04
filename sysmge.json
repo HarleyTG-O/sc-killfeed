@@ -6,9 +6,9 @@
     {
       "id": "6db6f564e441f3830b20ac7d4e8a065f",
       "title": "Coming Soon - Pre Release",
-      "description": "Version 0.1.4.2 Coming Soon",
+      "description": "Version 0.1.4.3 Coming Soon",
       "type": "update",
-      "date": "2025-07-15",
+      "date": "2025-08-04",
       "priority": "low",
       "link": "https://github.com/HarleyTG-O/sc-killfeed/releases/tag/Pre-Release"
     }
@@ -16,17 +16,24 @@
   "features": [
     {
       "id": "e9f0cfaab263b9927c613fb0b74a8a8c",
-      "title": "Death Message Toggles",
+      "title": "Death Message Filtering",
       "description": "You can now enable or disable specific death message types in the settings.",
       "date": "2025-07-04",
       "category": "settings"
     },
     {
-      "id": "a10be0f9459eea22b7c2337a3858fa1d",
-      "title": "Multi-Language Support",
-      "description": "English, Español, Français, Deutsch, and 中文 now available.",
-      "date": "2024-07-04",
-      "category": "localization"
+      "id": "a3f5e918d1d84c5f9e8c4e9d94cbb1c1",
+      "title": "UI Scaling Fixes",
+      "description": "Fixed UI scaling for both lower (720p) and higher (2K+) resolutions.",
+      "date": "2025-08-01",
+      "category": "ui"
+    },
+    {
+      "id": "c7f13a2f3b214f5f85f32c9a3bbf5f79",
+      "title": "Missing Actor Reporting",
+      "description": "Updated the Missing Actor Set and added a system for reporting unidentified actor names.",
+      "date": "2025-08-01",
+      "category": "system"
     }
   ]
 }
