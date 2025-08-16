@@ -4,7 +4,7 @@
   "disable_prerelease_download": true,
   "disable_prerelease_launch": true,
   "VERSION_NUMBER_MAP": {
-    "Live": "0.1.4.5",
+    "Live": "0.1.4.6",
     "Pre-Release": "0.1.4.10"
   }
 }
