@@ -3914,7 +3914,7 @@
       <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #b8c5d1;">Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths. Experience the ultimate kill tracking system designed for the Star Citizen universe.</p>
 
       <div class="button-group">
-        <a href="https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip" class="button" id="downloadButton">🚀 Download Latest</a>
+        <a href="https://github.com/HarleyTG-O/sckt-launcher/releases/tag/latest" class="button" id="downloadButton">🚀 Download Launcher - mandatory</a>
         <button class="button" id="discordButton">💬 Join Discord</button>
       </div>
     </section>
@@ -4129,8 +4129,8 @@
     <div class="overlay-content download-confirm">
       <div class="confirm-header">
         <div class="confirm-icon">🚀</div>
-        <h3>Download SC Kill Tracker</h3>
-        <p>Are you ready to download the latest release?</p>
+        <h3>Download SC Kill Tracker Launcher</h3>
+        <p>Are you ready to download the latest launcher release?</p>
       </div>
 
       <!-- Hash Information Display -->
@@ -4148,7 +4148,7 @@
         <div class="picker-container">
           <div class="picker-header">
             <h4>Choose Files to Download</h4>
-            <p>Select one or multiple assets from the Global release:</p>
+            <p>Select one or multiple assets from the launcher release:</p>
             <div class="picker-controls">
               <div class="picker-controls-left">
                 <button class="picker-control-btn" id="selectAllBtn">📋 Select All</button>
@@ -4228,7 +4228,7 @@
     <div class="download-animation">
       <div class="download-content">
         <div class="download-spinner"></div>
-        <div class="download-text">DOWNLOADING KILL TRACKER</div>
+        <div class="download-text">DOWNLOADING LAUNCHER</div>
         <div class="download-subtext">Preparing your Star Citizen experience...</div>
         <div class="download-progress-container">
           <div class="download-progress-bar" id="downloadProgressBar"></div>
@@ -4890,14 +4890,14 @@
     function fetchGitHubReleaseInfo() {
       console.log('🚀 Starting GitHub API fetch for file picker...');
 
-      // GitHub API endpoint for the specific "Global" tag release
-      fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/tags/Global')
+              // GitHub API endpoint for the launcher latest release
+              fetch('https://api.github.com/repos/HarleyTG-O/sckt-launcher/releases/latest')
         .then(response => {
           console.log('📡 GitHub API response status:', response.status);
           if (!response.ok) {
-            console.log('⚠️ Global tag not found, falling back to latest release');
-            // Fallback to latest release if Global tag doesn't exist
-            return fetch('https://api.github.com/repos/HarleyTG-O/sc-killfeed/releases/latest');
+                          console.log('⚠️ Launcher release not found, falling back to latest release');
+              // Fallback to latest release if launcher release doesn't exist
+            return fetch('https://api.github.com/repos/HarleyTG-O/sckt-launcher/releases/latest');
           }
           return response;
         })
@@ -4919,7 +4919,7 @@
             showFilePickerError('No assets found in the release');
           }
 
-          console.log('📋 GitHub Global release info:', {
+          console.log('📋 GitHub launcher release info:', {
             version: data.tag_name,
             totalAssets: data.assets ? data.assets.length : 0,
             allAssets: data.assets ? data.assets.map(a => ({
@@ -4931,34 +4931,26 @@
           });
         })
         .catch(error => {
-          console.error('❌ Failed to fetch GitHub Global release info:', error);
+          console.error('❌ Failed to fetch GitHub launcher release info:', error);
           console.log('🔄 Using fallback mock data for demonstration');
 
           // Use mock data as fallback
           const mockAssets = [
             {
               id: 1,
-              name: 'SCKillTrac.Global.zip',
-              size: 40082485,
+              name: 'SCKillTrac-Launcher.exe',
+              size: 31981568, // 30.5 MB in bytes
               download_count: 1247,
-              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/SCKillTrac.Global.zip',
-              updated_at: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString() // 11 hours ago
+              browser_download_url: 'https://github.com/HarleyTG-O/sckt-launcher/releases/download/latest/SCKillTrac-Launcher.exe',
+              updated_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString() // 2 weeks ago
             },
             {
               id: 2,
-              name: 'startup_args.txt',
-              size: 105,
+              name: 'SCKillTrac-Launcher.zip',
+              size: 31764480, // 30.3 MB in bytes
               download_count: 892,
-              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/startup_args.txt',
-              updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
-            },
-            {
-              id: 3,
-              name: 'Welcome-SCKillTrac.txt',
-              size: 1556,
-              download_count: 634,
-              browser_download_url: 'https://github.com/HarleyTG-O/sc-killfeed/releases/download/Global/Welcome-SCKillTrac.txt',
-              updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 days ago
+              browser_download_url: 'https://github.com/HarleyTG-O/sckt-launcher/releases/download/latest/SCKillTrac-Launcher.zip',
+              updated_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString() // 2 weeks ago
             }
           ];
 
@@ -5009,7 +5001,7 @@
         filePicker.appendChild(fileOption);
       });
 
-      // Auto-select the first file (usually SCKillTrac.Global.zip)
+      // Auto-select the first file (usually SCKillTrac-Launcher.exe)
       if (assets.length > 0) {
         console.log('🎯 Auto-selecting first file:', assets[0].name);
         toggleFileSelection(assets[0]);
@@ -5068,10 +5060,10 @@
     }
 
     function getAssetHash(filename) {
-      // Known hashes for the files you provided
+      // Known hashes for the launcher files
       const hashes = {
-        'SCKillTrac.Global.zip': 'sha256:c35b8b36b11209cee7be907e2d98a6ef78ffc2012a9d12d32e2b2d05f6cb4edf',
-        'Welcome-SCKillTrac.txt': 'f5bd91c2dd7385ff25d3561eca576beee170aa17aae693d7b73a388da61e81ee'
+        'SCKillTrac-Launcher.exe': '6d034cd99d86b1ade22f21d16064e8741f3c07c6d93b891f33d389ddac1820df',
+        'SCKillTrac-Launcher.zip': '83f59d2da9013e6c04ac715bedaa6df56b968ba41c560af0c01fb66e0ba8f76b'
       };
       return hashes[filename] || 'Not available';
     }
@@ -5086,6 +5078,9 @@
 
       const diffInDays = Math.floor(diffInHours / 24);
       if (diffInDays < 7) return `${diffInDays} day${diffInDays !== 1 ? 's' : ''} ago`;
+      
+      const diffInWeeks = Math.floor(diffInDays / 7);
+      if (diffInWeeks < 4) return `${diffInWeeks} week${diffInWeeks !== 1 ? 's' : ''} ago`;
 
       return date.toLocaleDateString();
     }
