@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Star Citizen Kill Tracker</title>
-  <link rel="icon" href="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" type="image/png" />
+  <title>Star Citizen Kill Tracker LITE</title>
+  <link rel="icon" href="https://github.com/HarleyTG-O/sckilltrac-lite/blob/main/SCKillTrac-LITE.ico?raw=true" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -3899,22 +3899,19 @@
   <div class="container">
     <header>
       <div class="header-left">
-        <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/logo.png?raw=true" alt="Logo" />
+        <img src="https://github.com/HarleyTG-O/sckilltrac-lite/blob/main/SCKillTrac-LITE.png?raw=true" alt="Logo" />
         <h1>
-          Star Citizen Kill Tracker
+          Star Citizen Kill Tracker <span id="version">LITE</span>
         </h1>
-      </div>
-      <div class="header-buttons">
-        <button class="button header-login-btn" id="loginButton">👤 Login / Register</button>
       </div>
     </header>
 
     <section class="section">
       <h2>Welcome</h2>
-      <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #b8c5d1;">Track player deaths in Star Citizen and receive real-time Discord notifications for PvP, Suicide, and Environmental deaths. Experience the ultimate kill tracking system designed for the Star Citizen universe.</p>
+      <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #b8c5d1;">Real-time kill tracking for Star Citizen with AI-powered NPC detection. LITE version features in-game overlay, system tray menu, and automatic updates. Lightweight and efficient.</p>
 
       <div class="button-group">
-        <a href="https://github.com/HarleyTG-O/sckt-launcher/releases/tag/latest" class="button" id="downloadButton">🚀 Download Launcher - mandatory</a>
+        <a href="https://github.com/HarleyTG-O/sckilltrac-lite/releases/latest" class="button" id="downloadButton">🚀 Download SC Kill Tracker LITE</a>
         <button class="button" id="discordButton">💬 Join Discord</button>
       </div>
     </section>
@@ -3964,7 +3961,7 @@
 
     <section class="section">
       <h2>Legal Information</h2>
-      <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #b8c5d1;">Review our legal documents and policies. These documents outline the terms of use, privacy practices, and licensing agreements for SC Kill Tracker.</p>
+      <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #b8c5d1;">Review our legal documents and policies. These documents outline the terms of use, privacy practices, and licensing agreements for SC Kill Tracker LITE.</p>
       <div class="button-group">
         <button class="button" onclick="showLegalOverlay('tos')">📋 Terms of Service</button>
         <button class="button" onclick="showLegalOverlay('privacy')">🔒 Privacy Policy</button>
@@ -3975,12 +3972,14 @@
     <section class="section">
       <h2>Features</h2>
       <ul>
-        <li>⚡ Real-time Death Tracking - Monitor kills as they happen</li>
-        <li>🔔 Discord Notifications - Instant alerts to your server</li>
-        <li>🎯 Kill Type Classification - PvP, Suicide, Environmental detection</li>
-        <li>🖥️ User-friendly Interface - Sleek, intuitive design</li>
-        <li>🛡️ Advanced Security - Secure and reliable tracking</li>
-        <li>⚙️ Customizable Settings - Tailor to your preferences</li>
+        <li>⚡ Real-time Overlay - See kills, deaths, and K/D ratio in-game</li>
+        <li>🤖 AI NPC Detection - Automatically identifies NPCs vs players</li>
+        <li>🎮 System Tray Menu - Right-click icon for updates, settings, shutdown</li>
+        <li>💬 Discord Integration - Show your stats (optional)</li>
+        <li>🔄 Auto-Updates - Always get the latest version</li>
+        <li>🔔 Toast Notifications - Clean, non-intrusive alerts</li>
+        <li>🔒 Ctrl + Insert - Lock/unlock overlay (toggle click-through)</li>
+        <li>🔑 License Key System - HWID-locked security</li>
       </ul>
     </section>
 
@@ -4001,7 +4000,7 @@
   </div>
 
   <footer>
-    <p>&copy; 2025 Star Citizen Kill Tracker | Built by the community for the verse</p>
+    <p>&copy; 2025 Star Citizen Kill Tracker LITE | Built by the community for the verse</p>
   </footer>
 
   <!-- Loading Screen -->
@@ -4068,7 +4067,7 @@
         margin-bottom: 40px;
         text-align: center;
         animation: pulse 2s ease-in-out infinite;
-      ">STAR CITIZEN KILL TRACKER</div>
+      ">STAR CITIZEN KILL TRACKER LITE</div>
 
       <!-- Loading Bar Container -->
       <div style="
@@ -4335,78 +4334,6 @@
     </div>
   </div>
 
-  <!-- Login Animation Screen -->
-  <div class="login-screen" id="loginScreen">
-    <div class="login-animation">
-      <div class="login-container">
-        <button class="login-close" id="loginCloseBtn">✕</button>
-
-        <div class="login-header">
-          <div class="login-logo">👤</div>
-          <h2 class="login-title">ACCESS THE VERSE</h2>
-          <p class="login-subtitle">Login to your SC Kill Tracker account</p>
-          <div style="background: rgba(255, 149, 0, 0.1); border: 1px solid rgba(255, 149, 0, 0.3); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 0.8rem; color: #ff9500; text-align: center;">
-            <strong>⚠️ MOCK SERVICE</strong><br>
-            Demo Username: <code style="color: #ed1c24;">HarleyTG</code><br>
-            Demo Password: <code style="color: #ed1c24;">Password</code>
-          </div>
-        </div>
-
-        <form class="login-form" id="loginForm">
-          <div class="form-group">
-            <label class="form-label">Username or Email</label>
-            <input type="text" class="form-input" id="usernameInput" placeholder="Enter your username or email" required>
-          </div>
-
-          <!-- Registration-only fields (hidden by default) -->
-          <div class="form-group register-only" id="emailGroup" style="display: none;">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" id="emailInput" placeholder="Enter your email address">
-          </div>
-
-          <div class="form-group register-only" id="orgGroup" style="display: none;">
-            <label class="form-label">Organization (Optional)</label>
-            <input type="text" class="form-input" id="orgInput" placeholder="e.g., Eclipse Legion">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-input" id="passwordInput" placeholder="Enter your password" required>
-            <div class="show-password-container">
-              <input type="checkbox" id="showPasswordCheck" class="show-password-checkbox" onchange="togglePasswordVisibility('passwordInput', this)">
-              <label for="showPasswordCheck" class="show-password-label">Show Password</label>
-            </div>
-          </div>
-
-          <div class="form-group register-only" id="confirmPasswordGroup" style="display: none;">
-            <label class="form-label">Confirm Password</label>
-            <input type="password" class="form-input" id="confirmPasswordInput" placeholder="Confirm your password">
-            <div class="show-password-container">
-              <input type="checkbox" id="showConfirmPasswordCheck" class="show-password-checkbox" onchange="togglePasswordVisibility('confirmPasswordInput', this)">
-              <label for="showConfirmPasswordCheck" class="show-password-label">Show Password</label>
-            </div>
-          </div>
-
-          <div class="login-buttons">
-            <button type="submit" class="login-btn" id="submitBtn">🚀 Login</button>
-
-            <div class="forgot-password-container">
-              <button type="button" class="forgot-password-btn" id="forgotPasswordBtn">🔑 Forgot Password?</button>
-            </div>
-
-            <div class="login-divider">
-              <span id="dividerText">or</span>
-            </div>
-
-            <button type="button" class="login-btn register-btn" id="toggleBtn">
-              ⭐ Create New Account
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- Media Viewer Overlay -->
   <div class="media-viewer" id="mediaViewer">
     <div class="media-viewer-content">
@@ -4417,44 +4344,6 @@
         <span class="media-viewer-counter" id="mediaCounter">1 / 9</span>
         <button class="media-viewer-next" id="nextMedia">›</button>
         <button class="media-viewer-close" id="closeMediaViewer">✕</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Forgot Password Modal -->
-  <div class="login-screen" id="forgotPasswordScreen" style="display: none;">
-    <div class="login-animation">
-      <div class="login-container" style="max-width: 450px;">
-        <button class="login-close" id="forgotPasswordCloseBtn">✕</button>
-
-        <div class="login-header">
-          <div class="login-logo">🔑</div>
-          <h2 class="login-title">RESET PASSWORD</h2>
-          <p class="login-subtitle">Enter your email to receive reset instructions</p>
-          <div style="background: rgba(255, 149, 0, 0.1); border: 1px solid rgba(255, 149, 0, 0.3); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 0.8rem; color: #ff9500; text-align: center;">
-            <strong>⚠️ MOCK SERVICE</strong><br>
-            This is a demonstration - no actual emails will be sent.
-          </div>
-        </div>
-
-        <form class="login-form" id="forgotPasswordForm">
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" id="resetEmailInput" placeholder="Enter your email address" required>
-          </div>
-
-          <div class="login-buttons">
-            <button type="submit" class="login-btn">📧 Send Reset Link</button>
-
-            <div class="login-divider">
-              <span>or</span>
-            </div>
-
-            <button type="button" class="login-btn register-btn" id="backToLoginBtn">
-              🚀 Back to Login
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
@@ -4769,13 +4658,13 @@
 
       if (type === "tos") {
         title.textContent = "Terms of Service";
-        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/tos-sckt.md";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sckilltrac-lite/main/LITE%20Legal/TOS-SCKT-LITE.md";
       } else if (type === "privacy") {
         title.textContent = "Privacy Policy";
-        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/privacy-sckt.md";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sckilltrac-lite/main/LITE%20Legal/PRIVACY-SCKT-LITE.md";
       } else if (type === "eula") {
         title.textContent = "End User License Agreement";
-        url = "https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/EULA.md";
+        url = "https://raw.githubusercontent.com/HarleyTG-O/sckilltrac-lite/main/LITE%20Legal/EULA-SCKT-LITE.md";
       }
 
       // Show loading state
@@ -4890,8 +4779,8 @@
     function fetchGitHubReleaseInfo() {
       console.log('🚀 Starting GitHub API fetch for file picker...');
 
-              // GitHub API endpoint for the launcher latest release
-              fetch('https://api.github.com/repos/HarleyTG-O/sckt-launcher/releases/latest')
+              // GitHub API endpoint for the LITE latest release
+              fetch('https://api.github.com/repos/HarleyTG-O/sckilltrac-lite/releases/latest')
         .then(response => {
           console.log('📡 GitHub API response status:', response.status);
           if (!response.ok) {
@@ -5442,8 +5331,7 @@
         'exitOverlay',
         'downloadScreen',
         'discordScreen',
-        'donationScreen',
-        'loginScreen'
+        'donationScreen'
       ];
 
       overlays.forEach(overlayId => {
@@ -5703,345 +5591,6 @@
         });
       }
     });
-
-    // Login Animation Functions
-    function showLoginAnimation() {
-      console.log('Showing login animation');
-      // Hide any other overlays first
-      hideAllOverlays();
-
-      const loginScreen = document.getElementById('loginScreen');
-      console.log('Login screen element:', loginScreen);
-
-      if (loginScreen) {
-        loginScreen.style.display = 'flex';
-        loginScreen.style.visibility = 'visible';
-        loginScreen.style.opacity = '1';
-        loginScreen.style.zIndex = '10005';
-        document.body.style.overflow = 'hidden';
-        console.log('Login screen should now be visible');
-      } else {
-        console.error('Login screen element not found!');
-      }
-    }
-
-    function hideLoginAnimation() {
-      const loginScreen = document.getElementById('loginScreen');
-      loginScreen.style.opacity = '0';
-
-      setTimeout(() => {
-        loginScreen.style.display = 'none';
-        loginScreen.style.opacity = '1';
-        document.body.style.overflow = 'auto';
-      }, 500);
-    }
-
-    // Forgot Password Animation Functions
-    function showForgotPasswordAnimation() {
-      console.log('Showing forgot password animation');
-      // Hide login screen first
-      hideLoginAnimation();
-
-      setTimeout(() => {
-        const forgotPasswordScreen = document.getElementById('forgotPasswordScreen');
-        console.log('Forgot password screen element:', forgotPasswordScreen);
-
-        if (forgotPasswordScreen) {
-          forgotPasswordScreen.style.display = 'flex';
-          forgotPasswordScreen.style.visibility = 'visible';
-          forgotPasswordScreen.style.opacity = '1';
-          forgotPasswordScreen.style.zIndex = '10005';
-          document.body.style.overflow = 'hidden';
-          console.log('Forgot password screen should now be visible');
-        } else {
-          console.error('Forgot password screen element not found!');
-        }
-      }, 300);
-    }
-
-    function hideForgotPasswordAnimation() {
-      const forgotPasswordScreen = document.getElementById('forgotPasswordScreen');
-      forgotPasswordScreen.style.opacity = '0';
-
-      setTimeout(() => {
-        forgotPasswordScreen.style.display = 'none';
-        forgotPasswordScreen.style.opacity = '1';
-        document.body.style.overflow = 'auto';
-      }, 500);
-    }
-
-    // Password visibility toggle functionality
-    function togglePasswordVisibility(inputId, checkbox) {
-      const passwordInput = document.getElementById(inputId);
-
-      if (checkbox.checked) {
-        passwordInput.type = 'text';
-      } else {
-        passwordInput.type = 'password';
-      }
-    }
-
-    // Login/Registration functionality
-    let isRegistrationMode = false;
-
-    function toggleRegistrationMode() {
-      const registerFields = document.querySelectorAll('.register-only');
-      const submitBtn = document.getElementById('submitBtn');
-      const toggleBtn = document.getElementById('toggleBtn');
-      const loginTitle = document.querySelector('.login-title');
-      const loginSubtitle = document.querySelector('.login-subtitle');
-      const dividerText = document.getElementById('dividerText');
-      const usernameInput = document.getElementById('usernameInput');
-      const usernameLabel = usernameInput.previousElementSibling;
-
-      isRegistrationMode = !isRegistrationMode;
-
-      if (isRegistrationMode) {
-        // Switch to registration mode
-        registerFields.forEach(field => field.style.display = 'flex');
-        submitBtn.innerHTML = '⭐ Create Account';
-        toggleBtn.innerHTML = '🚀 Back to Login';
-        loginTitle.textContent = 'JOIN THE VERSE';
-        loginSubtitle.textContent = 'Create your SC Kill Tracker account';
-        dividerText.textContent = 'or';
-        usernameLabel.textContent = 'Username';
-        usernameInput.placeholder = 'Choose a username';
-        usernameInput.type = 'text';
-
-        // Make registration fields required
-        document.getElementById('emailInput').required = true;
-        document.getElementById('confirmPasswordInput').required = true;
-      } else {
-        // Switch to login mode
-        registerFields.forEach(field => field.style.display = 'none');
-        submitBtn.innerHTML = '🚀 Login';
-        toggleBtn.innerHTML = '⭐ Create New Account';
-        loginTitle.textContent = 'ACCESS THE VERSE';
-        loginSubtitle.textContent = 'Login to your SC Kill Tracker account';
-        dividerText.textContent = 'or';
-        usernameLabel.textContent = 'Username or Email';
-        usernameInput.placeholder = 'Enter your username or email';
-
-        // Remove required from registration fields
-        document.getElementById('emailInput').required = false;
-        document.getElementById('confirmPasswordInput').required = false;
-
-        // Clear registration fields
-        document.getElementById('emailInput').value = '';
-        document.getElementById('orgInput').value = '';
-        document.getElementById('confirmPasswordInput').value = '';
-      }
-    }
-
-    // Login button event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-      const loginButton = document.getElementById('loginButton');
-      const loginCloseBtn = document.getElementById('loginCloseBtn');
-      const loginForm = document.getElementById('loginForm');
-      const toggleBtn = document.getElementById('toggleBtn');
-      const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
-      const forgotPasswordCloseBtn = document.getElementById('forgotPasswordCloseBtn');
-      const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-      const backToLoginBtn = document.getElementById('backToLoginBtn');
-
-      if (loginButton) {
-        console.log('Login button found, adding event listener');
-        loginButton.addEventListener('click', function(e) {
-          console.log('Login button clicked');
-          e.preventDefault();
-          showLoginAnimation();
-        });
-      } else {
-        console.error('Login button not found!');
-      }
-
-      if (loginCloseBtn) {
-        loginCloseBtn.addEventListener('click', function() {
-          hideLoginAnimation();
-          // Reset to login mode when closing
-          if (isRegistrationMode) {
-            toggleRegistrationMode();
-          }
-        });
-      }
-
-      if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-
-          const username = document.getElementById('usernameInput').value;
-          const password = document.getElementById('passwordInput').value;
-
-          if (isRegistrationMode) {
-            // Handle registration
-            const email = document.getElementById('emailInput').value;
-            const confirmPassword = document.getElementById('confirmPasswordInput').value;
-            const org = document.getElementById('orgInput').value;
-
-            if (!username || !email || !password || !confirmPassword) {
-              showNotification({
-                title: 'Form Validation',
-                message: 'Please fill in all required fields to continue.',
-                type: 'warning',
-                duration: 4000
-              });
-              return;
-            }
-
-            if (password !== confirmPassword) {
-              showNotification({
-                title: 'Password Mismatch',
-                message: 'The passwords you entered do not match. Please check and try again.',
-                type: 'error',
-                duration: 5000
-              });
-              return;
-            }
-
-            if (password.length < 6) {
-              showNotification({
-                title: 'Password Too Short',
-                message: 'Password must be at least 6 characters long for security.',
-                type: 'warning',
-                duration: 4000
-              });
-              return;
-            }
-
-            // Mock registration success
-            showNotification({
-              title: 'Account Created Successfully!',
-              message: 'Your SC Kill Tracker account has been created and is ready to use.',
-              details: `Username: ${username}\nSCKillTrac ID: ${username}@SCKillTrac\nOrganization: ${org || 'None'}\n\nYou can now login with your credentials.\n\n⚠️ This is a mock demonstration.`,
-              type: 'success',
-              duration: 8000
-            });
-
-            // Switch back to login mode
-            toggleRegistrationMode();
-
-            // Pre-fill username
-            document.getElementById('usernameInput').value = username;
-            document.getElementById('passwordInput').value = '';
-
-          } else {
-            // Handle login - require specific credentials
-            if (!username || !password) {
-              alert('Please enter both username and password');
-              return;
-            }
-
-            // Check for correct demo credentials
-            if (username === 'HarleyTG' && password === 'Password') {
-              // Set authentication tokens for session
-              localStorage.setItem('sckt_logged_in', 'true');
-              localStorage.setItem('sckt_session_token', 'mock_token_' + Date.now());
-              localStorage.setItem('sckt_username', username);
-              localStorage.setItem('sckt_login_time', new Date().toISOString());
-
-              // Simulate successful login
-              hideLoginAnimation();
-
-              // Redirect to profile page with login success info
-              setTimeout(() => {
-                const loginType = isRegistrationMode ? 'register' : 'login';
-                window.location.href = `profile.html?welcome=${loginType}&user=${encodeURIComponent(username)}`;
-              }, 500);
-            } else {
-              showNotification({
-                title: 'Invalid Credentials',
-                message: 'The username or password you entered is incorrect.',
-                details: 'Demo Login Credentials:\nUsername: HarleyTG\nPassword: Password\n\n⚠️ This is a mock service for demonstration purposes.',
-                type: 'error',
-                duration: 8000
-              });
-            }
-          }
-        });
-      }
-
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', function() {
-          toggleRegistrationMode();
-        });
-      }
-
-      // Forgot Password event listeners
-      if (forgotPasswordBtn) {
-        forgotPasswordBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          showForgotPasswordAnimation();
-        });
-      }
-
-      if (forgotPasswordCloseBtn) {
-        forgotPasswordCloseBtn.addEventListener('click', function() {
-          hideForgotPasswordAnimation();
-        });
-      }
-
-      if (backToLoginBtn) {
-        backToLoginBtn.addEventListener('click', function() {
-          hideForgotPasswordAnimation();
-          setTimeout(() => {
-            showLoginAnimation();
-          }, 300);
-        });
-      }
-
-      if (forgotPasswordForm) {
-        forgotPasswordForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-
-          const email = document.getElementById('resetEmailInput').value;
-
-          if (!email) {
-            showNotification({
-              title: 'Email Required',
-              message: 'Please enter your email address to receive password reset instructions.',
-              type: 'warning',
-              duration: 4000
-            });
-            return;
-          }
-
-          // Mock password reset
-          showNotification({
-            title: 'Password Reset Request Sent',
-            message: 'A password reset link has been sent to your email address.',
-            details: `Email: ${email}\n\nPlease check your email and follow the instructions to reset your password.\n\n⚠️ This is a mock demonstration - no actual email will be sent.`,
-            type: 'success',
-            duration: 8000
-          });
-
-          // Clear form and return to login
-          document.getElementById('resetEmailInput').value = '';
-          hideForgotPasswordAnimation();
-          setTimeout(() => {
-            showLoginAnimation();
-          }, 300);
-        });
-      }
-
-      // Update escape key handler to include login and forgot password screens
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          const loginScreen = document.getElementById('loginScreen');
-          const forgotPasswordScreen = document.getElementById('forgotPasswordScreen');
-
-          if (forgotPasswordScreen.style.display === 'flex') {
-            hideForgotPasswordAnimation();
-          } else if (loginScreen.style.display === 'flex') {
-            hideLoginAnimation();
-            // Reset to login mode when closing with escape
-            if (isRegistrationMode) {
-              toggleRegistrationMode();
-            }
-          }
-        }
-      });
-    });
-
 
   </script>
 
