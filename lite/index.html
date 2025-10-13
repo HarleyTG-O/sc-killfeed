@@ -147,7 +147,7 @@
     header img {
       width: 80px;
       height: 80px;
-      border-radius: 50%;
+      border-radius: 8px;
       box-shadow:
         0 0 20px rgba(237, 28, 36, 0.8),
         inset 0 0 20px rgba(237, 28, 36, 0.2);
@@ -3916,39 +3916,6 @@
       </div>
     </section>
 
-    <!-- Donation Goal Section -->
-    <section class="section">
-      <h2>Community Donations</h2>
-      <div class="donation-content">
-        <div class="donation-text">
-          💝 Community Support Goal: $1500+ for servers, website, Discord bot & more!
-        </div>
-        <div class="donation-progress-container">
-          <div class="donation-progress-bar">
-            <div class="donation-progress-fill" id="donationProgressFill"></div>
-            <div class="donation-progress-percentage" id="donationPercentage">0%</div>
-          </div>
-          <div class="donation-progress-label">Community Donations: $0 / $1500+</div>
-        </div>
-        <div class="button-group" style="margin-top: 20px;">
-          <button class="button" id="donationButton">💰 Support Development</button>
-        </div>
-        <div style="margin-top: 15px; padding: 15px; background: rgba(0, 150, 255, 0.1); border: 1px solid rgba(0, 150, 255, 0.3); border-radius: 8px;">
-          <div style="font-family: 'Orbitron', monospace; font-size: 0.9rem; color: #0096ff; margin-bottom: 8px; font-weight: 600;">
-            ℹ️ Important Note
-          </div>
-          <div style="font-family: 'Exo 2', sans-serif; font-size: 0.85rem; color: #d0d6dd; line-height: 1.4;">
-            <strong>Donations are separate from user/organization payments.</strong><br>
-            This goal is purely for community support to keep the project running and improve features for everyone.
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-
-
-
     <!-- New Status Section -->
     <section class="section">
       <h2>Status</h2>
@@ -3985,16 +3952,11 @@
 
   <section class="section">
     <h2>Media Gallery</h2>
-    <div class="media-gallery">
-      <video controls src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/Overlay%2BNotfication.mp4?raw=true"></video>
-      <video controls src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/SCKillTrac-SplashScreen.mp4?raw=true"></video>
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/discordrpc.png?raw=true" alt="discordrpc" />
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/mainmenu1.png?raw=true" alt="mainmenu1" />
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/mainmenu2.png?raw=true" alt="mainmenu2" />
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/mainmenu3.png?raw=true" alt="mainmenu3" />
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/mainmenu4.png?raw=true" alt="mainmenu4" />
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/userdiscordrpc.png?raw=true" alt="userdiscordrpc" />
-      <img src="https://github.com/HarleyTG-O/sc-killfeed/blob/main/Media/welcome-sckilltrac.png?raw=true" alt="welcome-sckilltrac" />
+    <div class="media-gallery" id="mediaGallery">
+      <div class="loading" style="padding: 40px; text-align: center; color: #8fa8b8;">
+        <div class="loading-spinner" style="margin: 0 auto;"></div>
+        <p style="margin-top: 20px;">Loading media...</p>
+      </div>
     </div>
   </section>
   </div>
@@ -4128,8 +4090,8 @@
     <div class="overlay-content download-confirm">
       <div class="confirm-header">
         <div class="confirm-icon">🚀</div>
-        <h3>Download SC Kill Tracker Launcher</h3>
-        <p>Are you ready to download the latest launcher release?</p>
+        <h3>Download SC Kill Tracker LITE</h3>
+        <p>Are you ready to download the latest LITE release?</p>
       </div>
 
       <!-- Hash Information Display -->
@@ -4147,7 +4109,7 @@
         <div class="picker-container">
           <div class="picker-header">
             <h4>Choose Files to Download</h4>
-            <p>Select one or multiple assets from the launcher release:</p>
+            <p>Select one or multiple assets from the LITE release:</p>
             <div class="picker-controls">
               <div class="picker-controls-left">
                 <button class="picker-control-btn" id="selectAllBtn">📋 Select All</button>
@@ -5239,87 +5201,85 @@
       document.head.appendChild(style);
     }
 
-    // Fetch and display version in header and status info
-    fetch('https://raw.githubusercontent.com/HarleyTG-O/sc-killfeed/main/client.json')
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-      })
-      .then(data => {
-        // Version in header
+    // Fetch version and status from LITE client.json and API
+    Promise.all([
+      fetch('https://raw.githubusercontent.com/HarleyTG-O/sckilltrac-lite/refs/heads/main/client.json').then(r => r.json()),
+      fetch('http://api.sckilltracker.com/lite/health').then(r => r.json()).catch(() => null)
+    ])
+      .then(([clientData, apiHealth]) => {
         const versionSpan = document.getElementById('version');
-        if (versionSpan) {
-          if (data.version) {
-            versionSpan.textContent = data.version;
-          } else {
-            versionSpan.textContent = '(version info unavailable)';
-          }
+        const statusDiv = document.getElementById('statusList');
+        
+        // Update version in header
+        if (versionSpan && clientData.version) {
+          versionSpan.textContent = clientData.version;
         }
 
-        // Status area
-        const statusDiv = document.getElementById('statusList');
+        // Build status display
         if (statusDiv) {
-          const disableClient = data.disable_client === true ? 'Yes' : 'No';
-          const mandatoryUpdate = data.mandatory_update === true ? 'Yes' : 'No';
-          const version = data.version || 'Unknown';
-
-          statusDiv.innerHTML =
-            `<div class="status-item">
-              <span class="status-label">Server Status:</span>
+          const disableClient = clientData.disable_client === false ? 'No' : 'Yes';
+          const mandatoryUpdate = clientData.mandatory_update === true ? 'Yes' : 'No';
+          const version = clientData.version || 'Unknown';
+          
+          // Check API health
+          const apiOnline = apiHealth !== null && apiHealth.status === 'healthy';
+          const dbConnected = apiHealth && apiHealth.database === 'connected';
+          
+          statusDiv.innerHTML = `
+            <div class="status-item">
+              <span class="status-label">API Status:</span>
               <span class="status-value">
-                <div class="server-status-container">
-                  <div class="server-status-main">
-                    <span class="status-indicator offline">🔴</span>
-                    <span class="status-text offline">Offline</span>
-                  </div>
-                  <div class="server-status-note">Under Construction / Development</div>
-                </div>
+                <span class="status-indicator ${apiOnline ? 'online' : 'offline'}">${apiOnline ? '🟢' : '🔴'}</span>
+                <span class="status-text ${apiOnline ? 'online' : 'offline'}">${apiOnline ? 'Online' : 'Offline'}</span>
+              </span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Database:</span>
+              <span class="status-value">
+                <span class="status-indicator ${dbConnected ? 'online' : 'offline'}">${dbConnected ? '🟢' : '🔴'}</span>
+                <span class="status-text ${dbConnected ? 'online' : 'offline'}">${dbConnected ? 'Connected' : 'Disconnected'}</span>
+              </span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">License Validation:</span>
+              <span class="status-value">
+                <span class="status-indicator ${apiOnline ? 'online' : 'offline'}">${apiOnline ? '🟢' : '🔴'}</span>
+                <span class="status-text ${apiOnline ? 'online' : 'offline'}">${apiOnline ? 'Available' : 'Unavailable'}</span>
               </span>
             </div>
             <div class="status-item">
               <span class="status-label">Client Status:</span>
               <span class="status-value">
-                <span class="status-indicator online">🟢</span>
-                <span class="status-text online">Working</span>
+                <span class="status-indicator ${disableClient === 'No' ? 'online' : 'offline'}">${disableClient === 'No' ? '🟢' : '🔴'}</span>
+                <span class="status-text ${disableClient === 'No' ? 'online' : 'offline'}">${disableClient === 'No' ? 'Enabled' : 'Disabled'}</span>
               </span>
             </div>
             <div class="status-item">
-              <span class="status-label">Disable Client:</span>
-              <span class="status-value">${disableClient}</span>
+              <span class="status-label">Current Version:</span>
+              <span class="status-value" style="color: #0096ff; font-weight: 700;">${version}</span>
             </div>
             <div class="status-item">
-              <span class="status-label">Current Version:</span>
-              <span class="status-value">${version}</span>
-            </div>`;
+              <span class="status-label">Mandatory Update:</span>
+              <span class="status-value" style="color: ${mandatoryUpdate === 'Yes' ? '#ff6b6b' : '#00ff7f'};">${mandatoryUpdate}</span>
+            </div>
+          `;
         }
       })
       .catch(() => {
         const versionSpan = document.getElementById('version');
-        if (versionSpan) versionSpan.textContent = '(failed to load version)';
+        if (versionSpan) versionSpan.textContent = 'LITE';
         const statusDiv = document.getElementById('statusList');
         if (statusDiv) statusDiv.innerHTML = `
           <div class="status-item">
-            <span class="status-label">Server Status:</span>
+            <span class="status-label">API Status:</span>
             <span class="status-value">
-              <div class="server-status-container">
-                <div class="server-status-main">
-                  <span class="status-indicator offline">🔴</span>
-                  <span class="status-text offline">Offline</span>
-                </div>
-                <div class="server-status-note">Under Construction / Development</div>
-              </div>
-            </span>
-          </div>
-          <div class="status-item">
-            <span class="status-label">Client Status:</span>
-            <span class="status-value">
-              <span class="status-indicator online">🟢</span>
-              <span class="status-text online">Working</span>
+              <span class="status-indicator offline">🔴</span>
+              <span class="status-text offline">Failed to load</span>
             </span>
           </div>
           <div class="status-item">
             <span class="status-label">Status:</span>
-            <span class="status-value" style="color: #ff6b6b;">Failed to load information</span>
+            <span class="status-value" style="color: #ff6b6b;">Unable to connect to services</span>
           </div>
         `;
       });
