@@ -4311,6 +4311,17 @@
   </div>
 
   <script>
+    <!--
+      //SC KILL TRACKER LITE - Data Sources
+      const config = {
+      clientConfig: 'https://raw.githubusercontent.com/HarleyTG-O/sckilltrac-lite/main/client.json',
+      apiHealth: 'https://api.sckilltracker.com/lite/health',
+      githubReleases: 'https://api.github.com/repos/HarleyTG-O/sckilltrac-lite/releases/latest',
+      mediaGallery: 'https://api.github.com/repos/HarleyTG-O/sckilltrac-lite/contents/Media',
+      legalDocs: 'https://github.com/HarleyTG-O/sckilltrac-lite/tree/main/LITE%20Legal',
+      discord: 'https://discord.gg/jxfHnGQqj7'
+    };
+
     // Loading screen functionality
     window.addEventListener('load', function() {
       const loadingBar = document.getElementById('loadingBar');
@@ -4347,37 +4358,7 @@
 
       // Start loading animation after a brief delay
       setTimeout(updateLoading, 200);
-
-      // Animate donation progress bar after loading screen is done
-      setTimeout(function() {
-        animateDonationProgress();
-      }, 3000); // Start after loading screen completes
     });
-
-    // Enhanced Donation Progress Bar Animation
-    function animateDonationProgress() {
-      const donationProgressFill = document.getElementById('donationProgressFill');
-      const donationPercentage = document.getElementById('donationPercentage');
-
-      if (donationProgressFill && donationPercentage) {
-        // Reset to 0% since we're starting fresh with community donations
-        donationProgressFill.style.width = '0%';
-        donationPercentage.textContent = '0%';
-
-        // Keep at 0% to show we're starting fresh with community donations
-        setTimeout(function() {
-          donationProgressFill.style.width = '0%';
-          donationPercentage.textContent = '0%';
-        }, 300);
-
-        // Add a subtle pulse effect to indicate it's ready for donations
-        setTimeout(function() {
-          donationPercentage.style.animation = 'countdownPulse 2s ease-in-out infinite';
-        }, 800);
-      }
-    }
-
-
 
     // Custom Notification System
     function showNotification(options) {
@@ -4610,7 +4591,7 @@
     }
 
     function showLegalOverlay(type) {
-      // Hide any other overlays first
+      // Hide other overlays first
       hideAllOverlays();
 
       const overlay = document.getElementById("legalOverlay");
@@ -4627,6 +4608,9 @@
       } else if (type === "eula") {
         title.textContent = "End User License Agreement";
         url = "https://raw.githubusercontent.com/HarleyTG-O/sckilltrac-lite/main/LITE%20Legal/EULA-SCKT-LITE.md";
+      } else {
+        title.textContent = "Legal Document";
+        url = "";
       }
 
       // Show loading state
@@ -4635,32 +4619,106 @@
       overlay.style.zIndex = "10000";
       document.body.style.overflow = "hidden";
 
-      fetch(url)
-        .then(res => res.ok ? res.text() : Promise.reject("Failed to load"))
-        .then(data => {
-          // Enhanced markdown-to-HTML conversion
-          let htmlContent = data
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code>$1</code>')
-            .replace(/^\* (.*$)/gim, '<li>$1</li>')
-            .replace(/^(\d+)\. (.*$)/gim, '<li>$1. $2</li>')
-            .replace(/\n\n/g, '</p><p>')
-            .replace(/^(?!<[h|l|p])/gm, '<p>')
-            .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
-            .replace(/<\/p><p><ul>/g, '<ul>')
-            .replace(/<\/ul><p>/g, '</ul>')
-            .replace(/<p><\/p>/g, '');
+      if (!url) {
+        text.innerHTML = '<div style="text-align: center; padding: 40px;"><p style="color: #ff6b6b; font-size: 1.1rem; margin-bottom: 15px;">⚠️ Invalid document type</p><p style="color: #8fa8b8;">The selected legal document could not be found.</p></div>';
+        return;
+      }
 
-          text.innerHTML = htmlContent;
-          // Scroll to top of content
+      fetch(url)
+        .then(function(res) { 
+          if (!res.ok) throw new Error("Failed to load document");
+          return res.text();
+        })
+        .then(function(data) {
+          // Improved markdown-to-HTML conversion
+          let htmlContent = data
+            // Escape existing HTML to prevent conflicts
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            // Headers (must be done before other replacements)
+            .replace(/^### (.*?)$/gim, '<h3>$1</h3>')
+            .replace(/^## (.*?)$/gim, '<h2>$1</h2>')
+            .replace(/^# (.*?)$/gim, '<h1>$1</h1>')
+            // Bold and italic
+            .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.+?)\*/g, '<em>$1</em>')
+            // Code
+            .replace(/`(.+?)`/g, '<code>$1</code>')
+            // Links
+            .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank">$1</a>')
+            // Line breaks - split into lines for better processing
+            .split('\n');
+
+          // Process lists and paragraphs
+          let processedLines = [];
+          let inList = false;
+          let listType = null;
+
+          for (let i = 0; i < htmlContent.length; i++) {
+            let line = htmlContent[i].trim();
+            
+            // Check for unordered list
+            if (line.match(/^[\*\-] (.+)/)) {
+              if (!inList) {
+                processedLines.push('<ul>');
+                inList = true;
+                listType = 'ul';
+              } else if (listType !== 'ul') {
+                processedLines.push('</ol><ul>');
+                listType = 'ul';
+              }
+              processedLines.push('<li>' + line.replace(/^[\*\-] /, '') + '</li>');
+            }
+            // Check for ordered list
+            else if (line.match(/^\d+\. (.+)/)) {
+              if (!inList) {
+                processedLines.push('<ol>');
+                inList = true;
+                listType = 'ol';
+              } else if (listType !== 'ol') {
+                processedLines.push('</ul><ol>');
+                listType = 'ol';
+              }
+              processedLines.push('<li>' + line.replace(/^\d+\. /, '') + '</li>');
+            }
+            // Not a list item
+            else {
+              if (inList) {
+                processedLines.push(listType === 'ul' ? '</ul>' : '</ol>');
+                inList = false;
+                listType = null;
+              }
+              
+              // Skip empty lines unless between content
+              if (line === '') {
+                if (i > 0 && i < htmlContent.length - 1 && htmlContent[i + 1].trim() !== '') {
+                  processedLines.push('<br>');
+                }
+              }
+              // Headers are already wrapped
+              else if (line.match(/^<h[1-3]>/)) {
+                processedLines.push(line);
+              }
+              // Regular paragraph
+              else if (line.length > 0) {
+                processedLines.push('<p>' + line + '</p>');
+              }
+            }
+          }
+
+          // Close any open list
+          if (inList) {
+            processedLines.push(listType === 'ul' ? '</ul>' : '</ol>');
+          }
+
+          text.innerHTML = processedLines.join('\n');
           text.scrollTop = 0;
         })
-        .catch(() => {
-          text.innerHTML = '<div style="text-align: center; padding: 40px;"><p style="color: #ff6b6b; font-size: 1.1rem; margin-bottom: 15px;">⚠️ Unable to load document</p><p style="color: #8fa8b8;">Please check your internet connection and try again later.</p></div>';
+        .catch(function(error) {
+          console.error('Error loading legal document:', error);
+          text.innerHTML = '<div style="text-align: center; padding: 40px;"><p style="color: #ff6b6b; font-size: 1.1rem; margin-bottom: 15px;">⚠️ Unable to load document</p><p style="color: #8fa8b8;">Please check your internet connection and try again later.</p><p style="color: #666; font-size: 0.9rem; margin-top: 15px;">Error: ' + error.message + '</p></div>';
         });
     }
 
@@ -4911,12 +4969,9 @@
     }
 
     function getAssetHash(filename) {
-      // Known hashes for the launcher files
-      const hashes = {
-        'SCKillTrac-Launcher.exe': '6d034cd99d86b1ade22f21d16064e8741f3c07c6d93b891f33d389ddac1820df',
-        'SCKillTrac-Launcher.zip': '83f59d2da9013e6c04ac715bedaa6df56b968ba41c560af0c01fb66e0ba8f76b'
-      };
-      return hashes[filename] || 'Not available';
+      // Hashes will be computed from the GitHub API asset data
+      // This function is kept for potential future use
+      return 'Computed from asset';
     }
 
     function getRelativeTime(dateString) {
@@ -5282,6 +5337,47 @@
             <span class="status-value" style="color: #ff6b6b;">Unable to connect to services</span>
           </div>
         `;
+      });
+
+    // Load media gallery from GitHub
+    fetch('https://api.github.com/repos/HarleyTG-O/sckilltrac-lite/contents/Media')
+      .then(response => response.json())
+      .then(files => {
+        const mediaGallery = document.getElementById('mediaGallery');
+        if (!mediaGallery) return;
+        
+        // Filter for image and video files
+        const mediaFiles = files.filter(file => {
+          const ext = file.name.toLowerCase().split('.').pop();
+          return ['png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'webm'].includes(ext);
+        });
+        
+        if (mediaFiles.length === 0) {
+          mediaGallery.innerHTML = '<p style="text-align: center; color: #8fa8b8; padding: 40px;">No media available yet. Check back soon!</p>';
+          return;
+        }
+        
+        // Build media gallery HTML
+        let galleryHTML = '';
+        mediaFiles.forEach(file => {
+          const ext = file.name.toLowerCase().split('.').pop();
+          const isVideo = ['mp4', 'webm'].includes(ext);
+          const fileUrl = file.download_url;
+          
+          if (isVideo) {
+            galleryHTML += `<video controls src="${fileUrl}"></video>`;
+          } else {
+            galleryHTML += `<img src="${fileUrl}" alt="${file.name}" />`;
+          }
+        });
+        
+        mediaGallery.innerHTML = galleryHTML;
+      })
+      .catch(error => {
+        const mediaGallery = document.getElementById('mediaGallery');
+        if (mediaGallery) {
+          mediaGallery.innerHTML = '<p style="text-align: center; color: #ff6b6b; padding: 40px;">Failed to load media gallery. Please try again later.</p>';
+        }
       });
 
     // Utility function to hide all overlays
