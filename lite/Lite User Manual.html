@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SC Kill Tracker LITE - User Manual</title>
+    <link rel="icon" href="https://github.com/HarleyTG-O/sckilltrac-lite/blob/main/SCKillTrac-LITE.ico?raw=true" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Animated background with particles */
+        body {
+            background: linear-gradient(135deg, #0a0f1c 0%, #1a252f 50%, #0f1419 100%);
+            color: #e0e6ed;
+            font-family: "Exo 2", "Segoe UI", sans-serif;
+            line-height: 1.7;
+            display: flex;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Simplified animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, #ed1c24, transparent),
+                radial-gradient(1px 1px at 40px 70px, rgba(237, 28, 36, 0.5), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ed1c24, transparent);
+            background-repeat: repeat;
+            background-size: 150px 80px;
+            animation: particleFloat 15s ease-in-out infinite;
+            opacity: 0.08;
+            z-index: -1;
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-50px) translateX(50px); }
+        }
+
+        /* Enhanced header with sci-fi styling */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(237, 28, 36, 0.3);
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex: 1;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ed1c24, transparent);
+            animation: scanLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scanLine {
+            0%, 100% { transform: translateX(-100%); opacity: 0; }
+            50% { transform: translateX(0%); opacity: 1; }
+        }
+
+        header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            box-shadow:
+                0 0 20px rgba(237, 28, 36, 0.8),
+                inset 0 0 20px rgba(237, 28, 36, 0.2);
+            border: 3px solid rgba(237, 28, 36, 0.5);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        header img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(237, 28, 36, 1);
+        }
+
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 20px rgba(237, 28, 36, 0.8), inset 0 0 20px rgba(237, 28, 36, 0.2); }
+            100% { box-shadow: 0 0 30px rgba(237, 28, 36, 1), inset 0 0 30px rgba(237, 28, 36, 0.4); }
+        }
+
+        header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #ed1c24;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow:
+                0 0 10px rgba(237, 28, 36, 0.8),
+                0 0 20px rgba(237, 28, 36, 0.4),
+                0 0 30px rgba(237, 28, 36, 0.2);
+            letter-spacing: 2px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px rgba(237, 28, 36, 0.8), 0 0 20px rgba(237, 28, 36, 0.4), 0 0 30px rgba(237, 28, 36, 0.2); }
+            100% { text-shadow: 0 0 15px rgba(237, 28, 36, 1), 0 0 25px rgba(237, 28, 36, 0.6), 0 0 35px rgba(237, 28, 36, 0.4); }
+        }
+
+        header h1 #version {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: #8fa8b8;
+            margin-left: 15px;
+            padding: 5px 12px;
+            background: rgba(237, 28, 36, 0.1);
+            border: 1px solid rgba(237, 28, 36, 0.3);
+            border-radius: 15px;
+            text-shadow: none;
+        }
+
+        /* Sidebar Navigation with enhanced styling */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(145deg, rgba(10, 15, 28, 0.98), rgba(15, 20, 25, 0.98));
+            padding: 25px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow: hidden;
+            border-right: 2px solid rgba(237, 28, 36, 0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -2px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ed1c24, transparent);
+            animation: scanLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scanLine {
+            0%, 100% { transform: translateY(-100%); opacity: 0; }
+            50% { transform: translateY(0%); opacity: 1; }
+        }
+
+        .sidebar-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            box-shadow:
+                0 0 15px rgba(237, 28, 36, 0.6),
+                inset 0 0 15px rgba(237, 28, 36, 0.2);
+            border: 2px solid rgba(237, 28, 36, 0.4);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(237, 28, 36, 0.9);
+        }
+
+        .sidebar h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            color: #ed1c24;
+            text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+            margin-bottom: 5px;
+            animation: sidebarTitleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes sidebarTitleGlow {
+            0% { text-shadow: 0 0 10px rgba(237, 28, 36, 0.5); }
+            100% { text-shadow: 0 0 15px rgba(237, 28, 36, 0.8); }
+        }
+
+        .sidebar .version {
+            font-size: 0.8rem;
+            color: #8fa8b8;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .sidebar #toc {
+            list-style: none;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 10px;
+            min-height: 0;
+        }
+
+        /* Custom scrollbar for sidebar TOC */
+        .sidebar #toc::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar #toc::-webkit-scrollbar-track {
+            background: rgba(10, 15, 28, 0.5);
+            border-radius: 3px;
+        }
+
+        .sidebar #toc::-webkit-scrollbar-thumb {
+            background: rgba(237, 28, 36, 0.5);
+            border-radius: 3px;
+        }
+
+        .sidebar #toc::-webkit-scrollbar-thumb:hover {
+            background: rgba(237, 28, 36, 0.7);
+        }
+
+        .sidebar #toc li a {
+            color: #8fa8b8;
+            text-decoration: none;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+        .sidebar #toc li a::before {
+            content: '▶';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: #ed1c24;
+        }
+
+        .sidebar #toc li a:hover {
+            background: rgba(237, 28, 36, 0.15);
+            color: #e0e6ed;
+            border-left-color: #ed1c24;
+            transform: translateX(5px);
+        }
+
+        .sidebar #toc li a:hover::before {
+            opacity: 1;
+            left: -12px;
+        }
+        
+        .sidebar #toc li a.active {
+            background: rgba(237, 28, 36, 0.25);
+            color: #ed1c24;
+            font-weight: 600;
+            border-left-color: #ed1c24;
+            box-shadow: 0 0 10px rgba(237, 28, 36, 0.3);
+            transform: translateX(5px);
+        }
+
+        .sidebar #toc li a.active::before {
+            opacity: 1;
+            left: -12px;
+        }
+
+        .sidebar #toc li a.active:hover {
+            background: rgba(237, 28, 36, 0.35);
+        }
+
+        /* Main Content with enhanced styling */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px 60px;
+            width: calc(100% - 280px);
+        }
+
+        section {
+            background: linear-gradient(145deg, rgba(31, 42, 56, 0.9), rgba(20, 28, 38, 0.9));
+            padding: 35px 40px;
+            border-radius: 15px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(237, 28, 36, 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ed1c24, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(237, 28, 36, 0.2), 0 0 30px rgba(237, 28, 36, 0.1);
+            border-color: rgba(237, 28, 36, 0.5);
+        }
+        
+        h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ed1c24;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(237, 28, 36, 0.3);
+            position: relative;
+            text-shadow: 0 0 10px rgba(237, 28, 36, 0.5);
+            letter-spacing: 1px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #ed1c24;
+            box-shadow: 0 0 10px #ed1c24;
+        }
+
+        h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: #e0e6ed;
+            margin: 30px 0 15px;
+            border-left: 4px solid #ed1c24;
+            padding-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        h3:hover {
+            transform: translateX(5px);
+            text-shadow: 0 0 8px rgba(237, 28, 36, 0.5);
+        }
+        
+        h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: #8fa8b8;
+            margin: 25px 0 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #e0e6ed;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #e0e6ed;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        section li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #ed1c24;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        section li:hover {
+            color: #ed1c24;
+            transform: translateX(10px);
+        }
+
+        section li:hover::before {
+            transform: scale(1.3);
+            text-shadow: 0 0 5px #ed1c24;
+        }
+
+        strong {
+            color: #e0e6ed;
+            font-weight: 600;
+        }
+
+        code {
+            background: rgba(0, 150, 255, 0.15);
+            color: #0096ff;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+
+        pre {
+            background: #000;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.85rem;
+            color: #b0c4de;
+            border: none;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(237, 28, 36, 0.5), transparent);
+            margin: 40px 0;
+        }
+        
+        /* Special Elements */
+        .smartscreen-warning {
+            background: linear-gradient(145deg, rgba(0, 150, 255, 0.15), rgba(0, 150, 255, 0.05));
+            border: 2px solid rgba(0, 150, 255, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .smartscreen-warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #0096ff;
+            box-shadow: 0 0 10px #0096ff;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 5px;
+        }
+        
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist input[type="checkbox"] {
+            width: 1.2em;
+            height: 1.2em;
+            accent-color: #ed1c24;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .checklist input[type="checkbox"]:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .checklist input[type="checkbox"]:checked {
+            filter: drop-shadow(0 0 5px rgba(237, 28, 36, 0.8));
+        }
+
+        .checklist li {
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:has(input:checked) {
+            opacity: 0.7;
+            text-decoration: line-through;
+            color: #8fa8b8;
+        }
+
+        footer {
+            margin-top: 60px;
+            color: #8fa8b8;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(237, 28, 36, 0.2);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: #ed1c24;
+            box-shadow: 0 0 10px #ed1c24;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 2px solid rgba(237, 28, 36, 0.2);
+                max-height: 40vh;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 30px;
+            }
+            section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <img src="https://github.com/HarleyTG-O/sckilltrac-lite/blob/main/SCKillTrac-LITE.png?raw=true" alt="SC Kill Tracker LITE Logo" class="sidebar-logo" />
+        <h1>SC Kill Tracker LITE</h1>
+        <span class="version">User Manual v0.1.6.4</span>
+        <ul id="toc">
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <header>
+            <div class="header-left">
+                <img src="https://github.com/HarleyTG-O/sckilltrac-lite/blob/main/SCKillTrac-LITE.png?raw=true" alt="Logo" />
+                <h1>
+                    Star Citizen Kill Tracker <span id="version">LITE</span>
+                </h1>
+            </div>
+        </header>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p><strong>SC Kill Tracker LITE</strong> is a lightweight application designed to track player vs player (PvP) and player vs environment (PvE) kills in Star Citizen by monitoring the game's log files. The application provides real-time kill tracking, statistics, and an optional overlay display.</p>
+            <h3>Key Capabilities</h3>
+            <ul>
+                <li><strong>Real-time Kill Tracking</strong>: Monitors Star Citizen's Game.log file for kill events</li>
+                <li><strong>Kill Classification</strong>: Automatically distinguishes between PvP, PvE, vehicle kills, and other death types</li>
+                <li><strong>NPC Recognition</strong>: Identifies NPCs vs real players</li>
+                <li><strong>Overlay Display</strong>: Optional on-screen overlay showing recent kills</li>
+                <li><strong>Statistics & History</strong>: Tracks and stores kill data locally</li>
+                <li><strong>Multiple Channels</strong>: Supports LIVE, PTU, HOTFIX, and EVOCOTI game channels</li>
+                <li><strong>License Key System</strong>: Secure registration and validation system</li>
+            </ul>
+        </section>
+
+        <section id="understanding-windows-smartscreen-warning">
+            <h2>Understanding Windows SmartScreen Warning</h2>
+            <div class="smartscreen-warning">
+                <h3>What is SmartScreen?</h3>
+                <p>When you first run <code>SCKillTrac-LITE.exe</code>, Windows Defender SmartScreen may display this warning:</p>
+                <pre><code>Microsoft Defender SmartScreen prevented an unrecognized app from starting.
+Running this app might put your PC at risk.
+
+App: SCKillTrac-LITE.exe
+Publisher: Unknown publisher</code></pre>
+                <h3>Why Does This Happen?</h3>
+                <ol>
+                    <li><strong>Unsigned Executable</strong>: The application is not digitally signed with a code signing certificate.</li>
+                    <li><strong>Unknown Publisher</strong>: Microsoft hasn't verified the publisher through their reputation system.</li>
+                    <li><strong>First Launch</strong>: Windows shows this for any newly downloaded executable from an unknown source.</li>
+                </ol>
+                <h3>Is It Safe?</h3>
+                <p>✅ <strong>Yes, it is safe to run.</strong> This is a standard Windows security feature that appears for unsigned applications. The warning is expected for applications not distributed through the Microsoft Store or signed with a commercial certificate.</p>
+                <h3>How to Proceed</h3>
+                <ol>
+                    <li>Click <strong>"More info"</strong> to see additional details.</li>
+                    <li>Click <strong>"Run anyway"</strong> to launch the application.</li>
+                    <li>After the first successful launch, Windows will remember your choice for future runs.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="antivirus-exclusions">
+            <h2>Adding Antivirus Exclusions</h2>
+            <div class="smartscreen-warning">
+                <h3>Why Add Exclusions?</h3>
+                <p>Some antivirus software may flag <code>SCKillTrac-LITE.exe</code> as potentially unwanted software or block it from running. This happens because the application monitors file changes and interacts with the game's log files. Adding an exclusion prevents false positives and ensures smooth operation.</p>
+                
+                <h3>Windows Defender</h3>
+                <ol>
+                    <li>Open <strong>Windows Security</strong> (search for "Windows Security" in Start menu)</li>
+                    <li>Go to <strong>Virus & threat protection</strong></li>
+                    <li>Click <strong>Manage settings</strong> under Virus & threat protection settings</li>
+                    <li>Scroll down to <strong>Exclusions</strong> and click <strong>Add or remove exclusions</strong></li>
+                    <li>Click <strong>Add an exclusion</strong> → <strong>File</strong></li>
+                    <li>Navigate to and select <code>SCKillTrac-LITE.exe</code></li>
+                    <li>Alternatively, add the entire folder where the application is located</li>
+                </ol>
+
+                <h3>Other Antivirus Software</h3>
+                <p>For other antivirus programs (Norton, McAfee, Avast, AVG, etc.):</p>
+                <ol>
+                    <li>Open your antivirus software's settings or control panel</li>
+                    <li>Look for <strong>Exclusions</strong>, <strong>Exceptions</strong>, or <strong>Whitelist</strong> settings</li>
+                    <li>Add <code>SCKillTrac-LITE.exe</code> to the exclusions list</li>
+                    <li>You may also need to exclude the application's data folder if it's located separately</li>
+                </ol>
+
+                <h3>What to Exclude</h3>
+                <ul>
+                    <li><strong>Executable File</strong>: <code>SCKillTrac-LITE.exe</code></li>
+                    <li><strong>Application Folder</strong>: The folder containing the executable (optional but recommended)</li>
+                    <li><strong>Data Folder</strong>: If stored separately, exclude the application's data/config folder</li>
+                </ul>
+
+                <h3>Still Getting Blocked?</h3>
+                <p>If your antivirus continues to block the application after adding exclusions:</p>
+                <ul>
+                    <li>Ensure you've added both file and folder exclusions</li>
+                    <li>Restart your antivirus software after adding exclusions</li>
+                    <li>Check if your antivirus has separate settings for "Real-time protection" and "On-demand scanning"</li>
+                    <li>Some antivirus programs require administrator privileges to modify exclusions</li>
+                    <li>Contact support at <code>discord.sckilltracker.com</code> if issues persist</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="installation-first-launch">
+            <h2>Installation & First Launch</h2>
+            <h3>System Requirements</h3>
+            <ul>
+                <li><strong>Operating System</strong>: Windows 10/11 (64-bit)</li>
+                <li><strong>Star Citizen</strong>: Must be installed and have generated Game.log files</li>
+                <li><strong>Internet Connection</strong>: Required for license validation</li>
+            </ul>
+            <h3>Installation Steps</h3>
+            <ol>
+                <li><strong>Download</strong> the <code>SCKillTrac-LITE.exe</code> file.</li>
+                <li><strong>Place</strong> the file in your desired location (e.g., Desktop).</li>
+                <li><strong>Run</strong> the executable (handle the SmartScreen warning as described above).</li>
+            </ol>
+            <h3>First Launch Setup</h3>
+            <h4>1. Account Registration</h4>
+            <p>You'll need to create an account with a <strong>Username</strong> and a <strong>License Key</strong> in the format <code>SCKT-LTE-XXX-XXXXX</code>. You can get a key from <code>discord.sckilltracker.com</code>.</p>
+            <h4>2. Game Log Detection</h4>
+            <p>The application automatically searches for Star Citizen's <code>Game.log</code> file. If not found, you can manually specify the path in Settings.</p>
+        </section>
+
+        <section id="main-features">
+            <h2>Main Features</h2>
+            <ul>
+                <li><strong>Kill Tracking</strong>: Monitors the <code>Game.log</code> for player kills, NPC kills, vehicle kills, and deaths.</li>
+                <li><strong>Kill Classification</strong>: Automatically categorizes kills into PvP, PvE, Vehicle, and Other.</li>
+                <li><strong>Overlay Display</strong>: An optional, customizable on-screen overlay to show recent kills and stats.</li>
+                <li><strong>Statistics & History</strong>: Tracks total kills, K/D ratio, and session statistics.</li>
+                <li><strong>Game Log Viewer</strong>: A built-in tool to inspect the <code>Game.log</code> file directly.</li>
+                <li><strong>System Messages</strong>: Receive notifications about updates, maintenance, and announcements.</li>
+            </ul>
+        </section>
+        
+        <section id="settings-configuration">
+            <h2>Settings & Configuration</h2>
+            <h3>Accessing Settings</h3>
+            <p>Open Settings from the main menu, the system tray icon, or a configured keyboard shortcut.</p>
+            <h4>1. Overlay Settings</h4>
+            <p>Customize the overlay's position, size, and display options. You can also lock its position to prevent accidental movement.</p>
+            <h4>2. Log File Settings</h4>
+            <p>Manually set the path to your <code>Game.log</code> file and switch between game channels like LIVE, PTU, etc.</p>
+            <h4>3. Application Settings</h4>
+            <p>Configure startup options (e.g., launch with Windows) and enable offline mode, which provides a 24-hour grace period for license validation.</p>
+            <h4>4. Advanced Settings</h4>
+            <p>Enable debug mode, clear application caches, or reset all settings to their default values.</p>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <hr>
+            <h4>License Key Validation Failed</h4>
+            <p><strong>Solutions</strong>: Check your internet connection, verify the key format (<code>SCKT-LTE-XXX-XXXXX</code>), and contact support if the issue persists. The app has a 24-hour offline grace period.</p>
+            <hr>
+            <h4>Game Log Not Found</h4>
+            <p><strong>Solutions</strong>: Ensure Star Citizen is installed and has run at least once. Manually set the path in Settings and verify the correct game channel (LIVE/PTU) is selected.</p>
+            <hr>
+            <h4>Kills Not Being Tracked</h4>
+            <p><strong>Solutions</strong>: Verify the log path is correct, the game is running, and that kill tracking is enabled in Settings. Use the debug overlay to check log monitoring status.</p>
+            <hr>
+            <h4>Antivirus Blocking or Flagging the Application</h4>
+            <p><strong>Solutions</strong>: Add <code>SCKillTrac-LITE.exe</code> to your antivirus exclusions list. See the <strong>Adding Antivirus Exclusions</strong> section for detailed instructions. Common antivirus software may flag the application due to file monitoring behavior, but this is a false positive.</p>
+            <hr>
+            <h4>Generate Support Information</h4>
+            <p>For complex issues, generate a support file via <strong>Settings → Support → Generate Support Info</strong>. This file gathers all necessary technical details to help diagnose the problem.</p>
+        </section>
+        
+        <section id="quick-reference">
+            <h2>Quick Reference</h2>
+            <h3>First Time Setup Checklist</h3>
+            <ul class="checklist">
+                <li><input type="checkbox" id="check-1"> Download <code>SCKillTrac-LITE.exe</code></li>
+                <li><input type="checkbox" id="check-2"> Handle SmartScreen warning (Run anyway)</li>
+                <li><input type="checkbox" id="check-3"> Create account with username and license key</li>
+                <li><input type="checkbox" id="check-4"> Verify <code>Game.log</code> path is detected</li>
+                <li><input type="checkbox" id="check-5"> Enable overlay (optional)</li>
+                <li><input type="checkbox" id="check-6"> Launch Star Citizen</li>
+                <li><input type="checkbox" id="check-7"> Verify kills are being tracked</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>For the latest updates and support, visit: <code>discord.sckilltracker.com</code></p>
+            <p>&copy; 2025 Harley's Studio | SC Kill Tracker</p>
+        </footer>
+
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toc = document.getElementById('toc');
+            const sections = document.querySelectorAll('.main-content section');
+
+            // Generate Table of Contents
+            sections.forEach(section => {
+                const title = section.querySelector('h2').textContent;
+                const id = section.getAttribute('id');
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="#${id}">${title}</a>`;
+                toc.appendChild(listItem);
+            });
+
+            // Active link highlighting on scroll (Scroll Spy)
+            const tocLinks = toc.querySelectorAll('a');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        tocLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Checkbox persistence for Quick Reference checklist
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            
+            // Save checkbox states to localStorage when changed
+            checkboxes.forEach(checkbox => {
+                // Load saved state
+                const savedState = localStorage.getItem(checkbox.id);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                }
+                
+                // Save state when changed
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem(this.id, 'true');
+                    } else {
+                        localStorage.removeItem(this.id); // Remove from storage when unchecked
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
